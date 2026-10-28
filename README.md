@@ -5,9 +5,7 @@ JamShoot Design helps you build static websites with reusable JavaScript compone
 Components render HTML at build time, so there's no client-side framework to ship. You bring the content, colours and any custom blocks. JamShoot takes care of the layout, typography, styling and motion.
 
 [Documentation](https://jamshoot-apps.github.io/jamshoot-design/) ·
-[Authoring guide](https://jamshoot-apps.github.io/jamshoot-design/authoring.html) ·
-[Component catalog](llms.txt) ·
-[Changelog](https://github.com/jamshoot-apps/jamshoot-design/blob/main/CHANGELOG.md)
+[Authoring guide](https://jamshoot-apps.github.io/jamshoot-design/authoring.html)
 
 ## Features
 
