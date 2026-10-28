@@ -1,152 +1,134 @@
 # JamShoot Design
 
-A dependency-free design system for static websites. JavaScript components render
-HTML at build time. Shared CSS defines the layout, typography and component styles;
-each site supplies its content, colours and optional custom blocks.
+JamShoot Design helps you build static websites with reusable JavaScript components, consistent styling and no extra dependencies.
+
+Components render HTML at build time, so there's no client-side framework to ship. You bring the content, colours and any custom blocks. JamShoot takes care of the layout, typography, styling and motion.
 
 [Documentation](https://jamshoot-apps.github.io/jamshoot-design/) ·
-[Authoring guide](https://jamshoot-apps.github.io/jamshoot-design/authoring.html) · [Component catalog](llms.txt) ·
-[Contributing](https://github.com/jamshoot-apps/jamshoot-design/blob/main/CONTRIBUTING.md)
+[Authoring guide](https://jamshoot-apps.github.io/jamshoot-design/authoring.html) ·
+[Component catalog](llms.txt) ·
+[Changelog](https://github.com/jamshoot-apps/jamshoot-design/blob/main/CHANGELOG.md)
 
-## What it includes
+## Features
 
-- Layout primitives and components for navigation, content, pricing and page regions.
-- Validated component options, generated API references and executable examples.
-- Twelve semantic colour roles, starter palettes and a theme-switching runtime.
-- Static site, documentation and local preview runners, plus source and output lint.
-- Built-in interface icons with their MIT licence notice.
-
-The library requires **Node.js 22 or newer** and has no npm dependencies. Component
-renderers run in Node; browser behaviour comes from selected runtime modules and
-explicit site-owned client scripts. There is no client-side component framework.
+- No npm dependencies. Everything runs on the Node.js standard library.
+- Components render static HTML during the build. The browser only gets
+  small scripts for the mobile menu, theme switching and FAQ links, plus
+  whatever client code a site adds itself.
+- Each component declares its options with `defineComponent`, so you'll
+  know during the build if something isn't quite right.
+- Customise your site's colours using twelve predefined roles. 
+  Light and dark themes are included, along with a theme toggle.
+- `jamshoot-lint` checks for accessibility and design issues like contrast,
+  focus styles, tap target size, reduced motion and more. Each rule is
+  explained in the docs.
+- API tables are generated from the component code, and README examples run as tests. When
+  components change, the checks help make sure the docs don't fall behind.
+- [`llms.txt`](llms.txt) is a short generated index of all components, handy
+  for people and coding assistants alike.
 
 ## Install
 
-Install the package in a site project:
+Requires **Node.js 22 or newer**.
 
 ```sh
 npm install @jamshoot-apps/design
 ```
 
-To use a local source checkout, clone this repository and pack it:
+## Quick start
 
-```sh
-git clone https://github.com/jamshoot-apps/jamshoot-design.git
-cd jamshoot-design
-npm pack --pack-destination /tmp
+Here's a small example of how components fit together. For a complete working site, see the authoring guide.
+
+A site is just a folder with a few files:
+
+```text
+my-site/
+├── site.config.js   # brand, URL, navigation, footer
+├── theme.css        # twelve colour roles and color-scheme
+├── pages.js         # pages composed from components
+├── content/         # user-facing strings
+├── blocks/          # optional site-specific markup
+└── themes/          # optional extra palettes
 ```
 
-Install the `.tgz` path printed by npm from your site directory with
-`npm install /path/to/archive.tgz`. No dependency installation is needed in the
-library checkout.
-
-Starting with 1.0.0, breaking public API changes increment the major version,
-compatible additions increment the minor version, and fixes increment the patch
-version. Review the changelog when upgrading.
-
-## Build a site
-
-A site supplies `site.config.js`, `theme.css`, `pages.js` and content files. Optional
-`blocks/` and `themes/` directories extend its markup and palettes.
-
-Import components through the public package:
+Pages import components from the public package. Each component takes one options
+object:
 
 ```js
-import { card, section } from '@jamshoot-apps/design';
+import { card, grid, section } from '@jamshoot-apps/design';
 
-const content = section({
-  title: 'Project resources',
-  content: card({
-    title: 'Documentation',
-    body: 'Read the setup and authoring guides.',
+const features = section({
+  id: 'features',
+  title: 'What it does.',
+  content: grid({
+    content: [
+      card({ title: 'Offline', body: 'No account or network required.' }),
+      card({ title: 'Fast', body: 'Static pages with no client framework.' }),
+    ],
   }),
 });
 ```
 
-The [authoring guide](https://jamshoot-apps.github.io/jamshoot-design/authoring.html) contains the complete files for a two-page
-site. From a site with the package installed, build and lint it with:
+Build the site into `dist/` and lint the source and output:
 
 ```sh
 npx --no-install jamshoot-build .
 npx --no-install jamshoot-lint .
 ```
 
-The build prerenders pages into `dist/` and validates component options. Lint checks
-the theme, authored code and generated output. Custom blocks use the separate
-`@jamshoot-apps/design/markup` API; sites should not import library internals.
+If an option is wrong, the build stops with an error like this:
 
-Successful builds replace `dist/` with the current generation; failed builds retain
-the previous output.
-
-Sites own their content, twelve colour roles, `color-scheme` and the component tokens
-allowed by the [token contract](src/tokens/contract.js). The library owns component
-markup, layout, type scale, spacing and motion. Fonts use the system stack unless
-the site supplies font assets and configuration.
-
-## Explore the documentation
-
-From a source checkout, run:
-
-```sh
-npm run serve
+```text
+button(): "variant" must be one of "primary", "ghost". See src/components/atoms/button/README.md.
 ```
 
-The reference runs at `http://127.0.0.1:4180` with live reload. Use
-`npm run serve -- --port 5000` to choose another port, or `npm run docs` to build
-static documentation into `dist-docs/`.
+The [authoring guide](https://jamshoot-apps.github.io/jamshoot-design/authoring.html)
+walks through a complete two-page site and a pre-launch checklist.
 
-Start with [site authoring](https://jamshoot-apps.github.io/jamshoot-design/authoring.html),
-[the architecture](https://jamshoot-apps.github.io/jamshoot-design/architecture.html), [theming](https://jamshoot-apps.github.io/jamshoot-design/theming.html) or
-[the component catalog](llms.txt). Component folders contain their API contracts and
-working examples. The same references can be used by developers and coding tools.
+## Command-line tools
 
-## Develop and verify
+| Command | Purpose |
+| --- | --- |
+| `jamshoot-build` | Prerenders pages, validates options and writes content-hashed assets to `dist/`. Failed builds keep the previous output. |
+| `jamshoot-lint` | Checks the theme, authored code and generated output against the design rules. |
+| `jamshoot-dev` | Serves a site locally with live reload. |
+| `jamshoot-og-image` | Generates Open Graph share images. |
+
+## How it is organised
+
+| Layer | Owned by | Provides |
+| --- | --- | --- |
+| Design tokens | Library | Spacing, type scale, radii, motion and breakpoints. |
+| Site theme | Site | Twelve colour roles and allowed component tokens. |
+| Components | Library | Validated HTML and namespaced CSS built from tokens. |
+| Pages and blocks | Site | Components composed with the site's content and custom UI. |
+
+Read more in [Architecture](https://jamshoot-apps.github.io/jamshoot-design/architecture.html),
+[Theming](https://jamshoot-apps.github.io/jamshoot-design/theming.html) and
+[Rules](https://jamshoot-apps.github.io/jamshoot-design/anti-patterns.html).
+
+## Development
+
+From a source checkout:
 
 ```sh
-npm run tables
-npm run llms
-npm run docs:review -- --check
-npm run docs
-npm test
-node src/cli/build.mjs test/fixtures/site
-node src/cli/lint.mjs test/fixtures/site
-npm pack --dry-run
+npm run serve   # documentation with live reload at http://127.0.0.1:4180
+npm test        # unit, integration, documentation and lint checks
 ```
 
-Tests and builds use a self-contained fixture site. They need no neighbouring
-repository, registry credentials or private assets. See [Contributing](https://github.com/jamshoot-apps/jamshoot-design/blob/main/CONTRIBUTING.md)
-for component changes and [Testing](https://jamshoot-apps.github.io/jamshoot-design/testing.html) for the test layout.
+Tests build a self-contained fixture site and need no network or private assets.
+See [Contributing](https://github.com/jamshoot-apps/jamshoot-design/blob/main/CONTRIBUTING.md)
+for the full set of required checks.
 
-[Deployment and releases](https://github.com/jamshoot-apps/jamshoot-design/blob/main/.github/RELEASING.md) describes the three manual GitHub
-Actions workflows: documentation on Pages, annotated tags with GitHub Releases, and
-npm publication using OIDC trusted publishing. Commits and tags do not start them.
+## Security
 
-## Security and limitations
-
-Plain text options are escaped. Options that accept authored HTML expect trusted
-content; validation does not sanitize HTML. Build and lint checks do not replace
-browser, keyboard or assistive-technology testing. Report vulnerabilities using the
+Plain text options are escaped; options that accept HTML expect trusted content.
+Report vulnerabilities through the
 [security policy](https://github.com/jamshoot-apps/jamshoot-design/blob/main/SECURITY.md).
 
 ## Licence
 
-Library code and documentation are available under [Apache License 2.0](LICENSE).
-The Ionicons assets retain their [MIT notice](src/assets/icons/LICENSE.txt). JamShoot
-artwork used by the documentation has [separate brand terms](https://github.com/jamshoot-apps/jamshoot-design/blob/main/docs/assets/brand/jamshoot/LICENSE.txt)
-and is excluded from Apache 2.0. Component examples use a neutral sample mark.
-See [NOTICE](NOTICE) for asset attribution.
-
-## Repository and package layout
-
-All published code and required resources live under `src/`: components, tokens,
-shared styles, browser runtime, built-in icons and consumer CLI tools. Public
-imports are defined by `package.json.exports`; the commands `jamshoot-build`,
-`jamshoot-lint`, `jamshoot-dev` and `jamshoot-og-image` are npm executable entries.
-Starter CSS is also exported as `@jamshoot-apps/design/themes/light.css` and
-`@jamshoot-apps/design/themes/dark.css`.
-
-The npm archive contains `src/` without behaviour tests, component API READMEs,
-`llms.txt`, this README, the Apache licence and NOTICE. Full documentation and its
-artwork stay in `docs/`; documentation generators and test tools stay in `scripts/`.
-Neither directory is needed to use the installed library. The public repository
-also contains shared tests under `test/` and manual workflows under `.github/`.
+[Apache License 2.0](LICENSE). Built-in icons are derived from Ionicons and keep
+their [MIT notice](src/assets/icons/LICENSE.txt). JamShoot brand artwork used by the
+documentation is excluded from Apache 2.0 and not included in the npm package. See
+[NOTICE](NOTICE) for details.
