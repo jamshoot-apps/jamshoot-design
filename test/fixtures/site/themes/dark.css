@@ -1,0 +1,23 @@
+/*
+ * The palette a dark system gets, and the second state of the header control. It
+ * writes only what differs from theme.css — which here is the whole palette, and in a
+ * theme that only warms the page would be two lines.
+ */
+
+:root {
+  color-scheme: dark;
+  --ds-theme-label: 'Dark';
+
+  --ds-bg: #0b0c0e;
+  --ds-surface: #131518;
+  --ds-surface-raised: #1b1e23;
+  --ds-surface-sunken: #0e0f12;
+  --ds-text: #f2f4f7;
+  --ds-text-muted: #a3aab6;
+  --ds-text-faint: #7f8794;
+  --ds-accent: #d2b48c;
+  --ds-accent-strong: #e6cba9;
+  --ds-on-accent: #14100b;
+  --ds-border: rgb(242 244 247 / 0.11);
+  --ds-border-strong: rgb(242 244 247 / 0.44);
+}

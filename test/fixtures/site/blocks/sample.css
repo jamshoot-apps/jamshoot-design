@@ -1,0 +1,7 @@
+.fixture-sample {
+  display: flex;
+  gap: var(--ds-space-sm);
+  padding: var(--ds-space-md);
+  border: var(--ds-hairline) solid var(--ds-border);
+  color: var(--ds-text-muted);
+}

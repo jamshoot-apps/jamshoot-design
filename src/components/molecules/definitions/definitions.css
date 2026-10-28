@@ -1,0 +1,26 @@
+.ds-definitions {
+  display: grid;
+  gap: var(--ds-space-xs);
+}
+
+.ds-definitions__row {
+  display: grid;
+  gap: var(--ds-space-3xs);
+  padding-block: var(--ds-space-xs);
+  border-top: var(--ds-hairline) solid var(--ds-border);
+}
+
+.ds-definitions__term {
+  color: var(--ds-text-faint);
+  font-size: var(--ds-text-caption);
+  letter-spacing: var(--ds-tracking-wide);
+  text-transform: uppercase;
+}
+
+@media (min-width: 34rem) {
+  .ds-definitions__row {
+    grid-template-columns: var(--ds-measure-2xs) 1fr;
+    gap: var(--ds-space-md);
+    align-items: baseline;
+  }
+}

@@ -1,0 +1,13 @@
+/*
+ * One button, every state: the one in force is drawn and the rest are not drawn and
+ * not read aloud. Which one that is, is an attribute rather than a selector per
+ * palette — a site with five themes needs no more CSS than a site with two.
+ */
+.ds-theme-toggle__option {
+  display: none;
+}
+
+.ds-theme-toggle__option[data-active] {
+  display: grid;
+  place-items: center;
+}

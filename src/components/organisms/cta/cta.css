@@ -1,0 +1,29 @@
+.ds-cta {
+  padding-block: var(--ds-section-space);
+  border-top: var(--ds-hairline) solid var(--ds-border);
+}
+
+.ds-cta__inner {
+  max-width: var(--ds-content-narrow);
+}
+
+.ds-cta__lead {
+  margin-top: var(--ds-space-sm);
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-subtitle);
+  line-height: var(--ds-leading-snug);
+}
+
+.ds-cta__actions {
+  margin-top: var(--ds-space-xl);
+}
+
+.ds-cta__note {
+  margin-top: var(--ds-space-md);
+  color: var(--ds-text-faint);
+  font-size: var(--ds-text-caption);
+}
+
+.ds-cta__note a {
+  color: var(--ds-accent);
+}

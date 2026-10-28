@@ -1,0 +1,43 @@
+.ds-prose {
+  max-width: var(--ds-content-narrow);
+  color: var(--ds-text-muted);
+}
+
+.ds-prose > * + * {
+  margin-top: var(--ds-space-sm);
+}
+
+.ds-prose > * + h2 {
+  margin-top: var(--ds-space-2xl);
+}
+
+/* h4 is here because a prose() inside a subsection() has its headings demoted. */
+.ds-prose > * + :is(h3, h4) {
+  margin-top: var(--ds-space-xl);
+}
+
+.ds-prose :is(h2, h3, h4) {
+  color: var(--ds-text);
+}
+
+.ds-prose a {
+  color: var(--ds-accent);
+}
+
+.ds-prose ul {
+  padding-left: var(--ds-space-md);
+  list-style: disc;
+}
+
+.ds-prose li + li {
+  margin-top: var(--ds-space-2xs);
+}
+
+.ds-prose li::marker {
+  color: var(--ds-text-faint);
+}
+
+.ds-prose strong {
+  color: var(--ds-text);
+  font-weight: var(--ds-weight-semibold);
+}

@@ -1,0 +1,13 @@
+/*
+ * The shape is `.ds-icon-button` in src/styles/base.css. All this adds is the pull that sets
+ * the glyph flush with the gutter, because this is the last control in the bar.
+ */
+.ds-nav-toggle {
+  margin-right: calc(var(--ds-space-2xs) * -1);
+}
+
+/* One button, two icons: whichever one is not the current state is not drawn. */
+.ds-nav-toggle[aria-expanded='true'] .ds-nav-toggle__menu,
+.ds-nav-toggle[aria-expanded='false'] .ds-nav-toggle__close {
+  display: none;
+}

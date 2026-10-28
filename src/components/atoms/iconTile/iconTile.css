@@ -1,0 +1,10 @@
+.ds-icon-tile {
+  display: grid;
+  place-items: center;
+  width: var(--ds-icon-tile);
+  height: var(--ds-icon-tile);
+  border: var(--ds-hairline) solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-surface-raised);
+  color: var(--ds-accent);
+}

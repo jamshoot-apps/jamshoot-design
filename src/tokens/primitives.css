@@ -1,0 +1,131 @@
+/*
+ * Primitives — the half of the design system a project never changes.
+ *
+ * Spacing rhythm, type scale, radii, motion and layout are identical on every
+ * site. A site supplies semantic colours and optional font faces; the scales remain
+ * library-owned.
+ */
+
+:root {
+  /* Spacing. One scale, used for every margin, padding and gap on the site. */
+  --ds-space-3xs: 0.25rem;
+  --ds-space-2xs: 0.5rem;
+  --ds-space-xs: 0.75rem;
+  --ds-space-sm: 1rem;
+  --ds-space-md: 1.25rem;
+  --ds-space-lg: 1.5rem;
+  --ds-space-xl: 2rem;
+  --ds-space-2xl: 2.5rem;
+  --ds-space-3xl: 3.5rem;
+  --ds-space-4xl: 5rem;
+  --ds-space-5xl: 7rem;
+
+  /* Radii. Four steps. A rectangle that is not a control stays a rectangle. */
+  --ds-radius-sm: 10px;
+  --ds-radius-md: 16px;
+  --ds-radius-lg: 22px;
+  --ds-radius-pill: 999px;
+
+  /* Type. Display and title scale with the viewport; body text does not. */
+  --ds-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ds-font-display: var(--ds-font-sans);
+  --ds-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+
+  --ds-text-display: clamp(2.1rem, 1.5rem + 2.6vw, 3.5rem);
+  --ds-text-title: clamp(1.55rem, 1.3rem + 1.1vw, 2.25rem);
+  --ds-text-subtitle: clamp(1.1rem, 1.02rem + 0.4vw, 1.3rem);
+  --ds-text-body: 1rem;
+  --ds-text-small: 0.9375rem;
+  --ds-text-caption: 0.8125rem;
+  --ds-text-micro: 0.6875rem;
+
+  /* Code sizes against the text it sits in, not against the root. */
+  --ds-text-code: 0.9em;
+
+  --ds-weight-regular: 400;
+  --ds-weight-medium: 500;
+  --ds-weight-semibold: 600;
+  --ds-weight-bold: 700;
+
+  --ds-leading-tight: 1.1;
+  --ds-leading-snug: 1.35;
+  --ds-leading-body: 1.6;
+  --ds-tracking-tight: -0.02em;
+  --ds-tracking-wide: 0.16em;
+
+  /*
+   * Two type-relative nudges. Both are `em` on purpose: an underline sitting under
+   * 13px caption text and one under a 40px display heading are not the same distance.
+   */
+  --ds-underline-offset: 0.18em;
+  --ds-align-nudge: 0.3em;
+
+  /*
+   * Motion. Content uses hover and focus feedback. The optional scroll-away Header
+   * is the exception documented in docs/anti-patterns.md, `scroll-animation`.
+   */
+  --ds-motion-quick: 160ms;
+  --ds-motion-settle: 320ms;
+  --ds-ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* Layout. Breakpoints are 34rem / 52rem / 64rem, mobile-first. */
+  --ds-content-max: 1120px;
+  --ds-content-narrow: 720px;
+  --ds-gutter: var(--ds-space-md);
+  --ds-header-height: 3.75rem;
+  --ds-section-space: var(--ds-space-4xl);
+
+  /*
+   * Measures. Every width, minimum width and minimum height in the system is a step
+   * on this scale — a grid column before the grid drops one, a line of copy, the
+   * frame a screenshot sits in. Values, not guesses, and the same ones twice.
+   */
+  --ds-measure-3xs: 9rem;
+  --ds-measure-2xs: 12rem;
+  --ds-measure-xs: 16rem;
+  --ds-measure-sm: 18rem;
+  --ds-measure-md: 20rem;
+  --ds-measure-lg: 34rem;
+  --ds-measure-xl: 36rem;
+  --ds-measure-2xl: 40rem;
+
+  /* Icons. Three sizes; --ds-icon-size is the one in force where an icon lands. */
+  --ds-icon-sm: 1rem;
+  --ds-icon-md: 1.125rem;
+  --ds-icon-lg: 1.5rem;
+  --ds-icon-size: var(--ds-icon-lg);
+  --ds-icon-tile: 2.75rem;
+
+  /*
+   * Stacking order. Two things in the system leave the flow, and the gap between them
+   * is deliberate: the chrome sits over the page, and the keyboard's route past the
+   * chrome sits over that. A third number picked at the moment it was needed is how a
+   * stylesheet ends up with 9999 in it, so this is a scale like any other.
+   */
+  --ds-layer-chrome: 20;
+  --ds-layer-top: 100;
+
+  /* Lines and rings. One hairline draws every boundary in the system. */
+  --ds-hairline: 1px;
+  --ds-focus-ring: 2px;
+  --ds-focus-offset: 3px;
+
+  --ds-tap-target: 44px;
+
+  /*
+   * The height of a one-line button: its line, its padding and its border. A control
+   * that shares a row with a button, such as a store badge drawn from fixed artwork,
+   * takes this height so the row lines up.
+   */
+  --ds-control-height: calc(
+    var(--ds-text-small) * var(--ds-leading-body) + var(--ds-space-xs) * 2 + var(--ds-hairline) * 2
+  );
+}
+
+@media (min-width: 52rem) {
+  :root {
+    --ds-gutter: var(--ds-space-xl);
+    --ds-header-height: 4.25rem;
+    --ds-section-space: var(--ds-space-5xl);
+  }
+}

@@ -1,0 +1,19 @@
+/* The base palette. themes/dark.css is the one a dark system gets instead. */
+
+:root {
+  color-scheme: light;
+  --ds-theme-label: 'Light';
+
+  --ds-bg: #fbfbfa;
+  --ds-surface: #ffffff;
+  --ds-surface-raised: #ffffff;
+  --ds-surface-sunken: #f3f3f1;
+  --ds-text: #17181a;
+  --ds-text-muted: #565a61;
+  --ds-text-faint: #6a6e75;
+  --ds-accent: #7a4d31;
+  --ds-accent-strong: #5d3a25;
+  --ds-on-accent: #ffffff;
+  --ds-border: rgb(23 24 26 / 0.12);
+  --ds-border-strong: rgb(23 24 26 / 0.5);
+}

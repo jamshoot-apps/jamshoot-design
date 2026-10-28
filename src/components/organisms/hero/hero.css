@@ -1,0 +1,52 @@
+/*
+ * Centred between the header and the first section: the space above the copy is one
+ * section-space, and the space below it is the next section's own padding, so the
+ * hero adds none at the bottom. Its visual may cast a shadow past that edge, so only
+ * the horizontal overflow is clipped — that is the one that would scroll the page.
+ */
+.ds-hero {
+  position: relative;
+  padding-block: var(--ds-section-space) 0;
+  overflow-x: clip;
+}
+
+.ds-hero__inner {
+  display: grid;
+  gap: var(--ds-space-3xl);
+  align-items: center;
+}
+
+.ds-hero__copy {
+  max-width: var(--ds-measure-2xl);
+}
+
+.ds-hero__title {
+  margin-top: var(--ds-space-xs);
+}
+
+.ds-hero__lead {
+  margin-top: var(--ds-space-md);
+  max-width: var(--ds-measure-xl);
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-subtitle);
+  line-height: var(--ds-leading-snug);
+}
+
+.ds-hero__actions {
+  margin-top: var(--ds-space-xl);
+}
+
+.ds-hero__proof {
+  margin-top: var(--ds-space-2xl);
+}
+
+.ds-hero__visual {
+  position: relative;
+  min-height: var(--ds-hero-visual-height, var(--ds-measure-md));
+}
+
+@media (min-width: 64rem) {
+  .ds-hero__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}

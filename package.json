@@ -1,0 +1,63 @@
+{
+  "name": "@jamshoot-apps/design",
+  "version": "1.0.0",
+  "description": "Design system for static sites. Build-time components, no dependencies.",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamshoot-apps/jamshoot-design.git"
+  },
+  "license": "Apache-2.0",
+  "author": "JamShoot",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.js",
+    "./markup": "./src/markup.js",
+    "./contract": "./src/tokens/contract.js",
+    "./build": "./src/cli/build.mjs",
+    "./themes/*.css": "./src/tokens/themes/*.css"
+  },
+  "files": [
+    "src/",
+    "!src/**/*.test.mjs",
+    "llms.txt",
+    "NOTICE"
+  ],
+  "scripts": {
+    "dev": "node src/cli/dev.mjs",
+    "serve": "node scripts/docs-server.mjs",
+    "build": "node src/cli/build.mjs",
+    "lint": "node src/cli/lint.mjs",
+    "docs": "node scripts/docs.mjs",
+    "docs:review": "node scripts/docs-review.mjs",
+    "tables": "node scripts/tables.mjs",
+    "llms": "node scripts/llms.mjs",
+    "hooks": "git config core.hooksPath .githooks",
+    "test": "node scripts/test.mjs"
+  },
+  "dependencies": {},
+  "homepage": "https://jamshoot-apps.github.io/jamshoot-design/",
+  "bugs": {
+    "url": "https://github.com/jamshoot-apps/jamshoot-design/issues"
+  },
+  "keywords": [
+    "design-system",
+    "static-site",
+    "html",
+    "css",
+    "components",
+    "accessibility"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "bin": {
+    "jamshoot-build": "src/cli/build.mjs",
+    "jamshoot-lint": "src/cli/lint.mjs",
+    "jamshoot-dev": "src/cli/dev.mjs",
+    "jamshoot-og-image": "src/cli/og-image.mjs"
+  }
+}

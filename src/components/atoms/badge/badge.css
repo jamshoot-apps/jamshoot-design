@@ -1,0 +1,19 @@
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-3xs);
+  padding: var(--ds-space-3xs) var(--ds-space-2xs);
+  border: var(--ds-hairline) solid var(--ds-border-strong);
+  border-radius: var(--ds-radius-pill);
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-micro);
+  font-weight: var(--ds-weight-semibold);
+  letter-spacing: var(--ds-tracking-wide);
+  text-transform: uppercase;
+}
+
+.ds-badge--accent {
+  border-color: transparent;
+  background: var(--ds-accent);
+  color: var(--ds-on-accent);
+}

@@ -1,0 +1,290 @@
+.docs {
+  display: grid;
+  gap: var(--ds-space-2xl);
+}
+.docs-main {
+  padding-block: var(--ds-space-xl) var(--ds-section-space);
+}
+.docs-header__toggle {
+  display: contents;
+}
+.docs__nav {
+  display: none;
+  position: fixed;
+  top: calc(var(--ds-header-height) + var(--ds-hairline));
+  inset-inline: 0;
+  z-index: var(--ds-layer-chrome);
+  max-height: calc(100dvh - var(--ds-header-height) - var(--ds-hairline));
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  padding: var(--ds-space-sm) var(--ds-gutter) var(--ds-space-md);
+  border-bottom: var(--ds-hairline) solid var(--ds-border);
+  background: var(--ds-bg);
+}
+.docs__nav[data-open] {
+  display: block;
+}
+.docs__body {
+  min-width: 0;
+}
+.docs__nav a {
+  display: block;
+  padding-block: var(--ds-space-3xs);
+  padding-inline: var(--ds-space-xs);
+  border-inline-start: var(--ds-space-3xs) solid transparent;
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-small);
+  text-decoration: none;
+}
+.docs__nav a:hover {
+  color: var(--ds-text);
+}
+.docs__nav a[aria-current="page"] {
+  border-inline-start-color: var(--ds-accent);
+  background: var(--ds-surface-raised);
+  box-shadow: inset 0 0 0 var(--ds-hairline) var(--ds-accent);
+  color: var(--ds-text);
+  font-weight: var(--ds-weight-medium);
+}
+.docs__nav strong {
+  display: block;
+  margin-top: var(--ds-space-md);
+  margin-bottom: var(--ds-space-3xs);
+  color: var(--ds-text-faint);
+  font-size: var(--ds-text-micro);
+  letter-spacing: var(--ds-tracking-wide);
+  text-transform: uppercase;
+}
+.docs__nav .docs__reference-start {
+  margin-top: var(--ds-space-xl);
+  padding-top: var(--ds-space-md);
+  border-top: var(--ds-hairline) solid var(--ds-border);
+}
+.docs__body > * + * {
+  margin-top: var(--ds-space-md);
+}
+:is(.docs__body, .generated) > * + h2,
+.docs__body > * + .generated:has(> h2:first-child) {
+  margin-top: var(--ds-space-3xl);
+}
+:is(.docs__body, .generated) > * + h3 {
+  margin-top: var(--ds-space-2xl);
+}
+/* Measure applies to the prose, not to anything inside a rendered example. */
+.docs__body > p,
+.docs__body > ul > li {
+  color: var(--ds-text-muted);
+  max-width: 70ch;
+}
+.docs__body ul {
+  padding-left: var(--ds-space-md);
+  list-style: disc;
+}
+.docs__body code {
+  color: var(--ds-text);
+}
+.css-assembly {
+  padding: var(--ds-space-sm);
+  border: var(--ds-hairline) solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-surface-sunken);
+}
+.css-assembly__caption {
+  margin-bottom: var(--ds-space-lg);
+  color: var(--ds-text);
+  font-weight: var(--ds-weight-medium);
+}
+.css-assembly__layers {
+  display: grid;
+  gap: var(--ds-space-md);
+  padding: 0;
+  list-style: none;
+}
+.css-assembly__row {
+  display: grid;
+  gap: var(--ds-space-2xs);
+  min-width: 0;
+}
+.css-assembly__sources,
+.css-assembly__layer,
+.css-assembly__output {
+  min-width: 0;
+  padding: var(--ds-space-sm);
+  border: var(--ds-hairline) solid var(--ds-border);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-surface);
+}
+.css-assembly__layer {
+  display: grid;
+  align-content: center;
+  background: var(--ds-surface-raised);
+}
+.css-assembly code {
+  display: block;
+  font-size: var(--ds-text-caption);
+  overflow-wrap: anywhere;
+}
+.css-assembly__label {
+  display: block;
+  margin-bottom: var(--ds-space-3xs);
+  color: var(--ds-text-faint);
+  font-size: var(--ds-text-micro);
+}
+.css-assembly__note {
+  margin-top: var(--ds-space-2xs);
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-caption);
+}
+.css-assembly__arrow {
+  justify-self: center;
+  align-self: center;
+  color: var(--ds-text-faint);
+  transform: rotate(90deg);
+}
+.css-assembly__output {
+  margin-top: var(--ds-space-lg);
+  border-color: var(--ds-border-strong);
+}
+@media (min-width: 52rem) {
+  .css-assembly {
+    padding: var(--ds-space-lg);
+  }
+  .css-assembly__row {
+    grid-template-columns: minmax(0, 1.6fr) auto minmax(0, 1fr);
+  }
+  .css-assembly__arrow {
+    transform: none;
+  }
+}
+:where(.docs__body) pre {
+  overflow-x: auto;
+  padding: var(--ds-space-md);
+  border: var(--ds-hairline) solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-surface-sunken);
+  font-size: var(--ds-text-caption);
+}
+/* A generated block: options tables and the rules under them. */
+.generated > * + * {
+  margin-top: var(--ds-space-md);
+}
+/* "Takes:" — the intro to the rules that span two options. */
+.generated > p:has(+ ul) {
+  margin-bottom: calc(var(--ds-space-2xs) * -1);
+  color: var(--ds-text-faint);
+  font-size: var(--ds-text-caption);
+}
+.generated > ul > li {
+  color: var(--ds-text);
+}
+.example {
+  border: var(--ds-hairline) solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  overflow: hidden;
+}
+.example__label {
+  padding: var(--ds-space-2xs) var(--ds-space-md);
+  border-bottom: var(--ds-hairline) solid var(--ds-border);
+  color: var(--ds-text-faint);
+  font-size: var(--ds-text-micro);
+  letter-spacing: var(--ds-tracking-wide);
+  text-transform: uppercase;
+}
+.example__stage {
+  padding: var(--ds-space-lg);
+  background: var(--ds-surface-sunken);
+}
+.example__stage > * + * {
+  margin-top: var(--ds-space-md);
+}
+.example__source {
+  margin: 0;
+  border: 0;
+  border-top: var(--ds-hairline) solid var(--ds-border);
+  border-radius: 0;
+}
+.swatches {
+  display: grid;
+  gap: var(--ds-space-2xs);
+  grid-template-columns: repeat(auto-fill, minmax(var(--ds-measure-3xs), 1fr));
+}
+.swatch {
+  padding: var(--ds-space-sm);
+  border: var(--ds-hairline) solid var(--ds-border);
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-text-faint);
+  font-size: var(--ds-text-caption);
+}
+.swatch--tall {
+  display: grid;
+  align-content: end;
+  gap: var(--ds-space-3xs);
+  min-height: var(--ds-measure-3xs);
+}
+.swatch code {
+  color: inherit;
+  font-size: var(--ds-text-micro);
+}
+.ruler {
+  display: grid;
+  grid-template-columns: var(--ds-measure-3xs) 1fr;
+  align-items: center;
+  gap: var(--ds-space-sm);
+  padding-block: var(--ds-space-3xs);
+}
+.ruler__bar {
+  display: block;
+  height: var(--ds-space-2xs);
+  border-radius: var(--ds-radius-pill);
+  background: var(--ds-accent);
+}
+.icon-grid {
+  display: grid;
+  gap: var(--ds-space-2xs);
+  grid-template-columns: repeat(auto-fill, minmax(var(--ds-measure-3xs), 1fr));
+}
+.icon-grid__item {
+  display: grid;
+  justify-items: center;
+  gap: var(--ds-space-2xs);
+  padding: var(--ds-space-sm) var(--ds-space-2xs);
+  border: var(--ds-hairline) solid var(--ds-border);
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-text);
+}
+.icon-grid__item code {
+  color: var(--ds-text-faint);
+  font-size: var(--ds-text-micro);
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+@media (min-width: 64rem) {
+  .docs-main {
+    padding-block: 0;
+  }
+  .docs {
+    grid-template-columns: var(--ds-measure-2xs) minmax(0, 1fr);
+    gap: var(--ds-space-3xl);
+  }
+  .docs-header__toggle {
+    display: none;
+  }
+  /* Keep the sidebar's spacing inside its viewport-sized scroll area. */
+  .docs__nav,
+  .docs__body {
+    padding-block: var(--ds-space-xl) var(--ds-section-space);
+  }
+  .docs__nav {
+    display: block;
+    position: sticky;
+    inset-inline: auto;
+    padding-inline: 0;
+    border-bottom: 0;
+    top: calc(var(--ds-header-height) + var(--ds-hairline));
+    align-self: start;
+    max-height: calc(100dvh - var(--ds-header-height) - var(--ds-hairline));
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
+}

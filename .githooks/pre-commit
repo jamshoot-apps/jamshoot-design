@@ -1,0 +1,19 @@
+#!/bin/sh
+set -eu
+
+version=$(git show :package.json | sed -nE 's/.*"version"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/p')
+release=$(git show :CHANGELOG.md | sed -nE 's/^## \[([0-9]+\.[0-9]+\.[0-9]+)\].*/\1/p' | head -n 1)
+
+if [ "$version" != "$release" ]; then
+  printf '%s\n' "Commit blocked: package version $version does not match CHANGELOG release $release." >&2
+  exit 1
+fi
+
+# Tests read the working tree: require it to match the snapshot being committed.
+if ! git diff --quiet -- || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+  printf '%s\n' 'Commit blocked: stage or set aside all unstaged and untracked files before running the checks.' >&2
+  exit 1
+fi
+
+# Documentation drift and behavior regressions are commit blockers.
+npm test

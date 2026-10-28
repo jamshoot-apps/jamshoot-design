@@ -1,0 +1,43 @@
+#!/bin/sh
+set -eu
+
+remote=${1:-origin}
+
+updates=$(mktemp)
+trap 'rm -f "$updates"' EXIT
+cat > "$updates"
+
+while read -r local_ref local_oid remote_ref remote_oid; do
+  case "$remote_ref" in
+    refs/heads/*) ;;
+    *) continue ;;
+  esac
+
+  [ "$local_oid" = 0000000000000000000000000000000000000000 ] && continue
+  range=$local_oid
+  [ "$remote_oid" != 0000000000000000000000000000000000000000 ] && range="$remote_oid..$local_oid"
+
+  for commit in $(git rev-list --reverse "$range"); do
+    version=$(git show "$commit:package.json" 2>/dev/null | sed -nE 's/.*"version"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/p')
+    previous=$(git show "$commit^:package.json" 2>/dev/null | sed -nE 's/.*"version"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/p' || true)
+    [ -z "$version" ] && continue
+    [ "$version" = "$previous" ] && continue
+
+    tag="v$version"
+    target=$(git rev-parse -q --verify "refs/tags/$tag^{}" || true)
+    type=$(git cat-file -t "refs/tags/$tag" 2>/dev/null || true)
+    if [ "$target" != "$commit" ] || [ "$type" != tag ]; then
+      printf '%s\n' "Push blocked: $commit bumps to $version but annotated tag $tag does not point to it." >&2
+      exit 1
+    fi
+    # The tag has to reach the remote, but not necessarily in this push: git leaves a
+    # tag the remote already has out of the ref list entirely, and a hook that only
+    # reads the list would then block every later push of the same branch.
+    if ! grep -q "^refs/tags/$tag .* refs/tags/$tag " "$updates" &&
+      [ "$(git ls-remote "$remote" "refs/tags/$tag^{}" | cut -f1)" != "$commit" ]; then
+      printf '%s\n' "Push blocked: $commit bumps to $version and $tag is not on $remote." >&2
+      printf '%s\n' "Send both: git push --atomic $remote HEAD:main refs/tags/$tag" >&2
+      exit 1
+    fi
+  done
+done < "$updates"

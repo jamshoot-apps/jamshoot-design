@@ -1,0 +1,8 @@
+version: 2
+updates:
+  # Keeps the pinned actions in .github/workflows current. The package has no npm
+  # dependencies, so no npm ecosystem is configured.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

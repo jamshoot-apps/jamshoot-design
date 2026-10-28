@@ -1,0 +1,71 @@
+name: Publish to npm (OIDC)
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing GitHub Release tag, for example v1.0.0'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: library-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      TAG: ${{ inputs.tag }}
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+    steps:
+      - name: Require the default branch and a published release
+        run: |
+          test "$GITHUB_REF" = "refs/heads/$DEFAULT_BRANCH"
+          [[ "$TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+          test "$(gh release view "$TAG" --json isDraft,isPrerelease --jq '.isDraft or .isPrerelease')" = false
+      - uses: actions/checkout@v7
+        with:
+          ref: refs/tags/${{ inputs.tag }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+      - name: Verify tag and release candidate
+        run: |
+          test "$(git cat-file -t "refs/tags/$TAG")" = tag
+          test "v$(node -p "require('./package.json').version")" = "$TAG"
+          git merge-base --is-ancestor HEAD "origin/$DEFAULT_BRANCH"
+          npm run tables
+          npm run llms
+          git diff --exit-code
+          npm run docs:review -- --check
+          npm run docs -- --out "$RUNNER_TEMP/design-docs"
+          npm test
+          node src/cli/build.mjs test/fixtures/site
+          node src/cli/lint.mjs test/fixtures/site
+      - name: Verify npm metadata
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync } from 'node:fs';
+          const { repository, private: isPrivate } = JSON.parse(readFileSync('package.json', 'utf8'));
+          assert.notEqual(isPrivate, true, 'The package must permit npm publication');
+          assert.equal(repository?.url, `git+https://github.com/${process.env.GITHUB_REPOSITORY}.git`,
+            'package.json repository.url must match the trusted GitHub repository');
+          NODE
+          npm pack --dry-run
+      - name: Publish with trusted publishing
+        run: npm publish --access public --tag latest

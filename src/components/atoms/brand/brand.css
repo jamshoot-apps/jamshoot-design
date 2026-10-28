@@ -1,0 +1,57 @@
+.ds-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2xs);
+  font-weight: var(--ds-weight-semibold);
+  letter-spacing: var(--ds-tracking-tight);
+  text-decoration: none;
+}
+
+.ds-brand__logo {
+  width: var(--ds-space-4xl);
+  height: auto;
+}
+
+.ds-brand__copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.ds-brand__tagline {
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-caption);
+  font-weight: var(--ds-weight-regular);
+  letter-spacing: normal;
+  line-height: var(--ds-leading-tight);
+}
+
+.ds-brand--bottom {
+  flex-direction: column;
+  text-align: center;
+}
+
+/*
+ * The lockup as a dense row of controls wants it — a page header, and anything else
+ * that is a bar with a name at one end.
+ *
+ * Small and square, because at this size what reads is the app icon rather than the
+ * artwork; and the tagline waits for a viewport wide enough to carry it, because on a
+ * phone a second line here is the height of the whole bar spent on a subtitle nobody
+ * came for. Both live on the atom, so the Header and any other bar get them from
+ * `brand({ compact: true })`.
+ */
+.ds-brand--compact .ds-brand__logo {
+  width: var(--ds-space-2xl);
+  aspect-ratio: 1;
+  border-radius: var(--ds-radius-sm);
+}
+
+.ds-brand--compact .ds-brand__tagline {
+  display: none;
+}
+
+@media (min-width: 52rem) {
+  .ds-brand--compact .ds-brand__tagline {
+    display: block;
+  }
+}

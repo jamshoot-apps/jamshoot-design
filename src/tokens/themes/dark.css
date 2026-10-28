@@ -1,0 +1,37 @@
+/*
+ * The dark palette — the whole colour contract, and one of the two files a project
+ * starts from. Copy it to the site as theme.css to make it the base palette, or to
+ * themes/dark.css to add it to a light site; change the values, change nothing else.
+ *
+ * Twelve colour tokens plus color-scheme. If a component needs a colour that is not
+ * here, the component is wrong, not the contract.
+ */
+
+:root {
+  color-scheme: dark;
+  --ds-theme-label: 'Dark';
+
+  /* Surfaces, back to front. */
+  --ds-bg: #0f1518;
+  --ds-surface: #1d2b31;
+  --ds-surface-raised: #27363c;
+  --ds-surface-sunken: #0b1114;
+
+  /* Text, in descending emphasis. */
+  --ds-text: #eaf3f2;
+  --ds-text-muted: #bdcdcc;
+  --ds-text-faint: #9bafad;
+
+  /* One accent. `strong` is the hover/active step, `on` is text placed on top of it. */
+  --ds-accent: #81c6d4;
+  --ds-accent-strong: #a7dce4;
+  --ds-on-accent: #10232b;
+
+  /*
+   * Lines. `border` separates without carrying meaning and is free to be faint;
+   * `border-strong` is the boundary of a control — the ghost button has no fill, so
+   * its outline is what says "button" — and is held to 3:1 by the lint.
+   */
+  --ds-border: #43565d;
+  --ds-border-strong: #879ca3;
+}

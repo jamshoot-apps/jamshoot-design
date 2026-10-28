@@ -1,0 +1,77 @@
+name: Create tag and GitHub Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: library-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+    steps:
+      - name: Require the default branch
+        run: test "$GITHUB_REF" = "refs/heads/$DEFAULT_BRANCH"
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Read prepared version and release notes
+        id: version
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync, writeFileSync, appendFileSync } from 'node:fs';
+          const { version } = JSON.parse(readFileSync('package.json', 'utf8'));
+          assert.match(version, /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/);
+          const sections = readFileSync('CHANGELOG.md', 'utf8').split(/^## /m).slice(1);
+          assert.match(sections[0], /^\[Unreleased\]/);
+          assert.equal(sections[0].replace(/^\[Unreleased\][^\n]*\n/, '').trim(), '',
+            'Move Unreleased entries to the new dated version before releasing');
+          assert.ok(sections[1]?.startsWith(`[${version}] — `), 'Latest changelog version must match package.json');
+          const notes = sections[1].slice(sections[1].indexOf('\n') + 1).trim();
+          assert.ok(notes, 'Release notes must not be empty');
+          writeFileSync(`${process.env.RUNNER_TEMP}/release-notes.md`, `${notes}\n`);
+          appendFileSync(process.env.GITHUB_OUTPUT, `tag=v${version}\n`);
+          NODE
+      - name: Verify release candidate
+        run: |
+          npm run tables
+          npm run llms
+          git diff --exit-code
+          npm run docs:review -- --check
+          npm run docs -- --out "$RUNNER_TEMP/design-docs"
+          npm test
+          node src/cli/build.mjs test/fixtures/site
+          node src/cli/lint.mjs test/fixtures/site
+          npm pack --dry-run
+      - name: Create annotated tag and release
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          if git show-ref --verify --quiet "refs/tags/$TAG"; then
+            test "$(git cat-file -t "refs/tags/$TAG")" = tag
+            test "$(git rev-parse "refs/tags/$TAG^{commit}")" = "$GITHUB_SHA"
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git tag -a "$TAG" "$GITHUB_SHA" -m "$TAG"
+            git push origin "refs/tags/$TAG"
+          fi
+          # A retry can recover after the tag was pushed but release creation failed.
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release view "$TAG"
+          else
+            gh release create "$TAG" --verify-tag --title "$TAG" --notes-file "$RUNNER_TEMP/release-notes.md"
+          fi

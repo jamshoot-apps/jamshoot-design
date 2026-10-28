@@ -1,0 +1,38 @@
+.ds-table-scroll {
+  overflow-x: auto;
+  margin-block: var(--ds-space-md);
+  border: var(--ds-hairline) solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+}
+
+.ds-table__caption {
+  padding: var(--ds-space-xs) var(--ds-space-sm);
+  border-bottom: var(--ds-hairline) solid var(--ds-border);
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-caption);
+  text-align: left;
+}
+
+.ds-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--ds-text-caption);
+  text-align: left;
+}
+
+.ds-table th,
+.ds-table td {
+  padding: var(--ds-space-xs) var(--ds-space-sm);
+  vertical-align: top;
+}
+
+.ds-table thead th {
+  border-bottom: var(--ds-hairline) solid var(--ds-border-strong);
+  color: var(--ds-text);
+  font-weight: var(--ds-weight-semibold);
+  white-space: nowrap;
+}
+
+.ds-table tbody tr + tr td {
+  border-top: var(--ds-hairline) solid var(--ds-border);
+}
