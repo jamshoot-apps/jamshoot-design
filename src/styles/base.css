@@ -1,0 +1,148 @@
+/* Element defaults. Everything here reads a token; nothing here declares a value. */
+
+body {
+  background: var(--ds-bg);
+  color: var(--ds-text);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-body);
+  line-height: var(--ds-leading-body);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-semibold);
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--ds-text-display);
+}
+
+h2 {
+  font-size: var(--ds-text-title);
+}
+
+h3 {
+  font-size: var(--ds-text-subtitle);
+}
+
+em {
+  font-style: normal;
+  font-weight: var(--ds-weight-medium);
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--ds-border-strong);
+  text-underline-offset: var(--ds-underline-offset);
+  transition: text-decoration-color var(--ds-motion-quick) var(--ds-ease-out);
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a {
+    transition: none;
+  }
+}
+
+/*
+ * An outline already follows the corners of whatever it is drawn around, so the ring
+ * needs no radius of its own. Setting one would round the element itself for as long
+ * as it had focus — a focused thing changing shape, not a focused thing getting a
+ * ring. Anything that wants a rounded ring has a rounded corner.
+ */
+:focus-visible {
+  outline: var(--ds-focus-ring) solid var(--ds-accent);
+  outline-offset: var(--ds-focus-offset);
+}
+
+::selection {
+  background: var(--ds-accent);
+  color: var(--ds-on-accent);
+}
+
+hr {
+  height: var(--ds-hairline);
+  border: 0;
+  background: var(--ds-border);
+}
+
+code,
+kbd,
+samp {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-code);
+}
+
+/* Shared by icon() and the low-level inlineIcon() helper used inside components. */
+.ds-icon {
+  flex: none;
+  width: var(--ds-icon-size);
+  height: var(--ds-icon-size);
+}
+
+/*
+ * Clipped to a hairline rather than hidden, so it is still read aloud. Shared by
+ * visuallyHidden() and by any control whose accessible name is a state the reader is
+ * shown as a glyph — the same reason .ds-icon lives here rather than in one atom.
+ */
+.ds-visually-hidden {
+  position: absolute;
+  width: var(--ds-hairline);
+  height: var(--ds-hairline);
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/*
+ * Shared styling keeps icon-only controls consistent. It lives in ds.base, below
+ * component layers, so individual controls can override size or colour states.
+ */
+.ds-icon-button {
+  display: grid;
+  place-items: center;
+  width: var(--ds-tap-target);
+  height: var(--ds-tap-target);
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--ds-text-muted);
+  cursor: pointer;
+}
+
+.ds-icon-button:hover {
+  color: var(--ds-text);
+}
+
+/* Keyboard-only route past the header, revealed on focus. */
+.ds-skip-link {
+  position: absolute;
+  top: var(--ds-space-2xs);
+  left: var(--ds-space-2xs);
+  z-index: var(--ds-layer-top);
+  padding: var(--ds-space-2xs) var(--ds-space-sm);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-accent);
+  color: var(--ds-on-accent);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+/*
+ * `:focus`, not `:focus-visible`: this is the one element whose whole purpose is to
+ * appear when it is focused, and a link focused by script or by a touch-and-hold is
+ * still a link somebody has to be able to see.
+ */
+.ds-skip-link:focus {
+  transform: translateY(0);
+}

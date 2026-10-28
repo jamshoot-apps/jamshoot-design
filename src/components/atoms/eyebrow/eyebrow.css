@@ -1,0 +1,8 @@
+.ds-eyebrow {
+  margin-bottom: var(--ds-space-xs);
+  color: var(--ds-text-faint);
+  font-size: var(--ds-text-caption);
+  font-weight: var(--ds-weight-medium);
+  letter-spacing: var(--ds-tracking-wide);
+  text-transform: uppercase;
+}

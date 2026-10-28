@@ -1,0 +1,16 @@
+/*
+ * A palette the system never picks on its own — its name is not a colour scheme, so
+ * it is only ever chosen from the control. It sets four tokens and inherits the other
+ * eight roles from theme.css, which is what the lint measures it as.
+ */
+
+:root {
+  color-scheme: light;
+  --ds-theme-label: 'Warm paper';
+  --ds-theme-icon: 'sunny-outline';
+
+  --ds-bg: #f5efe4;
+  --ds-surface: #fbf7ef;
+  --ds-surface-sunken: #ece3d4;
+  --ds-text-faint: #5f5546;
+}

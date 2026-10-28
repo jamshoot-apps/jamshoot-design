@@ -1,0 +1,10 @@
+.ds-container {
+  width: 100%;
+  max-width: calc(var(--ds-content-max) + var(--ds-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--ds-gutter);
+}
+
+.ds-container--narrow {
+  max-width: calc(var(--ds-content-narrow) + var(--ds-gutter) * 2);
+}

@@ -1,0 +1,30 @@
+.ds-steps {
+  border-bottom: var(--ds-hairline) solid var(--ds-border);
+}
+
+.ds-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--ds-space-sm) var(--ds-space-md);
+  padding-block: var(--ds-space-md);
+  border-top: var(--ds-hairline) solid var(--ds-border);
+}
+
+.ds-step__index {
+  grid-row: span 2;
+  color: var(--ds-accent);
+  font-size: var(--ds-text-subtitle);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-step__title {
+  font-size: var(--ds-text-subtitle);
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-step__body {
+  grid-column: 2;
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-small);
+}

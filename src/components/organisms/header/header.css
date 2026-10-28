@@ -1,0 +1,94 @@
+.ds-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--ds-layer-chrome);
+  border-bottom: var(--ds-hairline) solid var(--ds-border);
+  background: var(--ds-bg);
+}
+
+.ds-header[data-hide-on-scroll] {
+  transition: transform var(--ds-motion-quick) var(--ds-ease-out);
+}
+
+.ds-header[data-scroll-hidden]:not(:focus-within) {
+  transform: translateY(-100%);
+}
+
+/* A keyboard user must see the newly focused control immediately. */
+.ds-header:focus-within {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-header[data-hide-on-scroll] {
+    transition: none;
+  }
+}
+
+.ds-header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-sm);
+  min-height: var(--ds-header-height);
+}
+
+/* The lockup is `brand({ compact: true })`; the header places it and styles none of it. */
+
+.ds-header__end {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2xs);
+}
+
+.ds-header__toggle {
+  display: contents;
+}
+
+.ds-header__nav {
+  position: absolute;
+  top: 100%;
+  inset-inline: 0;
+  display: none;
+  flex-direction: column;
+  gap: var(--ds-space-2xs);
+  padding: var(--ds-space-sm) var(--ds-gutter) var(--ds-space-md);
+  border-bottom: var(--ds-hairline) solid var(--ds-border);
+  background: var(--ds-bg);
+}
+
+.ds-header__nav[data-open] {
+  display: flex;
+}
+
+.ds-header__link {
+  padding-block: var(--ds-space-2xs);
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-small);
+  text-decoration: none;
+}
+
+.ds-header__link:hover,
+.ds-header__link[aria-current] {
+  color: var(--ds-text);
+}
+
+@media (min-width: 52rem) {
+  .ds-header__end {
+    gap: var(--ds-space-lg);
+  }
+
+  .ds-header__toggle {
+    display: none;
+  }
+
+  .ds-header__nav {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--ds-space-lg);
+    padding: 0;
+    border-bottom: 0;
+  }
+}

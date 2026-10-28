@@ -1,0 +1,14 @@
+.ds-page-header {
+  padding-top: var(--ds-space-3xl);
+}
+
+.ds-page-header__content {
+  padding-bottom: var(--ds-space-xl);
+  border-bottom: calc(var(--ds-hairline) * 2) solid var(--ds-border-strong);
+}
+
+.ds-page-header__meta {
+  margin-top: var(--ds-space-2xs);
+  color: var(--ds-text-faint);
+  font-size: var(--ds-text-caption);
+}

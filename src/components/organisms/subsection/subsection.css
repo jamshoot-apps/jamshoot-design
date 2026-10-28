@@ -1,0 +1,4 @@
+/* By class, not by element: a nested group's own title is an h4, or lower. */
+.ds-subsection__title {
+  margin-bottom: var(--ds-space-md);
+}

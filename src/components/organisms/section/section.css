@@ -1,0 +1,28 @@
+.ds-section {
+  padding-block: var(--ds-section-space);
+}
+
+.ds-section--sunken {
+  background: var(--ds-surface-sunken);
+  border-block: var(--ds-hairline) solid var(--ds-border);
+}
+
+.ds-section__head {
+  max-width: var(--ds-content-narrow);
+  margin-bottom: var(--ds-space-2xl);
+}
+
+.ds-section__head:empty {
+  display: none;
+}
+
+.ds-section__lead {
+  margin-top: var(--ds-space-sm);
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-subtitle);
+  line-height: var(--ds-leading-snug);
+}
+
+.ds-section__cta {
+  margin-top: var(--ds-space-xl);
+}

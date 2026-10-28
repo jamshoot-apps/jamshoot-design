@@ -1,0 +1,13 @@
+JamShoot Design
+Copyright 2026 JamShoot
+
+Library code and documentation are licensed under the Apache License, Version 2.0.
+
+The SVG interface and documentation icons in src/assets/icons/ and docs/assets/icons/ are
+derived from Ionicons, Copyright (c) 2015-present Ionic, and retain the MIT notices
+distributed in those directories. Production builds include the applicable notice.
+
+The documentation website uses JamShoot artwork under separate brand terms in
+docs/assets/brand/jamshoot/LICENSE.txt in the source repository. That artwork is
+not included in the npm package and is excluded from Apache 2.0.
+Apache 2.0 does not grant rights to JamShoot trademarks.

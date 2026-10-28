@@ -1,0 +1,27 @@
+.ds-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-lg) var(--ds-space-2xl);
+}
+
+.ds-proof__item {
+  max-width: var(--ds-measure-sm);
+}
+
+.ds-proof__term {
+  font-size: var(--ds-text-small);
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-proof__text {
+  margin-top: var(--ds-space-3xs);
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-caption);
+  line-height: var(--ds-leading-snug);
+}
+
+.ds-proof--pills {
+  padding: 0;
+  list-style: none;
+  gap: var(--ds-space-2xs);
+}

@@ -1,0 +1,71 @@
+.ds-faq {
+  max-width: var(--ds-content-narrow);
+  padding-inline: var(--ds-space-md);
+  background: var(--ds-surface);
+  border: var(--ds-hairline) solid var(--ds-border);
+}
+
+.ds-faq__item {
+  border-bottom: var(--ds-hairline) solid var(--ds-border);
+}
+
+.ds-faq__item:last-child {
+  border-bottom: none;
+}
+
+.ds-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-sm);
+  padding-block: var(--ds-space-md);
+  cursor: pointer;
+  list-style: none;
+}
+
+/*
+ * The question carries a heading element for the outline, and the type of the line it
+ * always was: an FAQ is a list of questions, not a run of subtitles.
+ */
+.ds-faq__title {
+  font-size: var(--ds-text-body);
+  font-weight: var(--ds-weight-semibold);
+  line-height: var(--ds-leading-snug);
+  letter-spacing: normal;
+}
+
+.ds-faq__question::-webkit-details-marker {
+  display: none;
+}
+
+.ds-faq__icon {
+  display: flex;
+  --ds-icon-size: var(--ds-icon-md);
+  color: var(--ds-text-faint);
+  transition: transform var(--ds-motion-quick) var(--ds-ease-out);
+}
+
+.ds-faq__item[open] .ds-faq__icon {
+  transform: rotate(180deg);
+}
+
+.ds-faq__answer {
+  margin-bottom: var(--ds-space-md);
+  padding-left: var(--ds-space-sm);
+  padding-bottom: var(--ds-space-md);
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-small);
+  max-width: var(--ds-measure-lg);
+}
+
+@media (min-width: 52rem) {
+  .ds-faq {
+    padding-inline: var(--ds-space-xl);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-faq__icon {
+    transition: none;
+  }
+}

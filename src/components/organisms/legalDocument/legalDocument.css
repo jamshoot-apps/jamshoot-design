@@ -1,0 +1,20 @@
+.ds-document {
+  padding-block: var(--ds-space-2xl) var(--ds-section-space);
+}
+
+.ds-document__section + .ds-document__section {
+  margin-top: var(--ds-space-2xl);
+}
+
+.ds-document__section h2 {
+  font-size: var(--ds-text-subtitle);
+}
+
+.ds-document__section h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ds-document__body {
+  margin-top: var(--ds-space-2xs);
+}

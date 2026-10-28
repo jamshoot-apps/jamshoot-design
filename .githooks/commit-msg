@@ -1,0 +1,18 @@
+#!/bin/sh
+set -eu
+
+if git diff --cached --name-only --diff-filter=ACMR | grep -qx 'CHANGELOG.md'; then
+  exit 0
+fi
+
+if grep -Eq '^Changelog: [^[:space:]].+' "$1"; then
+  exit 0
+fi
+
+cat >&2 <<'EOF'
+Commit blocked: CHANGELOG.md is not staged.
+
+Document the change, or add an explicit exception to the commit message:
+Changelog: <why this commit needs no changelog entry>
+EOF
+exit 1

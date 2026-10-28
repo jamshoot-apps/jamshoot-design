@@ -1,0 +1,16 @@
+.ds-grid {
+  --_grid-min: var(--ds-grid-min, var(--ds-measure-xs));
+  --_grid-space: var(--ds-space-md);
+
+  display: grid;
+  gap: var(--_grid-space);
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--_grid-min), 100%), 1fr));
+}
+
+.ds-grid--lg {
+  --_grid-space: var(--ds-space-lg);
+}
+
+.ds-grid--cell-md {
+  --_grid-min: var(--ds-grid-min, var(--ds-measure-md));
+}

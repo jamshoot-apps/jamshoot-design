@@ -1,0 +1,6 @@
+.ds-note {
+  max-width: var(--ds-content-narrow);
+  margin-top: var(--ds-space-lg);
+  color: var(--ds-text-faint);
+  font-size: var(--ds-text-caption);
+}

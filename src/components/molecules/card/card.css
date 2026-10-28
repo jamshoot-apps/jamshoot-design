@@ -1,0 +1,44 @@
+.ds-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-xs);
+  padding: var(--ds-card-padding, var(--ds-space-lg));
+  border: var(--ds-hairline) solid var(--ds-border);
+  border-radius: var(--ds-card-radius, var(--ds-radius-md));
+  background: var(--ds-card-surface, var(--ds-surface));
+}
+
+/* The title and its supporting copy form one information group (proximity). */
+.ds-card__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3xs);
+}
+
+.ds-card__title {
+  font-size: var(--ds-text-subtitle);
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-card__body {
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-small);
+}
+
+.ds-card__list {
+  padding-left: var(--ds-space-md);
+  list-style: disc;
+}
+
+.ds-card__list li + li {
+  margin-top: var(--ds-space-3xs);
+}
+
+.ds-card__media {
+  --_card-inset: var(--ds-card-padding, var(--ds-space-lg));
+
+  overflow: hidden;
+  margin: calc(var(--_card-inset) * -1) calc(var(--_card-inset) * -1) var(--ds-space-2xs);
+  border-radius: var(--ds-card-radius, var(--ds-radius-md)) var(--ds-card-radius, var(--ds-radius-md)) 0 0;
+  background: var(--ds-surface-sunken);
+}

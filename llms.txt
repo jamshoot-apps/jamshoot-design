@@ -1,0 +1,111 @@
+# JamShoot Design
+
+> Build-time components for static sites. A site calls validated ES-module
+> functions while building; the resulting HTML and CSS ship without component
+> renderers in the browser.
+
+Fonts are site-owned; the default is the system stack. The icons the components draw
+themselves are built in. `JAMSHOOT_ICONS_DIR` names a trusted SVG directory for content
+icons; its files win over built-in ones of the same name.
+
+## Start here
+
+A site owns `site.config.js`, `theme.css`, `content/*.js`, `pages.js`, and
+optional `blocks/`. [Authoring](https://jamshoot-apps.github.io/jamshoot-design/authoring.html#set-up)
+provides package installation, source setup and a complete minimal site. From the library checkout:
+
+```sh
+node src/cli/build.mjs /path/to/site
+node src/cli/lint.mjs /path/to/site
+```
+
+Discover a component here, read its linked contract, compose the page, build, lint
+and correct errors. Build validates options; lint is a separate step that needs the
+current output for its output checks. [Authoring](https://jamshoot-apps.github.io/jamshoot-design/authoring.html#correct-invalid-options)
+shows a validation error and correction. Finish with its pre-launch checklist.
+
+`pages.js` imports public functions from `@jamshoot-apps/design`. Each takes one object:
+
+```js
+section({
+  id: 'features',
+  title: 'What it does.',
+  content: grid({
+    content: [card({ title: 'Offline', body: 'No account or network required.' })],
+  }),
+})
+```
+
+## Authoring boundaries
+
+- Pages call components; they do not write `ds-*` classes or import `@jamshoot-apps/design/markup`.
+- One-site markup belongs in `blocks/*.js`; only `blocks/*.client.js` reaches the browser.
+- A component returns static markup. Missing or invalid options stop the build and link to its README.
+- User-facing strings stay in `content/*.js` or `site.config.js`.
+- A site sets the twelve colour roles and `color-scheme`; optional component tokens are closed by the contract.
+- Spacing, type, radii, motion, measures and breakpoints stay library-owned.
+- Component CSS owns its namespace. Composition uses parent wrappers or a documented hook.
+- Option names are a closed vocabulary: `title` is a heading, `label` names a control, `text` is escaped words, `body`/`lead`/`note`/`answer`/`value` are prose carrying an inline link, `content` is renderable, `items` is a list of objects. A list of plain strings is named for the strings.
+
+## Component catalog
+
+Open only the component you need. Each linked README contains its generated recursive
+option table, defaults, constraints, executable examples, composition notes and any
+public styling hooks.
+
+### Layout
+
+- [`container({ content, width? })`](src/components/layout/container/README.md) — The one thing that decides how wide the page is.
+- [`stack({ content, gap? })`](src/components/layout/stack/README.md) — Children in a column with one gap between them.
+- [`cluster({ content, gap?, justify? })`](src/components/layout/cluster/README.md) — Children in a row that wraps rather than scrolls. Buttons, tags, proof points.
+- [`grid({ content, cell?, gap? })`](src/components/layout/grid/README.md) — Cards laid out in as many columns as the width allows.
+- [`split({ start, end })`](src/components/layout/split/README.md) — Two columns on a wide screen, one on a narrow one. Copy beside an illustration.
+
+### Atoms
+
+- [`button({ label, href?, variant?, icon? })`](src/components/atoms/button/README.md) — A navigation link styled as a primary or ghost action. Omitted when href is missing.
+- [`navToggle({ controls, label? })`](src/components/atoms/navToggle/README.md) — The accessible menu button used by a responsive header.
+- [`badge({ label, tone? })`](src/components/atoms/badge/README.md) — A short status word beside something else. Never the only thing carrying the message.
+- [`eyebrow({ text })`](src/components/atoms/eyebrow/README.md) — The small line above a title that says which part of the page this is.
+- [`note({ body })`](src/components/atoms/note/README.md) — The quiet line under a section: a caveat, a footnote, the sentence that keeps a claim honest.
+- [`icon({ name, label? })`](src/components/atoms/icon/README.md) — An inline SVG that is the size and colour of the text around it.
+- [`iconTile({ name })`](src/components/atoms/iconTile/README.md) — An icon on a raised square, for feature cards and step markers.
+- [`prose({ content })`](src/components/atoms/prose/README.md) — The one place bare elements get spacing, because the author is writing sentences.
+- [`brand({ logo?, text?, tagline?, label?, position?, compact?, href? })`](src/components/atoms/brand/README.md) — A logo with optional name and tagline beside or below it.
+- [`chip({ label })`](src/components/atoms/chip/README.md) — A short fact that stands on its own, in sentence case. Read as content, not as a status.
+- [`themeToggle({ label?, action?, choices })`](src/components/atoms/themeToggle/README.md) — The control that moves a reader between a site’s palettes.
+- [`visuallyHidden({ text })`](src/components/atoms/visuallyHidden/README.md) — Text for screen readers that is not drawn on screen.
+
+### Molecules
+
+- [`card({ title, body?, bullets?, icon?, media? })`](src/components/molecules/card/README.md) — A bordered panel for a title, supporting text or bullets, and optional icon or media.
+- [`steps({ items })`](src/components/molecules/steps/README.md) — A numbered process. The number is the only ornament a step gets.
+- [`plan({ title, price, subtitle?, features, featured?, badgeLabel?, link? })`](src/components/molecules/plan/README.md) — One pricing tier. Two or three of them sit in a grid.
+- [`faq({ items })`](src/components/molecules/faq/README.md) — Questions that open without JavaScript. With the `faq` runtime, a deep link opens the answer it points at.
+- [`figure({ src?, srcset?, sizes?, alt?, width?, height?, caption?, label?, priority? })`](src/components/molecules/figure/README.md) — A framed product image with an optional caption. Omit `src` for a labelled placeholder.
+- [`definitions({ items })`](src/components/molecules/definitions/README.md) — Term-and-value rows: system requirements, spec sheets, anything tabular but short.
+- [`proof({ items, style? })`](src/components/molecules/proof/README.md) — Short factual claims under a hero. Each one has to be checkable.
+- [`table({ columns, rows, caption? })`](src/components/molecules/table/README.md) — A real table, for data that has columns. Scrolls inside itself rather than widening the page.
+
+### Organisms
+
+- [`hero({ title, lead, eyebrow?, actions?, proof?, visual? })`](src/components/organisms/hero/README.md) — The top of a landing page: what the product is, on one side, and what it looks like on the other.
+- [`section({ content, id?, eyebrow?, title?, lead?, surface?, actions? })`](src/components/organisms/section/README.md) — A page region with optional heading text, required content and optional actions.
+- [`subsection({ title, content, id? })`](src/components/organisms/subsection/README.md) — A titled block inside a section — an FAQ split into subjects, a spec sheet split into groups.
+- [`cta({ title, lead?, eyebrow?, actions?, note? })`](src/components/organisms/cta/README.md) — An action band at the end of a page or between sections, with optional supporting text and a note.
+- [`pageHeader({ title, meta?, width? })`](src/components/organisms/pageHeader/README.md) — The title of a page that is not the landing page: a policy, a support page.
+- [`legalDocument({ width?, sections })`](src/components/organisms/legalDocument/README.md) — A policy or support document: ordered sections with optional anchored headings, paragraphs, bullet lists and tables.
+- [`header({ brand, links, activeId?, label?, toggleLabel?, hideOnScroll?, theme? })`](src/components/organisms/header/README.md) — The page navigation and brand, pinned or hidden on downward scroll.
+- [`footer({ blurb?, email?, showContact?, groups, copyright, legalNote? })`](src/components/organisms/footer/README.md) — The page footer: optional introduction, contact, link columns and legal copy.
+
+## Read deeper
+
+- [Choosing molecules](https://jamshoot-apps.github.io/jamshoot-design/molecules.html) — choose a content structure and compose it
+- [Naming conventions](https://jamshoot-apps.github.io/jamshoot-design/conventions.html) — the option names components share
+- [Adding a component](https://jamshoot-apps.github.io/jamshoot-design/adding-a-component.html) — the exact files, discovery and checks
+- [Authoring a site](https://jamshoot-apps.github.io/jamshoot-design/authoring.html) — setup, composition, builds and pre-launch checks
+- [Architecture](https://jamshoot-apps.github.io/jamshoot-design/architecture.html) — ownership and build flow
+- [Token contract](src/tokens/contract.js) — roles, component tokens, defaults and cascade layers
+- [Theming](https://jamshoot-apps.github.io/jamshoot-design/theming.html) — how a site supplies colour
+- [Rules](https://jamshoot-apps.github.io/jamshoot-design/anti-patterns.html) — every lint rule and its reason
+- [Site configuration](https://jamshoot-apps.github.io/jamshoot-design/configuration.html) — validated settings supplied to page components

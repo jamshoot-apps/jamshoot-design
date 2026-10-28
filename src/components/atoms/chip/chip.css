@@ -1,0 +1,15 @@
+/*
+ * A chip is read, not scanned past, so it is drawn the way a surface is: a raised fill
+ * that separates it from the page in every palette, with the hairline only as an edge.
+ * A hairline alone, at the strength of --ds-border, disappears on a dark page.
+ */
+.ds-chip {
+  display: inline-block;
+  padding: var(--ds-space-3xs) var(--ds-space-xs);
+  border: var(--ds-hairline) solid var(--ds-border);
+  border-radius: var(--ds-radius-pill);
+  background: var(--ds-surface-raised);
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-caption);
+  font-weight: var(--ds-weight-semibold);
+}

@@ -1,0 +1,50 @@
+.ds-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2xs);
+  /* control-height is this box's own height, stated once so a neighbour can match it. */
+  min-height: max(var(--ds-tap-target), var(--ds-control-height));
+  padding: var(--ds-space-xs) var(--ds-space-md);
+  border: var(--ds-hairline) solid transparent;
+  border-radius: var(--ds-button-radius, var(--ds-radius-pill));
+  font-size: var(--ds-text-small);
+  font-weight: var(--ds-button-weight, var(--ds-weight-medium));
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--ds-motion-quick) var(--ds-ease-out),
+    border-color var(--ds-motion-quick) var(--ds-ease-out),
+    color var(--ds-motion-quick) var(--ds-ease-out);
+}
+
+.ds-button--primary {
+  background: var(--ds-accent);
+  color: var(--ds-on-accent);
+}
+
+.ds-button--primary:hover {
+  background: var(--ds-accent-strong);
+}
+
+.ds-button--ghost {
+  border-color: var(--ds-border-strong);
+  background: transparent;
+  color: var(--ds-text);
+}
+
+.ds-button--ghost:hover {
+  border-color: var(--ds-text-faint);
+  background: var(--ds-surface-raised);
+}
+
+.ds-button__icon {
+  display: contents;
+  --ds-icon-size: var(--ds-icon-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-button {
+    transition: none;
+  }
+}

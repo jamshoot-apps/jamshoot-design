@@ -1,0 +1,12 @@
+.ds-split {
+  display: grid;
+  gap: var(--ds-space-2xl);
+  align-items: center;
+}
+
+@media (min-width: 52rem) {
+  .ds-split {
+    grid-template-columns: var(--ds-split-columns, 1fr 1fr);
+    gap: var(--ds-space-3xl);
+  }
+}

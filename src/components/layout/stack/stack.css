@@ -1,0 +1,31 @@
+.ds-stack {
+  --_stack-space: var(--ds-space-sm);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--_stack-space);
+}
+
+.ds-stack--2xs {
+  --_stack-space: var(--ds-space-2xs);
+}
+
+.ds-stack--xs {
+  --_stack-space: var(--ds-space-xs);
+}
+
+.ds-stack--md {
+  --_stack-space: var(--ds-space-md);
+}
+
+.ds-stack--lg {
+  --_stack-space: var(--ds-space-lg);
+}
+
+.ds-stack--xl {
+  --_stack-space: var(--ds-space-xl);
+}
+
+.ds-stack--2xl {
+  --_stack-space: var(--ds-space-2xl);
+}

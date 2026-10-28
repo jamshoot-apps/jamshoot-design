@@ -1,0 +1,20 @@
+.ds-cluster {
+  --_cluster-space: var(--ds-space-sm);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--_cluster-space);
+}
+
+.ds-cluster--xs {
+  --_cluster-space: var(--ds-space-xs);
+}
+
+.ds-cluster--lg {
+  --_cluster-space: var(--ds-space-lg);
+}
+
+.ds-cluster--between {
+  justify-content: space-between;
+}
