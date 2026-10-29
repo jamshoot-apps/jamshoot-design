@@ -1,7 +1,7 @@
 /*
- * A palette the system never picks on its own — its name is not a colour scheme, so
+ * A palette the system never picks on its own — its name is not a color scheme, so
  * it is only ever chosen from the control. It sets four tokens and inherits the other
- * eight roles from theme.css, which is what the lint measures it as.
+ * eight color roles from theme.css, which is what the lint measures it as.
  */
 
 :root {

@@ -2,7 +2,7 @@ import { defineComponent } from '../../../define.js';
 import { inlineIcon } from '../../../icons.js';
 
 export const icon = defineComponent('icon', {
-  summary: 'An inline SVG that is the size and colour of the text around it.',
+  summary: 'An inline SVG that is the size and color of the text around it.',
   docs: 'src/components/atoms/icon/README.md',
   styles: false,
   options: {

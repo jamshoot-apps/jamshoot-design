@@ -102,7 +102,7 @@ test('every reviewed exception is still a collision, so the list cannot go stale
  * the page says `body` carries inline markup and `text` never does, and a component
  * that disagrees is caught here rather than by a reader noticing the page is wrong.
  *
- * One-off names — `subtitle`, `caption`, `tagline`, `amount` — are not here. The
+ * One-off names — `caption`, `tagline`, `amount` — are not here. The
  * vocabulary is the words used by more than one component; the rest is a component
  * saying what only it has.
  */
@@ -119,6 +119,8 @@ const VOCABULARY = {
   items: 'items',
   term: 'text',
   question: 'text',
+  icon: 'icon',
+  variant: 'enum',
 };
 
 test('the shared words are the types the conventions page says they are', () => {

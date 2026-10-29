@@ -79,7 +79,7 @@ split({
 minimum column width from the measure scale; it does not set a column count.
 
 See [Space, radius and motion](space.md) for spacing and layout values, and
-[Theming](../theming.md#component-tokens) for the layout settings a site may change.
+[Theming](../theming.md#component-tokens) for the layout component tokens a site may change.
 The allowed breakpoint values live in [`src/tokens/contract.js`](../../src/tokens/contract.js);
 see the [breakpoint rule](../anti-patterns.md#breakpoint-a-fourth-breakpoint).
 
@@ -87,5 +87,5 @@ see the [breakpoint rule](../anti-patterns.md#breakpoint-a-fourth-breakpoint).
 
 A repeated arrangement shared by sites is a layout component. A shape used by one
 site belongs in that site's `blocks/`. Pages never assemble layout by typing `ds-*`
-classes. See [site blocks](../authoring.md#add-site-specific-blocks) for local
+classes. See [site blocks](../authoring.md#site-blocks) for local
 compositions and [Adding a component](../adding-a-component.md) for shared ones.

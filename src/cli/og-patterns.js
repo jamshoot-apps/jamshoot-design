@@ -64,7 +64,7 @@ const iconGlyph = (name) => iconSource(name).replace(/^<svg[^>]*>/, '').replace(
 /**
  * A staggered field of the library's own icons, sized and rotated per instance off a
  * seeded hash, adapted to this card's own layout: the icon and title sit vertically
- * centred across nearly the full width here, so the quiet band this fades into is
+ * centered across nearly the full width here, so the quiet band this fades into is
  * horizontal (top and bottom breathe; the text's own row does not), not the left-hand
  * margin used by other layouts.
  */

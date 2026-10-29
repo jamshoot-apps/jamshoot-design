@@ -1,8 +1,8 @@
 # Icon
 
-<!-- docs-review: 0e28e059d5e3; reason: Renamed the custom SVG directory variable to JAMSHOOT_ICONS_DIR without a compatibility alias. -->
+<!-- docs-review: 0c3a82df2d7a; reason: Reviewed American spelling in summaries; name option unchanged -->
 
-Inlines an SVG at build time. Colour follows `currentColor`; size follows
+Inlines an SVG at build time. Color follows `currentColor`; size follows
 `--ds-icon-size`.
 
 ## Usage
@@ -11,7 +11,7 @@ These icons are built in; this example needs no `JAMSHOOT_ICONS_DIR` setting.
 Import `icon` and `cluster` from `@jamshoot-apps/design`; see
 [example context](https://jamshoot-apps.github.io/jamshoot-design/authoring.html#component-example-context).
 
-```example title="Decorative and labelled icons"
+```example title="Decorative and labeled icons"
 cluster({ content: [
   icon({ name: 'arrow-forward' }),
   icon({ name: 'checkmark', label: 'Complete' }),

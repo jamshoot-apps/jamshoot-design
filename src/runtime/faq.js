@@ -8,7 +8,7 @@
  * item itself, so a link to `#refunds` scrolls to a question still closed.
  *
  * CSS can reach `:target`, but a `:target` rule forcing the panel open could never be
- * closed again — the element stays the target after the click — so the behaviour that
+ * closed again — the element stays the target after the click — so the behavior that
  * belongs to a reader's click cannot be written as a style.
  *
  * Without this module the link still lands on the right question. With it, the answer

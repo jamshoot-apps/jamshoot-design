@@ -1,6 +1,6 @@
 # Brand
 
-<!-- docs-review: 0dd7838e578b; reason: Clarified compact option wording and reviewed defaults, asset paths, naming constraints and Header ownership. -->
+<!-- docs-review: 8945ba315d08; reason: Reviewed logical position values end/bottom, default end, and site wording -->
 
 Combines an optional logo, visible name and tagline. It can be a link or a static
 lockup.
@@ -12,7 +12,7 @@ site-owned block needs another lockup.
 ## Usage
 
 Import `brand` and `cluster` from `@jamshoot-apps/design` in the block. The logo below is
-a documentation asset; use a site-owned asset path in your project. See
+a documentation asset; use a site-owned asset path in your site. See
 [example context](https://jamshoot-apps.github.io/jamshoot-design/authoring.html#component-example-context).
 
 ```example title="Text beside and below a logo, and the lockup a bar gets"
@@ -30,7 +30,7 @@ cluster({ gap: 'lg', content: [
 | `text` | `string` | optional | The name, shown beside the logo. |
 | `tagline` | `string` | optional | A short subtitle shown below the name. |
 | `label` | `string` | optional | The name for screen readers only, when the logo stands alone. |
-| `position` | `"right" \| "bottom"` | default `right` | Where the text sits relative to the logo. |
+| `position` | `"end" \| "bottom"` | default `end` | Where the text sits relative to the logo. |
 | `compact` | `true or false` | default `false` | A compact lockup for control rows. Uses a smaller logo and hides the tagline below 52 rem. |
 | `href` | `string` | optional | Where it links. Omit for a lockup that is not a link. |
 

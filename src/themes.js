@@ -7,7 +7,7 @@
  *      theme file has always been — `theme.css` is the base, `themes/<name>.css` is
  *      another palette named by its file.
  *   2. The build re-emits each file's declarations under the selector that turns it
- *      on: the base at `:root`, a palette named after a colour scheme also inside the
+ *      on: the base at `:root`, a palette named after a color scheme also inside the
  *      matching `prefers-color-scheme` query, and every palette under its own
  *      `[data-theme]` attribute.
  *   3. A palette only writes what differs from the base, because that is what the
@@ -73,7 +73,7 @@ function readTheme(path, name, base = false) {
   /*
    * Everything is read out of the `:root` block and nowhere else, because that block
    * is the only part of the file the build carries — a `color-scheme` or a label in a
-   * second rule would be honoured here and then never ship. `stray` reports that file
+   * second rule would be honored here and then never ship. `stray` reports that file
    * rather than this function quietly making sense of it.
    */
   const declarations = block?.[1] ?? '';

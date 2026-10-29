@@ -7,16 +7,16 @@ export const pageHeader = defineComponent('pageHeader', {
   docs: 'src/components/organisms/pageHeader/README.md',
   options: {
     title: { type: 'text', required: true, summary: 'The page’s name.' },
-    meta: { type: 'text', summary: 'Dates and version lines that belong to the document, not to the copy.' },
+    byline: { type: 'text', summary: 'Dates and version lines that belong to the document, not to the copy.' },
     width: { type: 'enum', values: ['default', 'narrow'], default: 'narrow', summary: 'Match the page content: default for sections, narrow for documents.' },
   },
-  render: ({ title, meta, width }) =>
+  render: ({ title, byline, width }) =>
     h('div', { class: 'ds-page-header' }, [
       container({
         width,
         content: h('div', { class: 'ds-page-header__content' }, [
           h('h1', { text: title }),
-          meta && h('p', { class: 'ds-page-header__meta', text: meta }),
+          byline && h('p', { class: 'ds-page-header__byline', text: byline }),
         ]),
       }),
     ]),

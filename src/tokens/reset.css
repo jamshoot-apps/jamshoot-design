@@ -53,7 +53,7 @@ ol[class] {
 
 /*
  * One global escape hatch for people who asked their system to calm down. Components
- * are still expected to declare their own reduced-motion behaviour where the static
+ * are still expected to declare their own reduced-motion behavior where the static
  * state needs to differ — this only stops things moving.
  */
 @media (prefers-reduced-motion: reduce) {

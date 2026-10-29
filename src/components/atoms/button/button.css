@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--ds-space-2xs);
-  /* control-height is this box's own height, stated once so a neighbour can match it. */
+  /* control-height is this box's own height, stated once so a neighbor can match it. */
   min-height: max(var(--ds-tap-target), var(--ds-control-height));
   padding: var(--ds-space-xs) var(--ds-space-md);
   border: var(--ds-hairline) solid transparent;

@@ -1,8 +1,8 @@
 # Figure
 
-<!-- docs-review: 3e2bd6f3d4bf; reason: Corrected alt, responsive source and loading explanations; checked placeholder, assets and Card media composition against renderer and CSS. -->
+<!-- docs-review: a09f07f4d282; reason: Reviewed rename of label to placeholder in spec, examples and table -->
 
-A framed product image with an optional caption. Omit `src` to show a labelled
+A framed product image with an optional caption. Omit `src` to show a labeled
 placeholder. The placeholder is not a fallback for an image that fails to load.
 
 ## Usage
@@ -13,7 +13,7 @@ under `assets/` and use its site-relative URL, such as `assets/viewer.png`; see
 
 ```example title="Placeholder and priority image"
 stack({ content: [
-  figure({ label: 'Screenshot pending', caption: 'The layout is ready. The screenshot is on its way.' }),
+  figure({ placeholder: 'Screenshot pending', caption: 'The layout is ready. The screenshot is on its way.' }),
   figure({
     src: 'brand/example.svg',
     alt: 'Example project mark',
@@ -28,14 +28,14 @@ stack({ content: [
 ```options figure
 | Option | Accepts |  | What it is |
 | --- | --- | --- | --- |
-| `src` | `string` | optional | The image. Omit it and the frame stays empty and labelled. |
+| `src` | `string` | optional | The image. Omit it and the frame stays empty and labeled. |
 | `srcset` | `string` | optional | Image candidates with width (`w`) descriptors. Supply `sizes` with them. |
 | `sizes` | `string` | optional | The rendered width used for candidate selection. Required with `srcset`. |
 | `alt` | `string` | optional | The image’s purpose or relevant information. Required with `src`; use `""` for a decorative image. |
 | `width` | `number` | optional | Intrinsic width in pixels. Supply with `height` to provide the aspect ratio. |
 | `height` | `number` | optional | Intrinsic height in pixels. Supply with `width`. |
 | `caption` | `string` | optional | A line under the frame. |
-| `label` | `string` | default `Screenshot pending` | What the empty frame says while the screenshot does not exist. |
+| `placeholder` | `string` | default `Screenshot pending` | What the empty frame says while the screenshot does not exist. |
 | `priority` | `true or false` | default `false` | Use for a critical hero image. Sets `loading="eager"` and `fetchpriority="high"`; otherwise the image loads lazily. |
 
 Takes:

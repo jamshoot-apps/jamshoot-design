@@ -16,7 +16,7 @@ test('component code and CSS have an explicit current documentation review', () 
 test('header, footer, configuration and build documentation gates detect every owned source change', () => {
   const targets = reviews();
   const build = targets.find((entry) => entry.name === 'build');
-  for (const path of ['src/cli/output.js', 'src/cli/files.js', 'src/cli/colours.js', 'scripts/docs/build.mjs']) {
+  for (const path of ['src/cli/output.js', 'src/cli/files.js', 'src/cli/colors.js', 'scripts/docs/build.mjs']) {
     assert.ok(build.dependencies.includes(join(LIB, path)), `${path} escaped build documentation review`);
   }
   for (const name of ['header', 'footer', 'siteConfig', 'build']) {

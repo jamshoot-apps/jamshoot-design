@@ -1,5 +1,5 @@
-/** Measurable hex/rgb colour as [r, g, b, alpha], otherwise null. */
-export function parseColour(value) {
+/** Measurable hex/rgb color as [r, g, b, alpha], otherwise null. */
+export function parseColor(value) {
   if (typeof value !== 'string') return null;
   const text = value.trim();
   const hex = text.match(/^#([0-9a-f]{3,8})$/i);

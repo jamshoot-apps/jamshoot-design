@@ -72,7 +72,7 @@ test('no two library stylesheets declare the same selector', () => {
 
 /**
  * How much overlap is worth a human's attention. Five declarations is where the run
- * stops being two rules that happen to both centre something and starts being one
+ * stops being two rules that happen to both center something and starts being one
  * shape written twice — it was picked by running the check over the library and
  * reading every pair it produced, not guessed.
  */
@@ -88,7 +88,7 @@ const OVERLAP = 5;
  */
 const REVIEWED = new Map();
 
-/** Every `selector { … }` in one stylesheet, as a set of normalised declarations. */
+/** Every `selector { … }` in one stylesheet, as a set of normalized declarations. */
 function rulesOf(path) {
   const css = stripCssComments(read(path));
 

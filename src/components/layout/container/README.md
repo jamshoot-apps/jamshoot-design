@@ -41,5 +41,5 @@ container adds another inline gutter; do not add one inside a section just to sp
 its content.
 
 See the [Layout overview](https://jamshoot-apps.github.io/jamshoot-design/foundations-layout.html) for component
-selection and [site blocks](https://jamshoot-apps.github.io/jamshoot-design/authoring.html#add-site-specific-blocks)
+selection and [site blocks](https://jamshoot-apps.github.io/jamshoot-design/authoring.html#site-blocks)
 for the block workflow.

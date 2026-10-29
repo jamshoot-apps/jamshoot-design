@@ -12,7 +12,7 @@ test('page-markup catches a page that writes markup by hand', () => {
   assert.ok(ruleNames(inContent).includes('page-markup'), 'a library class name was allowed in a content file');
 });
 
-test('a project block may compose design-system components, markup and tokens', () => {
+test('a site block may compose design-system components, markup and tokens', () => {
   const results = rulesFor({
     'blocks/scene.js':
       "import { card } from '@jamshoot-apps/design';\n" +
@@ -24,7 +24,7 @@ test('a project block may compose design-system components, markup and tokens', 
   });
 
   assert.deepEqual(
-    results.filter((entry) => ['page-markup', 'scale', 'theme-colour', 'knob-assignment'].includes(entry.rule)),
+    results.filter((entry) => ['page-markup', 'scale', 'theme-color', 'token-assignment'].includes(entry.rule)),
     [],
   );
 });

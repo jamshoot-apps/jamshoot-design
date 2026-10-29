@@ -53,8 +53,8 @@ test('OG uses configured site-owned fonts in its standalone HTML', () => {
   assert.doesNotMatch(html, /url\("\.\.\/assets/);
 });
 
-test('OG uses strict shared colour parsing for automatic ink selection', () => {
-  const html = join(root, 'colour.html');
+test('OG uses strict shared color parsing for automatic ink selection', () => {
+  const html = join(root, 'color.html');
   for (const bg of ['#12345', 'rgb(999 0 0)', 'rgb(0 0 0) trailing']) {
     const result = run('--html', html, '--bg', bg);
     assert.equal(result.status, 0, result.stderr);

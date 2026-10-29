@@ -9,13 +9,13 @@
  * Three tiers, the shape the field settled on (primitive → semantic → component):
  *
  *   L1 primitives   fixed scales — space, type, radius, motion, layout.
- *                   A project never touches these. They are what makes two sites
+ *                   A site never touches these. They are what makes two sites
  *                   with unrelated palettes still read as the same hand.
  *
- *   L2 roles        the twelve semantic colours plus color-scheme. A project sets
+ *   L2 roles        the twelve color roles plus color-scheme. A site sets
  *                   all twelve, and nothing else. Checked for contrast, not trusted.
  *
- *   L3 component    optional, whitelisted knobs a project may turn when a role is
+ *   L3 component    optional, whitelisted component tokens a site may set when a role is
  *                   not enough — a squarer button, a flatter card. Every one falls
  *                   back to a primitive or a role, so setting none is the house style.
  *
@@ -23,17 +23,17 @@
  * else fails the build.
  */
 
-/* --- L2: the colour roles ------------------------------------------------------ */
+/* --- L2: the color roles ------------------------------------------------------ */
 
 /**
- * A project sets exactly these, in theme.css. `on` names the surface a role is
+ * A site sets exactly these, in theme.css. `on` names the surface a role is
  * measured against; `min` is the ratio it has to clear, from WCAG 2.2:
  *
  *   4.5  body text                       (1.4.3 Contrast (Minimum), AA)
  *   3    UI that carries meaning without being text — the focus ring, a strong
  *        hairline, the accent used as a mark  (1.4.11 Non-text Contrast, AA)
  *
- * The accent also colours ordinary links, so both of its steps clear the 4.5 text
+ * The accent also colors ordinary links, so both of its steps clear the 4.5 text
  * threshold as well as the weaker 3:1 requirement for marks and focus rings. Text
  * placed on the accent is checked over both the resting and interactive fills.
  */
@@ -107,7 +107,7 @@ export const THEME_ATTRIBUTE = 'data-theme';
 export const THEME_STORAGE_KEY = 'ds-theme';
 
 /**
- * What a palette file may say about itself besides colour, for the control that
+ * What a palette file may say about itself besides color, for the control that
  * offers it. Both are optional and both have an answer without being set, so a site
  * that only wants two palettes writes neither.
  */
@@ -115,7 +115,7 @@ export const THEME_METADATA = {
   label: {
     token: 'theme-label',
     summary: 'What the control calls this palette, and what a screen reader says.',
-    fallback: 'The capitalised file name.',
+    fallback: 'The capitalized file name.',
   },
   icon: {
     token: 'theme-icon',
@@ -229,13 +229,13 @@ export const LAYOUT_PRIMITIVES = [
  * WCAG 2.2 §2.5.8 Target Size (Minimum) asks for 24 CSS px. The system uses 44, the
  * Apple HIG figure, because a landing page is read on a phone held in one hand.
  *
- * `--ds-tap-target` is a primitive, not a knob: a project cannot set it (`theme-contract`), so
+ * `--ds-tap-target` is a primitive, not a component token: a site cannot set it (`theme-contract`), so
  * this floor exists to stop the library itself regressing — a tightened button, an
  * icon-only control sized to its glyph.
  */
 export const MIN_TAP_TARGET_PX = 24;
 
-/* --- L3: the component knobs --------------------------------------------------- */
+/* --- L3: the component tokens -------------------------------------------------- */
 
 const primitiveValues = (group) => PRIMITIVES[group].map((step) => `var(--ds-${group}-${step})`);
 const surfaceValues = SURFACE_ROLES.map((name) => `var(--ds-${name})`);
@@ -243,7 +243,7 @@ const surfaceValues = SURFACE_ROLES.map((name) => `var(--ds-${name})`);
 const RADIUS = { values: ['0', ...primitiveValues('radius')], summary: 'zero or a `--ds-radius-*` token' };
 const WEIGHT = { values: primitiveValues('weight'), summary: 'a `--ds-weight-*` token' };
 const SPACE = { values: primitiveValues('space'), summary: 'a `--ds-space-*` token' };
-const SURFACE = { values: ['transparent', ...surfaceValues], summary: '`transparent` or a surface colour role' };
+const SURFACE = { values: ['transparent', ...surfaceValues], summary: '`transparent` or a surface color role' };
 const MEASURE = { values: primitiveValues('measure'), summary: 'a `--ds-measure-*` token' };
 const LENGTH = {
   values: primitiveValues('measure'),
@@ -256,20 +256,22 @@ const TRACK_RATIO = {
 };
 
 /**
- * The escape hatch, deliberately narrow. A project may set any of these in theme.css;
- * each one falls back to a primitive or a role, so a project that sets none of them
- * gets the house style. Anything not on this list is not a knob, and the lint says so.
+ * The escape hatch, deliberately narrow. A site may set any of these in theme.css;
+ * each one falls back to a primitive or a role, so a site that sets none of them
+ * gets the house style. Anything not on this list is not a component token, and the
+ * lint says so.
  *
  * `fallback` is checked against the CSS: the declaration that reads the token has to
- * supply exactly this default, so the documented behaviour and the stylesheet cannot
- * drift apart. `accepts` constrains project values to the same scales and roles the
- * library uses. `variants` names the other defaults the same knob is read with, one
- * per modifier — a wide grid starts wider — and the knob still wins over all of them.
+ * supply exactly this default, so the documented behavior and the stylesheet cannot
+ * drift apart. `accepts` constrains site values to the same scales and roles the
+ * library uses. `variants` names the other defaults the same token is read with, one
+ * per modifier — a wide grid starts wider — and the token still wins over all of them.
  *
  * What is deliberately *not* here: the spacing between children of a stack, a cluster
- * or a grid. That is the `gap` option, chosen per call from the fixed scale. A project
+ * or a grid. That is the `gap` option, chosen per call from the fixed scale. A site
  * token for it would have to win over every modifier, which would flatten seven
- * declared steps into one — a knob that quietly deletes the scale is worse than none.
+ * declared steps into one — a component token that quietly deletes the scale is worse
+ * than none.
  */
 export const COMPONENT_TOKENS = [
   { name: 'button-radius', fallback: '--ds-radius-pill', accepts: RADIUS, summary: 'Corner of a button. Tighten it for a flatter brand.' },
@@ -285,7 +287,7 @@ export const COMPONENT_TOKENS = [
     name: 'hero-visual-height',
     fallback: '--ds-measure-md',
     accepts: LENGTH,
-    summary: 'How much room the hero reserves for the project’s own visual. Set it from the block that fills it.',
+    summary: 'How much room the hero reserves for the site’s own visual. Set it from the block that fills it.',
   },
 
   {
@@ -304,14 +306,14 @@ export const COMPONENT_TOKEN_NAMES = COMPONENT_TOKENS.map((token) => token.name)
 export const THEMEABLE = [...ROLE_NAMES, ...COMPONENT_TOKEN_NAMES, ...THEME_METADATA_TOKENS];
 
 /*
- * A library stylesheet reads a knob and never assigns one — `knob-assignment`. A modifier that
- * needs its own default assigns a private variable instead, and the knob is read into
- * that variable:
+ * A library stylesheet reads a component token and never assigns one — `token-assignment`.
+ * A modifier that needs its own default assigns a private variable instead, and the
+ * component token is read into that variable:
  *
  *   .ds-grid        { --_grid-min: var(--ds-grid-min, var(--ds-measure-xs)); }
  *   .ds-grid--cell-md { --_grid-min: var(--ds-grid-min, var(--ds-measure-md)); }
  *
- * Written the other way round — the modifier assigning `--ds-grid-min` — the project's
+ * Written the other way round — the modifier assigning `--ds-grid-min` — the site's
  * own value would be overwritten on every variant, which is the failure this prefix
  * exists to make visible.
  */
@@ -321,7 +323,7 @@ export const THEMEABLE = [...ROLE_NAMES, ...COMPONENT_TOKEN_NAMES, ...THEME_META
 /**
  * Layer order, low to high. The build wraps every stylesheet it concatenates in one
  * of these, so override order is declared once here instead of being an accident of
- * the order files happen to be listed in — and a project never has to out-specify a
+ * the order files happen to be listed in — and a site never has to out-specify a
  * library selector to change something.
  *
  * Site authors write no `@layer` themselves: blocks/*.css is wrapped in `site.blocks`

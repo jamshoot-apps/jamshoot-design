@@ -129,7 +129,7 @@ test('the header shows the configured tagline without making the mobile menu par
   );
   const css = readFileSync(new URL('header.css', import.meta.url), 'utf8');
 
-  /* The lockup is the atom: the shell places brand() and styles none of it. */
+  /* The lockup is the atom: the template places brand() and styles none of it. */
   assert.match(markup, /class="ds-brand ds-brand--compact"/, 'the header rendered a lockup of its own again');
   assert.match(markup, /ds-brand__tagline">Useful tagline/);
   assert.doesNotMatch(css, /ds-header__brand/, 'a second lockup is being styled beside the one brand() owns');

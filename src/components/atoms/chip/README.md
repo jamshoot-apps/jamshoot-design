@@ -30,4 +30,4 @@ cluster({ gap: 'xs', content: [
 Use a chip for a fact and a [badge](../badge/README.md) for a status beside something
 else. A badge is uppercase, outlined and small because it annotates; a chip is the
 thing being said. Under a hero, [Proof](../../molecules/proof/README.md) with
-`style: 'pills'` lays out a list of chips for you.
+`layout: 'pills'` lays out a list of chips for you.

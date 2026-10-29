@@ -1,8 +1,8 @@
 # Architecture
 
 JamShoot Design builds static sites using shared components. The library defines
-their HTML, behaviour, spacing and typography. Each site provides its own content,
-colours and blocks. Node renders pages to HTML at build time, while runtime modules
+their HTML, behavior, spacing and typography. Each site provides its own content,
+colors and blocks. Node renders pages to HTML at build time, while runtime modules
 and `blocks/*.client.js` handle browser interactions.
 
 Library runtime belongs to shared component behavior: navigation, theme selection
@@ -12,7 +12,7 @@ belong in that site's client blocks and are bundled automatically.
 | Layer | What it provides |
 | --- | --- |
 | Design tokens | Named CSS values for spacing, typography, corners and motion. |
-| Site theme | Colour roles and allowed component settings. |
+| Site theme | Color roles and allowed component tokens. |
 | Components | Reusable UI built from those values. |
 | Pages and blocks | Components arranged with each site's content and custom UI. |
 
@@ -22,10 +22,10 @@ Every site uses the same design tokens: named CSS values for spacing, typography
 corners and motion. For example, `--ds-space-lg` sets a spacing value and
 `--ds-radius-md` sets a corner radius. Components reuse these values across sites.
 
-Sites set twelve colour roles, such as background, text and accent. Components use
-those roles, so a new palette changes their colours together. A small set of optional
+Sites set twelve color roles, such as background, text and accent. Components use
+those roles, so a new palette changes their colors together. A small set of optional
 component tokens adjusts details such as button corners without replacing component
-styles. See [Theming](theming.md) for the allowed settings.
+styles. See [Theming](theming.md) for the allowed component tokens.
 
 ## Component layers
 
@@ -64,7 +64,7 @@ update the library and rebuild. A reusable variation becomes a component option,
 so callers can choose it without copying HTML and CSS.
 
 A shape needed by one site stays in its `blocks/`. Blocks compose public components
-and add site-specific markup or behaviour. Page text stays in `content/`, and
+and add site-specific markup or behavior. Page text stays in `content/`, and
 `pages.js` sets the component order. See [Authoring a site](authoring.md) for examples.
 
 ## One definition for validation and docs
@@ -84,7 +84,7 @@ behaves. See [Rules](anti-patterns.md) and [Testing](testing.md).
 
 The build groups source files into CSS layers, then writes one stylesheet.
 Layers appear below in cascade order. Library paths are relative to the package;
-`site/` means the consuming site's directory.
+`site/` means the site's directory.
 
 ```diagram css-assembly
 ```
@@ -100,7 +100,7 @@ folder structure, public export, examples and documentation checks.
 ## Source and distribution
 
 All shipped implementation and resources live in `src/`: components, tokens, shared
-styles, runtime modules, built-in icons and consumer tools in `src/cli/`. Public
+styles, runtime modules, built-in icons and published command-line tools in `src/cli/`. Public
 imports are mapped by `package.json.exports`; CLI commands are mapped by its `bin`
 field. Repository tools in `scripts/`, full guides and artwork in `docs/`, and shared
 checks in `test/` are excluded from npm. Component READMEs and `llms.txt` provide

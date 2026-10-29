@@ -71,6 +71,7 @@ export const siteConfig = defineShape('site.config.js', {
         logo: { type: 'url', summary: 'The lockup image, shown in the header.' },
         favicon: { type: 'url', summary: 'The browser-tab icon.' },
         appleTouchIcon: { type: 'url', summary: 'The home-screen icon.' },
+        href: { type: 'url', default: 'index.html', summary: 'Where the brand lockup links.' },
       },
     },
 
@@ -104,7 +105,6 @@ export const siteConfig = defineShape('site.config.js', {
         label: header.spec.options.label,
         toggleLabel: header.spec.options.toggleLabel,
         hideOnScroll: header.spec.options.hideOnScroll,
-        homeHref: { type: 'url', default: 'index.html', summary: 'Where the brand lockup links.' },
       },
     },
 
@@ -115,7 +115,7 @@ export const siteConfig = defineShape('site.config.js', {
       of: {
         blurb: footer.spec.options.blurb,
         showContact: footer.spec.options.showContact,
-        columns: footer.spec.options.groups,
+        groups: footer.spec.options.groups,
         copyright: {
           type: 'template', required: true,
           summary: 'The notice. Write it as (year) => … so the build resolves the current year.',
@@ -147,13 +147,13 @@ export const siteConfig = defineShape('site.config.js', {
 
     /*
      * What a palette is called is in the palette, not here: `--ds-theme-label` in the
-     * file. So this stays two strings however many themes a site grows — the name of
+     * file. So this stays two strings however many palettes a site grows — the name of
      * the control, and the name of the one state that is not a palette.
      */
     theme: {
       type: 'shape',
       summary:
-        'The reader’s side of the palette. Leave it out and every reader gets the site’s own colours; set it when the site declares more than one palette and the reader should be able to choose.',
+        'The reader’s side of the palette. Leave it out and every reader gets the site’s own colors; set it when the site declares more than one palette and the reader should be able to choose.',
       of: {
         toggle: {
           type: 'boolean',
@@ -171,7 +171,7 @@ export const siteConfig = defineShape('site.config.js', {
     },
 
     /*
-     * Type is a brand decision the way colour is, so a site may make it — but only by
+     * Type is a brand decision the way color is, so a site may make it — but only by
      * naming a face for a role the scale already has. Sizes, weights and leading stay
      * the library's: a site changes what the letters look like, not how big they are.
      */

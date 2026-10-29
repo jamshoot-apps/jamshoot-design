@@ -18,14 +18,14 @@ add dependencies or assume another repository exists beside this checkout.
 | Path | Purpose |
 | --- | --- |
 | `src/index.js` | Public component exports. |
-| `src/markup.js` | Public markup helpers for custom site blocks. |
+| `src/markup.js` | Public markup helpers for site blocks. |
 | `src/define.js` | Component specifications and option validation. |
 | `src/config.js` | Site configuration contract. |
-| `src/components/<group>/<name>/` | Component renderer, CSS, README and optional behaviour tests. |
-| `src/templates.js` | Page composition, metadata and shared shell. |
+| `src/components/<group>/<name>/` | Component renderer, CSS, README and optional behavior tests. |
+| `src/templates.js` | Page composition, metadata and shared template. |
 | `src/tokens/contract.js` | Public tokens, allowed site overrides and shared constants. |
 | `src/tokens/`, `src/styles/` | Reset, primitives, starter palettes and base styles. |
-| `src/runtime/` | Browser behaviour declared by components or site configuration. |
+| `src/runtime/` | Browser behavior declared by components or site configuration. |
 | `src/cli/` | Published build, lint, development and OG-image tools and their helpers. |
 | `scripts/` | Repository-only documentation, generation and test tools. |
 | `docs/` | Guides, foundations, examples and checked documentation. |
@@ -38,7 +38,7 @@ add dependencies or assume another repository exists beside this checkout.
 ## Change boundaries
 
 The library owns component markup, spacing, type scale, radii, motion and
-breakpoints. A consuming site owns its content, blocks, twelve colour roles,
+breakpoints. A site owns its content, blocks, twelve color roles,
 `color-scheme` and component tokens allowed by `src/tokens/contract.js`.
 
 Sites import public package exports, never internal source paths. Runners accept
@@ -48,9 +48,9 @@ implicit sibling-repository discovery.
 Components declare their options through `defineComponent` and their browser
 modules through the local runtime specification. Header and Footer are public
 organisms and follow the same discovery, validation, examples and regression gates
-as other components. Do not introduce a shell exemption.
+as other components. Do not introduce a template exemption.
 
-Keep behaviour tests beside the component as `<name>.test.mjs`. Shared checks belong
+Keep behavior tests beside the component as `<name>.test.mjs`. Shared checks belong
 in the corresponding `test/` directory. Tests are discovered recursively; do not
 maintain a test-file registry. New visual rules must appear in both
 `docs/anti-patterns.md` and `src/cli/lint.mjs`.
@@ -87,7 +87,7 @@ npm pack --dry-run
 
 Build before linting so output checks run against current generated files. Failing
 or skipped required checks block completion, commits and releases. Review generated
-changes. When a consumer is explicitly in scope, validate its build and lint too.
+changes. When a site is explicitly in scope, validate its build and lint too.
 Preserve checks for API tables, executable examples, option coverage, documentation
 drift and the Header/Footer public contract.
 Keep a regression proving that unacknowledged source changes fail documentation
@@ -101,8 +101,8 @@ bypass a failing hook.
 
 All shipped code and required resources belong under `src/`. Keep documentation
 site tools under `scripts/`, full guides and demonstration artwork under `docs/`,
-and shared checks under `test/`. Package `src/` without behaviour tests, plus the
-root README, licences, NOTICE and `llms.txt`. Component READMEs remain available
+and shared checks under `test/`. Package `src/` without behavior tests, plus the
+root README, licenses, NOTICE and `llms.txt`. Component READMEs remain available
 offline; links to full guides must use public documentation URLs. Do not make a
 published module depend on files from `scripts/`, `docs/` or `test/`.
 

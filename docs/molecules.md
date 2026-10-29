@@ -9,7 +9,7 @@ contract for required fields, defaults and examples.
 | Your content | Component |
 | --- | --- |
 | A title with text or bullets in a bordered panel | [Card](../src/components/molecules/card/README.md) |
-| A framed product image or labelled placeholder | [Figure](../src/components/molecules/figure/README.md) |
+| A framed product image or labeled placeholder | [Figure](../src/components/molecules/figure/README.md) |
 | Requirements or specifications as term-and-value pairs | [Definitions](../src/components/molecules/definitions/README.md) |
 | Data compared across shared columns | [Table](../src/components/molecules/table/README.md) |
 | An ordered process with a description for each step | [Steps](../src/components/molecules/steps/README.md) |
@@ -31,7 +31,7 @@ result looks like this; the placeholder needs no image asset:
 card({
   title: 'Project viewer',
   body: 'Review the project before exporting it.',
-  media: figure({ label: 'Screenshot pending', caption: 'Project overview' }),
+  media: figure({ placeholder: 'Screenshot pending', caption: 'Project overview' }),
 })
 ```
 
@@ -66,7 +66,7 @@ node src/cli/build.mjs /path/to/site
 node src/cli/lint.mjs /path/to/site
 ```
 
-From a consuming site directory, use the package paths shown in
+From a site directory, use the package paths shown in
 [Authoring](authoring.md#compose-pages). Build validates component options; lint is a
 separate check. Read the named field and linked README when correcting a
 [validation error](authoring.md#correct-invalid-options), rebuild, and rerun lint.

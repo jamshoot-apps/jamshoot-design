@@ -1,26 +1,26 @@
-# Colour
+# Color
 
-Use this page to choose a colour role. [Theming](../theming.md) explains how to assign
-values, organise palette files and switch between them.
+Use this page to choose a color role. [Theming](../theming.md) explains how to assign
+values, organize palette files and configure the theme control.
 
-A role names a colour's purpose. The library defines twelve semantic interface
-roles: four surfaces, three text roles, three accent roles and two borders.
+A role names a color's purpose. The library defines twelve color roles: four
+surfaces, four text roles, two accent roles and two borders.
 Components reuse the same roles instead of defining a separate palette for each
-component. Themes change the values while keeping their purpose. Twelve is the
-interface contract, not a limit on all the colours a site can use; illustration
-colours belong to the site.
+component. Palettes change the values while keeping their purpose. Twelve is the
+interface contract, not a limit on all the colors a site can use; illustration
+colors belong to the site.
 
-The swatches below use the current theme. Switch palettes in the header to compare
+The swatches below use the current palette. Use the theme control in the header to compare
 them.
 
 ## Surfaces
 
 Choose a surface by placement: `bg` for the page, `surface` for cards and panels,
 `surface-raised` for elements above them, and `surface-sunken` for inset areas or
-alternating bands. A theme may give two roles the same value: the light starter
+alternating bands. A palette may give two roles the same value: the light starter
 palette uses white for both `surface` and `surface-raised`.
 
-The ghost button uses `surface-raised` on hover and changes its border colour.
+The ghost button uses `surface-raised` on hover and changes its border color.
 Changing that surface also changes the button's hover fill.
 
 ```example title="Surfaces"
@@ -34,7 +34,8 @@ h('div', { class: 'swatches' }, ['bg', 'surface', 'surface-raised', 'surface-sun
 Use `text` for a heading or key statement, `text-muted` for the description that
 supports it, and `text-faint` for a caption or footnote. These roles give content
 different emphasis; they do not set its size or weight. Each works on all four
-surfaces with a minimum contrast of 4.5:1.
+surfaces with a minimum contrast of 4.5:1. `on-accent` is also a text role, for
+text on either accent fill; it is described with the accent roles below.
 
 ```example title="Text on every surface"
 h('div', { class: 'swatches' }, ['bg', 'surface', 'surface-raised', 'surface-sunken'].map((surface) =>
@@ -48,7 +49,7 @@ h('div', { class: 'swatches' }, ['bg', 'surface', 'surface-raised', 'surface-sun
 
 ## Accent
 
-One accent gives emphasis and interaction a consistent colour across primary
+One accent gives emphasis and interaction a consistent color across primary
 buttons, accent links, the focus ring and text selection. Use `accent-strong` for
 its hover and active step, and `on-accent` for text or icons on either accent fill.
 
@@ -68,7 +69,7 @@ h('div', { class: 'swatches' }, [
 ## Borders
 
 Use `border` for decorative dividers and card edges. Use `border-strong` for a
-boundary that identifies a control. Surface colours alone need not contrast with
+boundary that identifies a control. Surface colors alone need not contrast with
 each other, so keep a visible boundary wherever it carries meaning.
 
 ```example title="Borders"
@@ -92,7 +93,7 @@ stack({ gap: 'md', content: [
 ## Allowed pairs
 
 Lint checks 26 foreground/background pairs in every resolved palette, including
-values inherited from the base theme:
+values inherited from the base palette:
 
 | Foreground | Background | Minimum contrast |
 | --- | --- | --- |
@@ -106,22 +107,22 @@ Translucent foregrounds are composited onto their background before measurement;
 the backgrounds in checked pairs must be opaque.
 
 Other combinations, including ordinary text roles on accent fills and text over
-photographs, gradients or illustration colours, need a separate contrast check
+photographs, gradients or illustration colors, need a separate contrast check
 against the background actually shown. See the
 [`contrast` rule](../anti-patterns.md#contrast-unreadable-text-and-boundaries-that-are-not-there)
 and [WCAG non-text contrast](https://www.w3.org/WAI/WCAG22/understanding/non-text-contrast.html).
 
-## Site illustration colours
+## Site illustration colors
 
-Keep illustration colours in site-prefixed tokens used by site blocks, such as
-a site's `--project-*` illustration colours. Shared components use the twelve library
+Keep illustration colors in site-prefixed tokens used by site blocks, such as
+`--brand-*` illustration colors. Shared components use the twelve library
 roles. Add a shared role when a component needs a distinct meaning that the existing
 roles do not express; define its usage and contrast pairs together. See
 [Extending the system](../theming.md#extending-the-system) for where to add it.
 
-## Colour values and validation
+## Color values and validation
 
 Rerun lint after changing a palette to check its resolved foreground/background
 pairs. Build and lint are separate steps; see
-[Authoring](../authoring.md#build-and-lint). Supported colour formats and palette
+[Authoring](../authoring.md#build-and-lint). Supported color formats and palette
 validation are in [Theming](../theming.md#two-rules-the-lint-enforces).

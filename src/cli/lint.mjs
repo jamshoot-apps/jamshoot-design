@@ -34,7 +34,7 @@ import { siteThemes } from '../themes.js';
 import { isMain, knownSites, locate, takeSitesFlag } from './sites.js';
 import { librarySheets, stripCssComments } from './build.mjs';
 import { filesBelow } from './files.js';
-import { parseColour, over, contrast } from './colours.js';
+import { parseColor, over, contrast } from './colors.js';
 import { componentsIn, TIER_NAMES } from './components.js';
 
 const LIB = fileURLToPath(new URL('../../', import.meta.url));
@@ -46,7 +46,7 @@ const LIB = fileURLToPath(new URL('../../', import.meta.url));
  *                 negotiable, and the citation is in the docs beside it.
  *   house         A decision this system made once so that nobody re-decides it per
  *                 site. Argue with it in docs/anti-patterns.md, not in a stylesheet.
- *   architecture  The line between what the library owns and what a project owns.
+ *   architecture  The line between what the library owns and what a site owns.
  *                 Crossing it is what makes a design system rot back into three sites.
  *
  * The name is what the failure prints, so `node src/cli/lint.mjs` reads as a sentence
@@ -60,18 +60,18 @@ export const RULES = {
   'no-js-content': { group: 'standard', summary: 'A page that needs JavaScript to say anything' },
 
   scale: { group: 'house', summary: 'A size that is not on a scale' },
-  'theme-colour': { group: 'house', summary: 'Colour outside the theme' },
+  'theme-color': { group: 'house', summary: 'Color outside the theme' },
   gradient: { group: 'house', summary: 'A gradient with no reason' },
   glass: { group: 'house', summary: 'Glass with nothing behind it' },
   'scroll-animation': { group: 'house', summary: 'Animation driven by scrolling' },
   'hollow-claims': { group: 'house', summary: 'Marketing words that survive no edit' },
   breakpoint: { group: 'house', summary: 'A fourth breakpoint' },
 
-  'theme-contract': { group: 'architecture', summary: 'A project token outside the contract' },
+  'theme-contract': { group: 'architecture', summary: 'A site token outside the contract' },
   'page-markup': { group: 'architecture', summary: 'A page that writes markup by hand' },
   'token-default': { group: 'architecture', summary: 'A component token that lies about its default' },
-  'knob-assignment': { group: 'architecture', summary: 'A library rule that assigns a project knob' },
-  'component-boundary': { group: 'architecture', summary: 'A component stylesheet that selects a neighbour' },
+  'token-assignment': { group: 'architecture', summary: 'A library rule that assigns a site component token' },
+  'component-boundary': { group: 'architecture', summary: 'A component stylesheet that selects a neighbor' },
   layer: { group: 'architecture', summary: 'A stylesheet that assigns its own cascade layer' },
   assets: { group: 'architecture', summary: 'Unversioned or duplicated assets' },
   'og-image': { group: 'architecture', summary: 'A configured share image that is missing' },
@@ -118,7 +118,7 @@ function styleSource(source) {
 
   for (const { end, body } of comments) {
     const marker = body.replace(/^\s*\* ?/gm, '').trim()
-      .match(/^ds-allow:\s*(length|type|layer|colour|gradient|backdrop)\s+—\s*(\S[\s\S]*)$/);
+      .match(/^ds-allow:\s*(length|type|layer|color|gradient|backdrop)\s+—\s*(\S[\s\S]*)$/);
     if (!marker) continue;
     const next = css.slice(end).match(/^\s*([-\w]+)\s*:/);
     if (next) byStart.get(end + next[0].indexOf(next[1]))?.exceptions.add(marker[1]);
@@ -158,11 +158,11 @@ const STACKING = /^z-index$/;
 const LAYER = /^var\(--ds-layer-[\w-]+\)$/;
 /* A media query is the one place CSS cannot read a token. `breakpoint` checks those. */
 const MEDIA_PRELUDE = /@media[^{]+/g;
-const COLOUR = /(?:^|[;{\s(])(#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\)|hsla?\([^)]*\)|oklch\([^)]*\))/g;
+const COLOR = /(?:^|[;{\s(])(#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\)|hsla?\([^)]*\)|oklch\([^)]*\))/g;
 /*
  * Translucent pure black and pure white are shading — a shadow, a sheen, a hairline
  * over an unknown backdrop. They carry no brand and survive any retheme, so they are
- * not what `theme-colour` is about.
+ * not what `theme-color` is about.
  */
 const SHADE = /^rgba?\(\s*(?:0\s*[,\s]\s*0\s*[,\s]\s*0|255\s*[,\s]\s*255\s*[,\s]\s*255)\s*[/,]/;
 
@@ -193,11 +193,11 @@ function checkBreakpoints(css, file) {
   }
 }
 
-function checkColours(declarations, file) {
+function checkColors(declarations, file) {
   for (const { value, exceptions } of declarations) {
-    for (const match of value.matchAll(COLOUR)) {
-      if (!SHADE.test(match[1]) && !exceptions.has('colour')) {
-        fail('theme-colour', label(file), `literal colour ${match[1].slice(0, 40)}`);
+    for (const match of value.matchAll(COLOR)) {
+      if (!SHADE.test(match[1]) && !exceptions.has('color')) {
+        fail('theme-color', label(file), `literal color ${match[1].slice(0, 40)}`);
       }
     }
   }
@@ -249,7 +249,7 @@ function checkStyles(files, { themeFiles, libraryFiles }) {
     if (!themeFiles.includes(file)) {
       checkScale(declarations, file, libraryFiles.includes(file));
       checkBreakpoints(css, file);
-      checkColours(declarations, file);
+      checkColors(declarations, file);
     }
     checkStyleEffects(css, declarations, file);
   }
@@ -269,12 +269,12 @@ function checkScripts(files) {
 
 /**
  * theme-contract and contrast. What a palette is allowed to say, and whether the
- * colours it says it in can actually be read.
+ * colors it says it in can actually be read.
  *
  * A site has one palette or several, and the several are the same thing repeated: a
  * file that sets some of the same names. So this resolves each one against the base —
  * exactly the way the cascade will — and measures the result. A palette that changes
- * three colours is checked as a whole palette, because that is what a reader gets.
+ * three colors is checked as a whole palette, because that is what a reader gets.
  *
  * The names, the ratios and the shape of a theme name all come from
  * src/tokens/contract.js, so this file, the docs table and the starter palettes cannot
@@ -323,7 +323,7 @@ function checkThemeDeclaration(theme) {
   }
 
   if (!ROLE_NAMES.some((name) => theme.declared.has(name))) {
-    fail('theme-contract', where, 'declares no colour of its own — a palette that changes nothing is a choice that does nothing');
+    fail('theme-contract', where, 'declares no color of its own — a palette that changes nothing is a choice that does nothing');
   }
 }
 
@@ -343,7 +343,7 @@ function checkThemeIcon(theme) {
 
 function checkRoleContrast(role, resolved, where) {
   const against = role.on === 'surfaces' ? SURFACE_ROLES : role.on;
-  const foreground = parseColour(resolved.get(role.name) ?? '');
+  const foreground = parseColor(resolved.get(role.name) ?? '');
 
   if (!foreground) {
     fail('contrast', where, `--ds-${role.name} cannot be measured — use a hex or rgb() value`);
@@ -351,7 +351,7 @@ function checkRoleContrast(role, resolved, where) {
   }
 
   for (const name of against) {
-    const backdrop = parseColour(resolved.get(name) ?? '');
+    const backdrop = parseColor(resolved.get(name) ?? '');
 
     if (!backdrop) {
       fail('contrast', where, `--ds-${name} cannot be measured — use a hex or rgb() value`);
@@ -400,8 +400,8 @@ function checkThemes(themes) {
   }
 }
 
-/** Project component-token values stay inside the scales and syntax each knob declares. */
-function checkProjectTokens(files) {
+/** Site component-token values stay inside the scales and syntax each component token declares. */
+function checkSiteTokens(files) {
   const tokens = new Map(COMPONENT_TOKENS.map((token) => [token.name, token]));
 
   for (const file of files) {
@@ -431,7 +431,7 @@ function checkProjectTokens(files) {
 /*
  * hollow-claims. A starting list, not a moral position: these are the words that read
  * as filler in every draft they appear in, because none of them names a thing the
- * product does. A project is free to add its own — the point is that a claim which
+ * product does. A site is free to add its own — the point is that a claim which
  * needs one of these is a claim with no demonstration behind it.
  */
 const BANNED = [
@@ -521,7 +521,7 @@ function checkBuild(distDir) {
  *
  * The point of the component API is that a page has a closed vocabulary a machine can
  * check. Two things reopen it: importing the raw-markup entry point, and typing a
- * `ds-` class name. Both are legitimate inside blocks/, which is where a project's
+ * `ds-` class name. Both are legitimate inside blocks/, which is where a site's
  * own markup lives, and neither is legitimate in a page or a content file.
  */
 function checkSiteCode(files) {
@@ -545,7 +545,7 @@ function checkSiteCode(files) {
 /**
  * token-default. A component token that does not default to what the contract says.
  *
- * The knobs in src/tokens/contract.js are a promise: set none of them and you get the
+ * The component tokens in src/tokens/contract.js are a promise: set none of them and you get the
  * house style. That promise lives in a `var(--ds-x, <fallback>)` in one stylesheet,
  * so this checks the stylesheet still says what the contract says.
  */
@@ -574,22 +574,23 @@ function checkComponentTokens(files) {
 }
 
 /**
- * knob-assignment. A library stylesheet that assigns a project knob.
+ * token-assignment. A library stylesheet that assigns a site component token.
  *
- * A knob is the project's word on a component. A rule inside the library that writes
- * to it — `.ds-grid--cell-md { --ds-grid-min: 20rem }` — overwrites whatever the project
- * put in theme.css, and only for that variant, which is the kind of half-working
- * override nobody reports as a bug. The library reads knobs; a modifier that needs a
- * default of its own assigns a private `--_name` and reads the knob into it.
+ * A component token is the site's word on a component. A rule inside the library that
+ * writes to it — `.ds-grid--cell-md { --ds-grid-min: 20rem }` — overwrites whatever the
+ * site put in theme.css, and only for that variant, which is the kind of half-working
+ * override nobody reports as a bug. The library reads component tokens; a modifier that
+ * needs a default of its own assigns a private `--_name` and reads the component token
+ * into it.
  */
-export function knobAssignments(css) {
+export function componentTokenAssignments(css) {
   return COMPONENT_TOKEN_NAMES.filter((name) => new RegExp(`(?:^|[;{])\\s*--ds-${name}\\s*:`, 'm').test(css));
 }
 
-function checkKnobAssignment(files) {
+function checkComponentTokenAssignment(files) {
   for (const file of files) {
-    for (const name of knobAssignments(read(file))) {
-      fail('knob-assignment', label(file), `assigns --ds-${name}, which belongs to the project — read it into a --_ variable instead`);
+    for (const name of componentTokenAssignments(read(file))) {
+      fail('token-assignment', label(file), `assigns --ds-${name}, which belongs to the site — read it into a --_ variable instead`);
     }
   }
 }
@@ -597,7 +598,7 @@ function checkKnobAssignment(files) {
 /**
  * The boundary check is intentionally narrow: it reads literal `.ds-*` class
  * selectors and compares their BEM roots with classes emitted by the owning source.
- * It is not a CSS parser and makes no claim about tag, attribute or project classes.
+ * It is not a CSS parser and makes no claim about tag, attribute or site classes.
  */
 export function foreignComponentClasses(source, css) {
   const roots = new Set(
@@ -651,7 +652,7 @@ function checkLayering(files) {
  * tap-target. The floor.
  *
  * WCAG 2.2 §2.5.8 Target Size (Minimum) asks for 24 CSS pixels. The system ships 44,
- * the Apple HIG figure; this only refuses a project that drops below the standard.
+ * the Apple HIG figure; this only refuses a site that drops below the standard.
  */
 function checkTapTarget(primitivesPath) {
   const declared = read(primitivesPath).match(/--ds-tap-target\s*:\s*([\d.]+)px/);
@@ -747,12 +748,12 @@ function run(siteRoot, dist) {
     fail(
       'theme-contract',
       label(join(siteRoot, BASE_THEME.file)),
-      `a site has to declare its own colours — there is no ${BASE_THEME.file} here`,
+      `a site has to declare its own colors — there is no ${BASE_THEME.file} here`,
     );
   }
 
   /*
-   * Everything in src/tokens/ and every palette the site declares is where colour and raw
+   * Everything in src/tokens/ and every palette the site declares is where color and raw
    * values are allowed to be written, so the directories are the list: a palette added
    * to either is exempt by living there rather than by being remembered here.
    */
@@ -769,7 +770,7 @@ function run(siteRoot, dist) {
     checkThemes(themes);
   }
 
-  checkProjectTokens([...blockStyles, ...sitePalettes]);
+  checkSiteTokens([...blockStyles, ...sitePalettes]);
 
   checkCopy(filesBelow(join(siteRoot, 'content'), '.js'));
 
@@ -777,7 +778,7 @@ function run(siteRoot, dist) {
     skipped.push('no-js-content and assets — there is no dist/ to read; build first to check the output');
   }
 
-  // A page and its content, but not blocks/ — that is where project markup belongs.
+  // A page and its content, but not blocks/ — that is where site markup belongs.
   checkSiteCode(
     [join(siteRoot, 'pages.js'), join(siteRoot, 'site.config.js'), ...filesBelow(join(siteRoot, 'content'), '.js')].filter(
       (path) => existsSync(path),
@@ -785,7 +786,7 @@ function run(siteRoot, dist) {
   );
 
   checkComponentTokens(libraryStyles);
-  checkKnobAssignment(libraryStyles);
+  checkComponentTokenAssignment(libraryStyles);
   checkComponentBoundaries();
   checkLayering([...libraryStyles, ...blockStyles, ...themeFiles]);
   checkTapTarget(primitives);

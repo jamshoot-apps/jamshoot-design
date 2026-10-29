@@ -8,7 +8,7 @@ const DOCS = fileURLToPath(new URL('../../docs/', import.meta.url));
 const GROUPS = {
   'Start here': ['index', 'architecture', 'authoring'],
   'Build a site': ['configuration', 'theming', 'conventions', 'anti-patterns'],
-  Foundations: ['foundations-colour', 'foundations-type', 'foundations-space', 'foundations-brand', 'foundations-icons', 'foundations-language', 'foundations-markup'],
+  Foundations: ['foundations-color', 'foundations-type', 'foundations-space', 'foundations-brand', 'foundations-icons', 'foundations-language', 'foundations-markup'],
   Layout: ['foundations-layout'],
   Atoms: [],
   Molecules: ['molecules'],

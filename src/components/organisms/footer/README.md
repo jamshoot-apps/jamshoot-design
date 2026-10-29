@@ -1,6 +1,6 @@
 # Footer
 
-<!-- docs-review: ea44940ee59c; reason: Documented public groups, optional contact and intro, and mapping of site copyright to resolved text. -->
+<!-- docs-review: 63e2654cb2fb; reason: Reviewed option summaries now saying link groups to match footer.groups -->
 
 The shared footer with link columns, optional description and contact details, and
 legal copy. Configure it in `site.config.js`; the page template renders it after
@@ -35,12 +35,12 @@ footer({
 ```options footer
 | Option | Accepts |  | What it is |
 | --- | --- | --- | --- |
-| `blurb` | `string` | optional | An optional product description beside the link columns. |
+| `blurb` | `string` | optional | An optional product description beside the link groups. |
 | `email` | `string` | optional | The contact email, linked with mailto. |
 | `showContact` | `true or false` | default `true` | Show the contact email when one is supplied. |
-| `groups` | `non-empty array of { title, links }` | required | The link columns, left to right. |
-| `groups[].title` | `string` | required | What the column groups. |
-| `groups[].links` | `non-empty array of { label, href }` | required | The links in the column. |
+| `groups` | `non-empty array of { title, links }` | required | The link groups, left to right. |
+| `groups[].title` | `string` | required | What the group holds. |
+| `groups[].links` | `non-empty array of { label, href }` | required | The links in the group. |
 | `groups[].links[].label` | `string` | required | What the link says. |
 | `groups[].links[].href` | `string` | required | Where it goes. |
 | `copyright` | `string` | required | The copyright notice, with the year already resolved. |
@@ -54,7 +54,7 @@ With neither a blurb nor a visible contact address, the introduction column is o
 The footer renders static links and needs no runtime.
 
 The component calls its link columns `groups`, each with a title and links. The page
-template maps `footer.columns` in site config to these groups.
+template maps `footer.groups` in site config to these groups.
 
 The component receives the copyright as text. The page template resolves a site's
 `footer.copyright(year)` function using the build year and passes `contact.email`

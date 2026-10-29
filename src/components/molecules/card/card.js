@@ -23,7 +23,7 @@ export const card = defineComponent('card', {
      */
     h('div', { class: 'ds-card' }, [
       media && h('div', { class: 'ds-card__media' }, media),
-      iconName && iconTile({ name: iconName }),
+      iconName && iconTile({ icon: iconName }),
       h('div', { class: 'ds-card__copy' }, [
         h('h3', { class: 'ds-card__title', text: title }),
         body && h('p', { class: 'ds-card__body', html: body }),

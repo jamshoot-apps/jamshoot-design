@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { foreignComponentClasses, knobAssignments } from '../../src/cli/lint.mjs';
+import { foreignComponentClasses, componentTokenAssignments } from '../../src/cli/lint.mjs';
 import { ruleFor, ruleNames, rulesFor } from '../support/lint-site.mjs';
 
 test('scroll-animation allows library navigation but still rejects site scroll effects', () => {
@@ -48,15 +48,15 @@ test('scale holds stacking order to the layer scale, in a block as much as in th
   assert.deepEqual(excused.filter((entry) => entry.rule === 'scale'), [], 'a stated reason was refused');
 });
 
-test('knob-assignment catches a library rule that assigns a project knob', () => {
+test('token-assignment catches a library rule that assigns a site component token', () => {
   assert.deepEqual(
-    knobAssignments('.ds-grid--cell-md {\n  --ds-grid-min: 20rem;\n}\n'),
+    componentTokenAssignments('.ds-grid--cell-md {\n  --ds-grid-min: 20rem;\n}\n'),
     ['grid-min'],
-    'a modifier was allowed to overwrite what the project set',
+    'a modifier was allowed to overwrite what the site set',
   );
 
-  // The shape that is allowed: read the knob, assign the private variable.
-  assert.deepEqual(knobAssignments('.ds-grid--cell-md {\n  --_grid-min: var(--ds-grid-min, var(--ds-measure-md));\n}\n'), []);
+  // The shape that is allowed: read the component token, assign the private variable.
+  assert.deepEqual(componentTokenAssignments('.ds-grid--cell-md {\n  --_grid-min: var(--ds-grid-min, var(--ds-measure-md));\n}\n'), []);
 });
 
 test('component-boundary checks literal foreign classes without banning owned descendants', () => {
@@ -106,7 +106,7 @@ for (const [kind, rule, declaration] of [
   ['length', 'scale', 'padding: 13px'],
   ['type', 'scale', 'line-height: 1'],
   ['layer', 'scale', 'z-index: -1'],
-  ['colour', 'theme-colour', 'color: #123456'],
+  ['color', 'theme-color', 'color: #123456'],
   ['gradient', 'gradient', 'background: linear-gradient(transparent, rgb(0 0 0 / 0.3))'],
   ['backdrop', 'glass', 'backdrop-filter: blur(3px)'],
 ]) {
@@ -135,11 +135,11 @@ test('ds-allow accepts long multiline reasons and declarations, including commen
 });
 
 test('ds-allow applies to every matching value in one declaration, but not the next declaration', () => {
-  const css = `.x {\n/* ds-allow: colour — two inks belong to this print. */\n` +
+  const css = `.x {\n/* ds-allow: color — two inks belong to this print. */\n` +
     `box-shadow: 0 0 #123456, 0 0 #654321;\ncolor: #abcdef;\n}`;
-  const colours = rulesFor({ 'blocks/x.css': css }).filter((entry) => entry.rule === 'theme-colour');
-  assert.equal(colours.length, 1);
-  assert.match(colours[0].detail, /#abcdef/);
+  const colors = rulesFor({ 'blocks/x.css': css }).filter((entry) => entry.rule === 'theme-color');
+  assert.equal(colors.length, 1);
+  assert.match(colors[0].detail, /#abcdef/);
 });
 
 test('ds-allow does not cross selectors, declarations or an inline value', () => {
@@ -154,7 +154,7 @@ test('ds-allow does not cross selectors, declarations or an inline value', () =>
 
 test('ds-allow can combine distinct exceptions for the same adjacent declaration', () => {
   const css = `.x {\n/* ds-allow: gradient — light falling on paper. */\n` +
-    `/* ds-allow: colour — the print uses its own inks. */\n` +
+    `/* ds-allow: color — the print uses its own inks. */\n` +
     `background: linear-gradient(#123456, #654321);\n}`;
   assert.deepEqual(ruleFor({ 'blocks/x.css': css }), []);
 });
@@ -164,7 +164,7 @@ test('ds-allow only suppresses its named check, not unrelated rules', () => {
     `background: linear-gradient(#123456, #654321);\n}`;
   const rules = ruleFor({ 'blocks/x.css': css });
   assert.ok(!rules.includes('gradient'));
-  assert.ok(rules.includes('theme-colour'));
+  assert.ok(rules.includes('theme-color'));
   assert.ok(ruleFor({ 'blocks/x.css': '/* ds-allow: layer — intentional. */\n@layer custom { .x { display: grid; } }' }).includes('layer'));
 });
 

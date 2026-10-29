@@ -3,18 +3,18 @@ import { h } from '../../../html.js';
 import { container } from '../../layout/container/container.js';
 
 export const footer = defineComponent('footer', {
-  summary: 'The page footer: optional introduction, contact, link columns and legal copy.',
+  summary: 'The page footer: optional introduction, contact, link groups and legal copy.',
   docs: 'src/components/organisms/footer/README.md',
   options: {
-    blurb: { type: 'text', summary: 'An optional product description beside the link columns.' },
+    blurb: { type: 'text', summary: 'An optional product description beside the link groups.' },
     email: { type: 'text', summary: 'The contact email, linked with mailto.' },
     showContact: { type: 'boolean', default: true, summary: 'Show the contact email when one is supplied.' },
     groups: {
-      type: 'items', required: true, summary: 'The link columns, left to right.',
+      type: 'items', required: true, summary: 'The link groups, left to right.',
       of: {
-        title: { type: 'text', required: true, summary: 'What the column groups.' },
+        title: { type: 'text', required: true, summary: 'What the group holds.' },
         links: {
-          type: 'items', required: true, summary: 'The links in the column.',
+          type: 'items', required: true, summary: 'The links in the group.',
           of: {
             label: { type: 'text', required: true, summary: 'What the link says.' },
             href: { type: 'url', required: true, summary: 'Where it goes.' },

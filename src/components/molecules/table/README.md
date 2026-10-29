@@ -1,6 +1,6 @@
 # Table
 
-<!-- docs-review: e4acf5d851bc; reason: Documented the focusable scroll container and what a caption adds. -->
+<!-- docs-review: a9dddec7b7c8; reason: Reviewed comment spelling only; documented table contract unchanged -->
 
 Data arranged in shared columns with a header row. Wide tables scroll inside their
 container. Add a caption to name both the table and its scroll region.

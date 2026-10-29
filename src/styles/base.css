@@ -106,7 +106,7 @@ samp {
 
 /*
  * Shared styling keeps icon-only controls consistent. It lives in ds.base, below
- * component layers, so individual controls can override size or colour states.
+ * component layers, so individual controls can override size or color states.
  */
 .ds-icon-button {
   display: grid;

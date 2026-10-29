@@ -64,7 +64,7 @@ test('every exported component is declared, and takes exactly one options object
   }
 });
 
-test('header and footer are public organisms with no internal-shell exemption', () => {
+test('header and footer are public organisms with no template exemption', () => {
   for (const name of ['header', 'footer']) {
     assert.ok(specOf(ds[name]), `${name} is not a validated public component`);
     assert.ok(namesIn('organisms').includes(name), `${name} is not an organism`);

@@ -38,7 +38,7 @@ The contract test catches a missing or extra export in `src/index.js`.
 | One site needs the markup | that site's `blocks/` |
 | Two sites need the same UI and behavior | a design-system component |
 | An existing component needs another meaningful state | a local option or variant |
-| A project needs to tune one stable visual value | a rare component token |
+| A site needs to tune one stable visual value | a rare component token |
 
 Do not promote a page block for symmetry, and do not create a new component to rename
 an existing variant.
@@ -245,13 +245,13 @@ page from the navigation.
 
 ## Changing the contract
 
-- **Parameter:** edit the local spec and renderer, then update local examples.
+- **Option:** edit the local spec and renderer, then update local examples.
 - **Enum or boolean:** declare it locally and cover valid values in README examples.
 - **Constraint:** declare it in the local spec; the generated table prints it.
 - **Component token:** add one entry to `COMPONENT_TOKENS` in `src/tokens/contract.js`,
-  then read it in the owning CSS with the exact declared fallback. Tokens are project
-  theme knobs, not per-call state. See [Theming](theming.md) for the contract.
-- **Colour role:** widen `ROLES` only when the twelve semantic roles cannot express a
+  then read it in the owning CSS with the exact declared fallback. Tokens are site-owned
+  values, not per-call state. See [Theming](theming.md) for the contract.
+- **Color role:** widen `ROLES` only when the twelve color roles cannot express a
   single-purpose component. Every site theme must then adopt the new role.
 
 The token contract remains the only list of names, accepted values and fallbacks. Do

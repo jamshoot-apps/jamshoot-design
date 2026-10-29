@@ -28,7 +28,7 @@ export const plan = defineComponent('plan', {
         note: { type: 'markup', summary: 'A small qualifier directly below the price. May carry an inline link.' },
       },
     },
-    subtitle: { type: 'text', summary: 'One line explaining what the tier is for.' },
+    lead: { type: 'markup', summary: 'One line explaining what the tier is for. May carry an inline link.' },
     features: { type: 'lines', required: true, summary: 'What the tier includes, one line each.' },
     featured: { type: 'boolean', default: false, summary: 'Visually marks a recommended tier. Use at most one per comparison; build and lint do not check this across plans.' },
     badgeLabel: { type: 'text', summary: 'A word on the tier — "Popular", "Free". Drawn as a badge().' },
@@ -42,12 +42,12 @@ export const plan = defineComponent('plan', {
     },
   },
   /* A div, like a card: a tier is page furniture, not a syndicable composition. */
-  render: ({ title, price, subtitle, features, featured, badgeLabel, link }) =>
+  render: ({ title, price, lead, features, featured, badgeLabel, link }) =>
     h('div', { class: ['ds-plan', featured && 'ds-plan--featured'] }, [
       h('header', { class: 'ds-plan__head' }, [
         h('h3', { class: 'ds-plan__name', text: title }),
         badgeLabel &&
-          h('div', { class: 'ds-plan__badge' }, badge({ label: badgeLabel, tone: featured ? 'accent' : 'plain' })),
+          h('div', { class: 'ds-plan__badge' }, badge({ label: badgeLabel, variant: featured ? 'accent' : 'plain' })),
       ]),
       h('div', { class: 'ds-plan__cost' }, [
         h('div', { class: 'ds-plan__price-group' }, [
@@ -60,7 +60,7 @@ export const plan = defineComponent('plan', {
           ]),
           price.note && h('p', { class: 'ds-plan__price-note', html: price.note }),
         ]),
-        subtitle && h('p', { class: 'ds-plan__subtitle', text: subtitle }),
+        lead && h('p', { class: 'ds-plan__lead', html: lead }),
       ]),
       h(
         'ul',

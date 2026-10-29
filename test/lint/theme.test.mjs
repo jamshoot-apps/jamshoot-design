@@ -15,7 +15,7 @@ test('contrast refuses a palette it cannot measure rather than passing it', () =
 
   assert.ok(
     results.some((entry) => entry.rule === 'contrast' && entry.detail.includes('cannot be measured')),
-    'an unparseable colour was silently skipped',
+    'an unparseable color was silently skipped',
   );
 });
 
@@ -49,7 +49,7 @@ test('contrast covers accent text and the interactive accent fill', () => {
 
   assert.ok(
     weakText.some((entry) => entry.rule === 'contrast' && entry.detail.includes('--ds-accent on --ds-surface')),
-    'accent-coloured text was held only to the non-text threshold',
+    'accent-colored text was held only to the non-text threshold',
   );
   assert.ok(
     weakHoverPair.some((entry) => entry.rule === 'contrast' && entry.detail.includes('--ds-on-accent on --ds-accent-strong')),
@@ -58,10 +58,10 @@ test('contrast covers accent text and the interactive accent fill', () => {
 });
 
 test('theme-contract accepts a component token and still refuses an invented one', () => {
-  const withKnob = rulesFor({ 'theme.css': theme.replace('}', '  --ds-button-radius: var(--ds-radius-sm);\n}') });
+  const withToken = rulesFor({ 'theme.css': theme.replace('}', '  --ds-button-radius: var(--ds-radius-sm);\n}') });
   const withJunk = rulesFor({ 'theme.css': theme.replace('}', '  --ds-shadow-blue: #00f;\n}') });
 
-  assert.deepEqual(withKnob.filter((entry) => entry.rule === 'theme-contract'), [], 'a contract knob was refused');
+  assert.deepEqual(withToken.filter((entry) => entry.rule === 'theme-contract'), [], 'a contract component token was refused');
   assert.ok(ruleNames(withJunk).includes('theme-contract'), 'an invented token was allowed');
 });
 
@@ -225,14 +225,14 @@ test('a palette naming an icon the library does not have is reported against the
   assert.ok(!fine.some((entry) => entry.detail.includes('installed SVG icon set')), 'a real icon name was refused');
 });
 
-test('a palette that changes no colour is reported rather than offered', () => {
+test('a palette that changes no color is reported rather than offered', () => {
   const problems = rulesFor({
     'theme.css': theme,
     'themes/quiet.css': ":root {\n  color-scheme: dark;\n  --ds-theme-label: 'Quiet';\n}\n",
   });
 
   assert.ok(
-    problems.some((entry) => entry.rule === 'theme-contract' && entry.detail.includes('declares no colour')),
+    problems.some((entry) => entry.rule === 'theme-contract' && entry.detail.includes('declares no color')),
     'a choice that does nothing was allowed into the control',
   );
 });

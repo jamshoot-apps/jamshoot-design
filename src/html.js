@@ -144,7 +144,7 @@ export function fragment(children) {
  *
  * It rewrites rendered markup rather than asking each component for a level, which
  * would be the same option on `card`, `steps`, `plan`, `faq` and everything added
- * after them — a knob at every call site to say what the nesting already says.
+ * after them — an option at every call site to say what the nesting already says.
  *
  * Only real elements are rewritten. A heading typed into a text option was escaped on
  * the way in (`&lt;h3&gt;`), an attribute value likewise, and an inline markup option

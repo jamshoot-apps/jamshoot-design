@@ -1,6 +1,6 @@
 # Section
 
-<!-- docs-review: 2481a5b9ad41; reason: Reviewed Organisms composition, heading roles and examples; clarified recommendations and removed unsupported list and numbering claims. -->
+<!-- docs-review: 45ad20eac28b; reason: Reviewed surface value plain renamed to default and example title -->
 
 A page region with optional heading text, required content and optional actions.
 Use it to group related content and give navigation links an anchor. See the
@@ -9,7 +9,7 @@ and placement in `pages.js`.
 
 ## Usage
 
-```example title="Plain section"
+```example title="Default section"
 section({ title: 'Questions', content: faq({ items: [{ question: 'Offline?', answer: 'Yes.' }] }) })
 ```
 
@@ -33,7 +33,7 @@ section({
 | `eyebrow` | `string` | optional | The small line above the title that says which part of the page this is. |
 | `title` | `string` | optional | What this part of the page is for, as a sentence. |
 | `lead` | `string (inline HTML allowed)` | optional | Supporting text under the title, usually one or two sentences. |
-| `surface` | `"plain" \| "sunken"` | default `plain` | Which surface role the band sits on. Alternate `sunken` down a long page so it has structure without a decorative divider. |
+| `surface` | `"default" \| "sunken"` | default `default` | Which surface role the band sits on. Alternate `sunken` down a long page so it has structure without a decorative divider. |
 | `actions` | `component call, string, or array of them` | optional | A button() under the content, set off from it. The way on from a section that answered something. |
 ```
 
