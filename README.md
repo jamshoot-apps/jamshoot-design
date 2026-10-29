@@ -7,6 +7,11 @@ Components render HTML at build time, so there's no client-side framework to shi
 [Documentation](https://jamshoot-apps.github.io/jamshoot-design/) ·
 [Authoring guide](https://jamshoot-apps.github.io/jamshoot-design/authoring.html)
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/jamshoot-apps/jamshoot-design/main/docs/assets/docs-overview-dark.webp">
+  <img alt="Screenshot of the JamShoot Design documentation overview: sidebar navigation beside a sample section of four cards and a button" src="https://raw.githubusercontent.com/jamshoot-apps/jamshoot-design/main/docs/assets/docs-overview-light.webp">
+</picture>
+
 ## Features
 
 - No npm dependencies. Everything runs on the Node.js standard library.

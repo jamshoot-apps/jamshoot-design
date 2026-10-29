@@ -11,17 +11,30 @@ One stylesheet uses CSS cascade layers to separate theme, library and site style
 Browser behavior comes from selected library runtime modules and explicit
 `blocks/*.client.js` files.
 
+```example title="Sample design"
+section({
+  eyebrow: 'Design system',
+  title: 'Static pages from validated components.',
+  lead: 'The library sets layout and type. Sites own their content and colors.',
+  content: grid({
+    content: [
+      card({ icon: 'flash-outline', title: 'Rendered at build time', body: 'Pages ship as plain HTML and CSS, with no client framework.' }),
+      card({ icon: 'lock-closed-outline', title: 'Validated options', body: 'A wrong option fails the build with an error that says what to fix.' }),
+      card({ icon: 'eye-outline', title: 'Lint rules', body: 'Lint checks source and output for contrast, focus and tap targets.' }),
+      card({ icon: 'sparkles-outline', title: 'Ready for coding agents', body: 'One <code>llms.txt</code> file maps every component to its contract.' }),
+    ],
+  }),
+  actions: button({ label: 'Author a site', href: 'authoring.html', icon: 'arrow-forward' }),
+})
+```
+
+The card icons come from `docs/assets/icons/`, not the built-in set. A site adds its own
+icons through `JAMSHOOT_ICONS_DIR`, as [Your own icons](foundations/icons.md#your-own-icons) describes.
+
 ## Start here
 
 [Authoring a site](authoring.md#set-up) shows package and source installation and a complete
-minimal site. Pages compose components through validated options:
-
-```example title="A section containing a card"
-section({
-  title: 'Project resources',
-  content: card({ title: 'Documentation', body: 'Read the setup and authoring guides.' }),
-})
-```
+minimal site. Pages compose components through validated options, as in the example above.
 
 Put copy in `content/*.js`, composition in `pages.js`, shared options in
 `site.config.js` and colors in `theme.css`. From the library checkout, build the

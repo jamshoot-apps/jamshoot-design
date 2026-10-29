@@ -77,7 +77,8 @@
   color: var(--ds-text-muted);
   max-width: 70ch;
 }
-.docs__body ul {
+/* Prose bullets stay out of rendered examples. */
+.docs__body ul:not(.example__stage *) {
   padding-left: var(--ds-space-md);
   list-style: disc;
 }
@@ -191,12 +192,24 @@
   letter-spacing: var(--ds-tracking-wide);
   text-transform: uppercase;
 }
+/* Bands in an example use gutter-sized padding instead of full page spacing. */
 .example__stage {
+  --ds-section-space: var(--ds-gutter);
   padding: var(--ds-space-lg);
   background: var(--ds-surface-sunken);
 }
 .example__stage > * + * {
   margin-top: var(--ds-space-md);
+}
+/* On narrow screens the stage padding alone insets the band.
+   0px, not 0: the gutter is used in calc(). */
+.example__stage > :is(.ds-section, .ds-cta, .ds-hero) {
+  --ds-gutter: 0px;
+}
+@media (min-width: 52rem) {
+  .example__stage > :is(.ds-section, .ds-cta, .ds-hero) {
+    --ds-gutter: inherit;
+  }
 }
 .example__source {
   margin: 0;
