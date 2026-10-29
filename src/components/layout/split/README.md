@@ -10,7 +10,7 @@ it places them side by side. `start` remains first in source and reading order.
 ```example title="Copy beside a visual"
 split({
   start: note({ body: 'Copy remains first on a narrow screen.' }),
-  end: figure({ label: 'Product view', caption: 'Product view' }),
+  end: figure({ placeholder: 'Product view', caption: 'Product view' }),
 })
 ```
 

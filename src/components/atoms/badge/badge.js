@@ -6,7 +6,7 @@ export const badge = defineComponent('badge', {
   docs: 'src/components/atoms/badge/README.md',
   options: {
     label: { type: 'text', required: true, summary: 'One or two words.' },
-    tone: { type: 'enum', values: ['plain', 'accent'], default: 'plain', summary: 'Accent marks the one that matters.' },
+    variant: { type: 'enum', values: ['plain', 'accent'], default: 'plain', summary: 'Accent marks the one that matters.' },
   },
-  render: ({ label, tone }) => h('span', { class: ['ds-badge', tone === 'accent' && 'ds-badge--accent'], text: label }),
+  render: ({ label, variant }) => h('span', { class: ['ds-badge', variant === 'accent' && 'ds-badge--accent'], text: label }),
 });

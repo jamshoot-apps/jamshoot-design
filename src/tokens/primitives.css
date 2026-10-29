@@ -1,8 +1,8 @@
 /*
- * Primitives — the half of the design system a project never changes.
+ * Primitives — the half of the design system a site never changes.
  *
  * Spacing rhythm, type scale, radii, motion and layout are identical on every
- * site. A site supplies semantic colours and optional font faces; the scales remain
+ * site. A site supplies color roles and optional font faces; the scales remain
  * library-owned.
  */
 

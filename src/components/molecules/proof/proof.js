@@ -15,16 +15,16 @@ export const proof = defineComponent('proof', {
         value: { type: 'markup', summary: 'The sentence that makes it checkable. May carry an inline link.' },
       },
     },
-    style: {
+    layout: {
       type: 'enum',
       values: ['stacked', 'pills'],
       default: 'stacked',
       summary: '`pills` drops the expansion line and shows each term as a chip().',
     },
   },
-  render: ({ items, style }) =>
+  render: ({ items, layout }) =>
     // Pills have terms and nothing to define them by, so they are a list, not a <dl>.
-    style === 'pills'
+    layout === 'pills'
       ? h(
           'ul',
           { class: 'ds-proof ds-proof--pills', role: 'list' },

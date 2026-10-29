@@ -2,10 +2,10 @@ import { defineComponent, requiredWith, together } from '../../../define.js';
 import { h } from '../../../html.js';
 
 export const figure = defineComponent('figure', {
-  summary: 'A framed product image with an optional caption. Omit `src` for a labelled placeholder.',
+  summary: 'A framed product image with an optional caption. Omit `src` for a labeled placeholder.',
   docs: 'src/components/molecules/figure/README.md',
   options: {
-    src: { type: 'url', summary: 'The image. Omit it and the frame stays empty and labelled.' },
+    src: { type: 'url', summary: 'The image. Omit it and the frame stays empty and labeled.' },
     srcset: { type: 'text', summary: 'Image candidates with width (`w`) descriptors. Supply `sizes` with them.' },
     sizes: { type: 'text', summary: 'The rendered width used for candidate selection. Required with `srcset`.' },
     alt: {
@@ -16,7 +16,7 @@ export const figure = defineComponent('figure', {
     width: { type: 'number', summary: 'Intrinsic width in pixels. Supply with `height` to provide the aspect ratio.' },
     height: { type: 'number', summary: 'Intrinsic height in pixels. Supply with `width`.' },
     caption: { type: 'text', summary: 'A line under the frame.' },
-    label: {
+    placeholder: {
       type: 'text',
       default: 'Screenshot pending',
       summary: 'What the empty frame says while the screenshot does not exist.',
@@ -38,7 +38,7 @@ export const figure = defineComponent('figure', {
     requiredWith('sizes', 'srcset', 'declare the rendered width for width-based image candidates'),
     together(['width', 'height'], 'provide the intrinsic aspect ratio with both dimensions'),
   ],
-  render: ({ src, srcset, sizes, alt, width, height, caption, label, priority }) =>
+  render: ({ src, srcset, sizes, alt, width, height, caption, placeholder, priority }) =>
     h('figure', { class: 'ds-figure' }, [
       h(
         'div',
@@ -58,7 +58,7 @@ export const figure = defineComponent('figure', {
           /* The fallback is the option's declared default, not a string in here: it
            * is words a reader sees, so it belongs where docs/foundations/language.md
            * can list it. */
-          : h('div', { class: 'ds-figure__empty', text: label }),
+          : h('div', { class: 'ds-figure__empty', text: placeholder }),
       ),
       caption && h('figcaption', { class: 'ds-figure__caption', text: caption }),
     ]),

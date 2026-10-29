@@ -1,6 +1,6 @@
 # Built-in icons
 
-These eight SVGs are from Ionicons, under the MIT licence in `LICENSE.txt`.
+These eight SVGs are from Ionicons, under the MIT license in `LICENSE.txt`.
 The theme icons (`sunny-outline`, `moon-outline`, `contrast-outline`) use the
 [v5.5.2 source](https://github.com/ionic-team/ionicons/tree/v5.5.2/src/svg), replacing
 the original theme-control artwork previously shipped under those names.

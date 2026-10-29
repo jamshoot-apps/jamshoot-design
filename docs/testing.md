@@ -30,7 +30,7 @@ built-in runner with no dependencies or test-file registry.
 | Executable examples, generated docs, links and review markers | `test/docs/` |
 | Lint rules | `test/lint/` |
 | Build output, development server, CLI and Git hooks | `test/integration/` |
-| Minimal consumer site | `test/fixtures/site/` |
+| Minimal site | `test/fixtures/site/` |
 | Setup reused by multiple test files | `test/support/` |
 
 Name test files after their subject. Helpers and fixtures use `.js` or `.mjs`;
@@ -62,5 +62,5 @@ Reuse helpers in `test/support/`:
 - `lint-site.mjs`: temporary lint fixtures and diagnostics.
 
 Keep assertions and scenario data in their tests. Integration builds use temporary
-directories and clean up afterwards; never build into fixture sources or neighbouring
+directories and clean up afterwards; never build into fixture sources or neighboring
 repositories.

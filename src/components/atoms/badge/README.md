@@ -1,6 +1,6 @@
 # Badge
 
-<!-- docs-review: 57155ea01316; reason: Initial local API, examples and composition reviewed. -->
+<!-- docs-review: 2fac58f42107; reason: Reviewed rename of tone to variant in spec, example and table; American spelling -->
 
 A short label beside another element. It is not a notification count or the only
 place a status is stated.
@@ -10,10 +10,10 @@ place a status is stated.
 These are component expressions for an existing site. Import `badge` and `cluster`
 from `@jamshoot-apps/design`; see [example context](https://jamshoot-apps.github.io/jamshoot-design/authoring.html#component-example-context).
 
-```example title="Both tones"
+```example title="Both variants"
 cluster({ content: [
   badge({ label: 'One-time purchase' }),
-  badge({ label: 'Most popular', tone: 'accent' }),
+  badge({ label: 'Most popular', variant: 'accent' }),
 ] })
 ```
 
@@ -21,7 +21,7 @@ cluster({ content: [
 | Option | Accepts |  | What it is |
 | --- | --- | --- | --- |
 | `label` | `string` | required | One or two words. |
-| `tone` | `"plain" \| "accent"` | default `plain` | Accent marks the one that matters. |
+| `variant` | `"plain" \| "accent"` | default `plain` | Accent marks the one that matters. |
 ```
 
 ## Composition

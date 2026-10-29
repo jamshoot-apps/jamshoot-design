@@ -1,5 +1,5 @@
 /*
- * Centred between the header and the first section: the space above the copy is one
+ * Centered between the header and the first section: the space above the copy is one
  * section-space, and the space below it is the next section's own padding, so the
  * hero adds none at the bottom. Its visual may cast a shadow past that edge, so only
  * the horizontal overflow is clipped — that is the one that would scroll the page.

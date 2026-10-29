@@ -1,6 +1,6 @@
 {
   "name": "@jamshoot-apps/design",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Design system for static sites. Build-time components, no dependencies.",
   "type": "module",
   "repository": {

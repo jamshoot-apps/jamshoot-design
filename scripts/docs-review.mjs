@@ -49,7 +49,7 @@ export function reviews() {
   entries.push(
     { name: 'siteConfig', source: join(LIB, 'src/config.js'), docs: join(LIB, siteConfig.spec.docs) },
     { name: 'build', source: join(LIB, 'src/cli/build.mjs'), docs: join(LIB, 'docs/authoring.md'),
-      dependencies: ['src/cli/styles.mjs', 'src/cli/serve.js', 'src/cli/build-lock.js', 'src/cli/output.js', 'src/cli/files.js', 'src/cli/colours.js', 'scripts/docs/build.mjs', 'src/templates.js', 'src/html-transform.js', 'src/cli/og-image.mjs', 'src/cli/og-patterns.js'].map((path) => join(LIB, path)) },
+      dependencies: ['src/cli/styles.mjs', 'src/cli/serve.js', 'src/cli/build-lock.js', 'src/cli/output.js', 'src/cli/files.js', 'src/cli/colors.js', 'scripts/docs/build.mjs', 'src/templates.js', 'src/html-transform.js', 'src/cli/og-image.mjs', 'src/cli/og-patterns.js'].map((path) => join(LIB, path)) },
     { name: 'icons', source: join(LIB, 'src/icons.js'), docs: join(LIB, 'docs/foundations/icons.md') },
   );
   return entries.map((entry) => {

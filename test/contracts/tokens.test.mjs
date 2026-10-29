@@ -36,7 +36,7 @@ test('every component token falls back to what the contract promises', () => {
   const css = libraryStyles().map(read).join('\n');
 
   for (const token of COMPONENT_TOKENS) {
-    assert.ok(token.accepts?.summary, `--ds-${token.name} does not declare what project values it accepts`);
+    assert.ok(token.accepts?.summary, `--ds-${token.name} does not declare what site values it accepts`);
     assert.ok(css.includes(`var(--ds-${token.name},`), `no stylesheet reads --ds-${token.name}`);
 
     for (const fallback of [token.fallback, ...(token.variants ?? [])]) {
@@ -60,8 +60,8 @@ test('every design token reference is owned or supplies its fallback', () => {
   const declared = new Set([...css.matchAll(/(--ds-[\w-]+)\s*:/g)].map(([, name]) => name));
   const referenced = [...css.matchAll(/var\((--ds-[\w-]+)(\s*,[^)]*)?\)/g)];
   const unknown = referenced.filter(([, name, fallback]) => !declared.has(name) && !fallback).map(([, name]) => name);
-  const knobs = [...new Set(referenced.filter(([, name]) => !declared.has(name)).map(([, name]) => name.slice(5)))].sort();
+  const tokens = [...new Set(referenced.filter(([, name]) => !declared.has(name)).map(([, name]) => name.slice(5)))].sort();
 
   assert.deepEqual([...new Set(unknown)], []);
-  assert.deepEqual(knobs, [...COMPONENT_TOKEN_NAMES].sort(), 'a stylesheet reads an undeclared component token');
+  assert.deepEqual(tokens, [...COMPONENT_TOKEN_NAMES].sort(), 'a stylesheet reads an undeclared component token');
 });

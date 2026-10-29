@@ -7,7 +7,7 @@
   border-bottom: calc(var(--ds-hairline) * 2) solid var(--ds-border-strong);
 }
 
-.ds-page-header__meta {
+.ds-page-header__byline {
   margin-top: var(--ds-space-2xs);
   color: var(--ds-text-faint);
   font-size: var(--ds-text-caption);

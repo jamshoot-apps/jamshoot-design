@@ -1,6 +1,6 @@
 # Button
 
-<!-- docs-review: a2ff87712587; reason: Clarified navigation-only catalog summary and reviewed href omission, variants, icons and composition guidance. -->
+<!-- docs-review: 9bc43228ff7b; reason: Reviewed CSS comment spelling and site block wording; contract unchanged -->
 
 A navigation link styled as a primary or ghost action. It renders nothing when
 `href` is omitted. Use a site-owned block for a submit button or a custom action.
@@ -31,7 +31,7 @@ cluster({ content: [
 
 With no `href`, the component returns `null`; pre-launch pages do not show a dead
 action. There is no arbitrary attribute pass-through. A new navigation behavior is a
-component decision or belongs in a project block.
+component decision or belongs in a site block.
 
 The icon sits in a button-owned wrapper. Button CSS does not select icon internals.
 The `icon` option uses a built-in icon name or an SVG from the trusted directory

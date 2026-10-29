@@ -114,7 +114,7 @@ test('a lock left by an exited process is superseded, and the superseded file re
   assert.equal(await readFile(`${stem}.2`, 'utf8'), 'released\n');
 });
 
-test('an unrecognised lock file blocks and is named, never overwritten', async (t) => {
+test('an unrecognized lock file blocks and is named, never overwritten', async (t) => {
   const { destination } = await fixture(t);
   const stem = buildLockPath(destination);
   await writeFile(`${stem}.1`, 'partial');

@@ -31,7 +31,7 @@ export const table = defineComponent('table', {
          * The box scrolls, so a keyboard has to be able to reach it: a scroll
          * container only a pointer can move hides its right-hand columns from
          * everyone else (WCAG 2.1.1). It becomes a named region only when there is a
-         * caption to name it with — an unnamed region is one more unlabelled stop in
+         * caption to name it with — an unnamed region is one more unlabeled stop in
          * a screen reader's list, which is worse than no region at all.
          */
         tabindex: '0',

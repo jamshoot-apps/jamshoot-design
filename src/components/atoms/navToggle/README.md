@@ -7,7 +7,7 @@ The accessible disclosure button used by responsive headers.
 For template-rendered sites, configure navigation through
 [site configuration](https://jamshoot-apps.github.io/jamshoot-design/configuration.html).
 [Header](../../organisms/header/README.md) supplies the toggle, navigation and
-responsive visibility styles. A custom block using this atom must supply those
+responsive visibility styles. A site block using this atom must supply those
 surrounding parts itself.
 
 ## Usage
@@ -54,7 +54,7 @@ Header's responsive layout and scroll behavior belong to its own contract.
 
 ## For library maintainers
 
-Its shape — a glyph centred on a tap target, muted until hovered — is `.ds-icon-button`
+Its shape — a glyph centered on a tap target, muted until hovered — is `.ds-icon-button`
 in `src/styles/base.css`, shared with the theme toggle beside it. The local stylesheet only
 pulls the button flush with the gutter and hides whichever icon is not the current
 state.

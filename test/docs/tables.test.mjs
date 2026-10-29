@@ -88,7 +88,7 @@ test('site configuration documents its generated contract including navigation a
     'grouped tables must document every top-level option exactly once');
   assert.equal([...table.matchAll(/^## .+\n\n[^\n]+\n\n\| Option/gm)].length, 8,
     'each configuration block needs a heading, explanation and options table');
-  for (const path of ['nav.hideOnScroll', 'nav.links[].href', 'footer.showContact', 'footer.columns[].links[].label']) {
+  for (const path of ['nav.hideOnScroll', 'nav.links[].href', 'footer.showContact', 'footer.groups[].links[].label']) {
     assert.ok(table.includes(`\`${path}\``), `site config omits ${path}`);
   }
 });

@@ -1,6 +1,6 @@
 export const support = {
   title: 'Fixture support',
-  meta: 'Integration reference',
+  byline: 'Integration reference',
   sections: [
     {
       id: 'purpose',
@@ -11,7 +11,7 @@ export const support = {
       ],
       list: [
         'It imports component functions from the current checkout.',
-        'It uses a build-time block renderer and a separate client file.',
+        'It uses a build-time block renderer and a separate client block.',
         'It produces enough static text for the no-JavaScript content check.',
       ],
       table: {
@@ -22,7 +22,7 @@ export const support = {
         ],
       },
       outro: [
-        'A successful isolated run proves that tests do not need the name, path, installed package or content of a neighbouring repository.',
+        'A successful isolated run proves that tests do not need the name, path, installed package or content of a neighboring repository.',
       ],
     },
   ],

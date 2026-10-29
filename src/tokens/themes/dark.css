@@ -1,9 +1,9 @@
 /*
- * The dark palette — the whole colour contract, and one of the two files a project
+ * The dark palette — the whole color contract, and one of the two files a site
  * starts from. Copy it to the site as theme.css to make it the base palette, or to
  * themes/dark.css to add it to a light site; change the values, change nothing else.
  *
- * Twelve colour tokens plus color-scheme. If a component needs a colour that is not
+ * Twelve color roles plus color-scheme. If a component needs a color that is not
  * here, the component is wrong, not the contract.
  */
 

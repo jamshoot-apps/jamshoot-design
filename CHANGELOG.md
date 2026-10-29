@@ -2,6 +2,29 @@
 
 ## [Unreleased]
 
+## [2.0.0] — 2026-10-29
+
+### Changed
+
+- Documentation, messages and identifiers use American English. The lint rule
+  `theme-colour` is now `theme-color`, the allow directive `ds-allow: colour` is
+  `ds-allow: color`, and `knob-assignment` is `token-assignment`. The color guide
+  moved from `foundations/colour` to `foundations/color`.
+- Renamed options for consistent naming. Update sites and site blocks:
+  - `site.config.js`: `footer.columns` is `footer.groups`; `nav.homeHref` is
+    `brand.href`.
+  - `iconTile`: `name` is `icon`.
+  - `section`: the `surface` value `plain` is `default`.
+  - `brand`: the `position` value `right` is `end`.
+  - `plan`: `subtitle` is `lead`, which is inline markup and no longer escaped
+    (pass trusted text only); the element class
+    `ds-plan__subtitle` is `ds-plan__lead`.
+  - `badge`: `tone` is `variant`.
+  - `proof`: `style` is `layout`.
+  - `figure`: `label` is `placeholder`.
+  - `pageHeader`: `meta` is `byline`; the element class `ds-page-header__meta` is
+    `ds-page-header__byline`.
+
 ## [1.0.0] — 2026-10-28
 
 Initial public release of `@jamshoot-apps/design`, a dependency-free design system

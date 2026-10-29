@@ -1,6 +1,6 @@
 # Card
 
-<!-- docs-review: f6adcbe2ffda; reason: Reviewed the media slot contract, executable Figure composition and site block recipe; updated the catalog summary. -->
+<!-- docs-review: a3dc5ce6a977; reason: Reviewed internal iconTile icon option call; documented card contract unchanged -->
 
 A bordered panel for related content: a title with supporting text or a bullet list,
 plus an optional icon or media slot.

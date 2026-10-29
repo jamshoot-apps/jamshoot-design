@@ -20,7 +20,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { escape, h } from '../html.js';
 import { iconNames } from '../icons.js';
 import { fontCss } from './build.mjs';
-import { parseColour, over, contrast } from './colours.js';
+import { parseColor, over, contrast } from './colors.js';
 import { SURFACE_ROLES } from '../tokens/contract.js';
 import { DEFAULT_SCATTER_ICONS, PATTERNS, patternDataUri } from './og-patterns.js';
 import { isMain, knownSites, locate, suggest, takeSitesFlag } from './sites.js';
@@ -76,7 +76,7 @@ function pngSize(buffer) {
 
 /* ---- source fingerprint -------------------------------------------------------------- */
 
-/* Chromium's pixels differ between versions, operating systems and font rasterisers, so
+/* Chromium's pixels differ between versions, operating systems and font rasterizers, so
    --check cannot compare bytes across machines. Each rendered PNG instead carries a tEXt
    chunk with a SHA-256 of the HTML it was rendered from, and --check compares that with
    the HTML it would render now, without launching a browser. */
@@ -180,7 +180,7 @@ export function sourceFingerprint(png) {
   return stamp.data.toString('latin1', stamp.data.indexOf(0) + 1);
 }
 
-/* ---- colour ------------------------------------------------------------------------ */
+/* ---- color ------------------------------------------------------------------------ */
 
 /* A generic contrast pair — not tied to any one site's theme, for the moment a custom
    background steps outside the twelve roles the theme.css contract already checks. */
@@ -200,8 +200,8 @@ function themeRoles(themeCss) {
 
 /** Contrast is measurable only against an opaque background. */
 function contrastOf(bgValue, fgValue) {
-  const bg = parseColour(bgValue);
-  const fg = parseColour(fgValue);
+  const bg = parseColor(bgValue);
+  const fg = parseColor(fgValue);
   return bg && fg && bg[3] >= 1 ? contrast(over(fg, bg), bg) : null;
 }
 
@@ -216,7 +216,7 @@ function pickInk(bg, inkFlag) {
 
   if (lightRatio === null || darkRatio === null) {
     console.log(
-      `  Could not read "${bg}" as a hex or rgb() colour to pick contrasting text automatically — assuming light text. Pass --ink dark if that reads wrong.`,
+      `  Could not read "${bg}" as a hex or rgb() color to pick contrasting text automatically — assuming light text. Pass --ink dark if that reads wrong.`,
     );
 
     return LIGHT_INK;
@@ -239,7 +239,7 @@ function warnIfLowContrast({ bg, text, textMuted }) {
 /**
  * `bg` is either one of the theme's own surface roles — in which case the theme's own
  * `text`/`text-muted` already clear the contract's 4.5:1 against it — or an arbitrary
- * colour, in which case contrast is read off its luminance (or `--ink`, when that
+ * color, in which case contrast is read off its luminance (or `--ink`, when that
  * can't be done reliably). Either way, the result is checked before it ships.
  */
 function resolveColors(themeCss, bgFlag, inkFlag) {

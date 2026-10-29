@@ -21,8 +21,8 @@ export const section = defineComponent('section', {
     lead: { type: 'markup', summary: 'Supporting text under the title, usually one or two sentences.' },
     surface: {
       type: 'enum',
-      values: ['plain', 'sunken'],
-      default: 'plain',
+      values: ['default', 'sunken'],
+      default: 'default',
       summary: 'Which surface role the band sits on. Alternate `sunken` down a long page so it has structure without a decorative divider.',
     },
     actions: {

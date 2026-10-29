@@ -1,15 +1,15 @@
 # Theming
 
-Use this page to assign values to colour roles, organise palette files and configure
-theme switching. [Colour](foundations/colour.md) explains which role to choose and
+Use this page to assign values to color roles, organize palette files and configure the
+theme control. [Color](foundations/color.md) explains which role to choose and
 which foreground/background pairs are checked.
 
-A site sets colour and optional component tokens. The spacing rhythm, type scale,
+A site sets color and optional component tokens. The spacing rhythm, type scale,
 motion and breakpoints remain library-owned. For a new site, copy a starter palette
 to `theme.css`; for another palette, add a file in `themes/` with the values that
 differ. Lint checks each resulting palette, including inherited values.
 
-## The twelve colour roles
+## The twelve color roles
 
 A site's base `theme.css` sets all twelve roles, plus `color-scheme: dark | light`
 so native form controls and scrollbars follow. This table is generated from
@@ -113,14 +113,14 @@ defaults, so an ordinary light/dark pair needs neither. This table is generated 
 ```tokens metadata
 | Token | What it is | Defaults to |
 | --- | --- | --- |
-| `--ds-theme-label` | What the control calls this palette, and what a screen reader says. | The capitalised file name. |
+| `--ds-theme-label` | What the control calls this palette, and what a screen reader says. | The capitalized file name. |
 | `--ds-theme-icon` | The icon the control shows while in that state. | The icon for its `color-scheme`. |
 ```
 
 The icon must name a built-in icon or an SVG in the optional `JAMSHOOT_ICONS_DIR`
 directory. Lint reports an unknown name against the palette file.
 
-Keep this metadata in the palette file alongside its colour values.
+Keep this metadata in the palette file alongside its color values.
 
 ## Letting the reader choose
 
@@ -145,40 +145,40 @@ The runtime reads the states from the control's markup, so a palette added to
 
 ## Extending the system
 
-Four things a project might want to add, and where each one goes.
+Four things a site might want to add, and where each one goes.
 
 **Another palette.** Add a file in `themes/` with the values that differ from the base.
 
-**Another colour role.** First check the
-[role guidance](foundations/colour.md#site-illustration-colours). Add the role to
+**Another color role.** First check the
+[role guidance](foundations/color.md#site-illustration-colors). Add the role to
 `ROLES` in `src/tokens/contract.js` and give it a base value in every site. Declare its
 contrast backgrounds and minimum ratio in the same entry. The generated table and
 lint checks read that contract; additional palettes may inherit the base value.
 
-**Another component knob.** One entry in `COMPONENT_TOKENS`, and one `var(--ds-x, …)`
+**Another component token.** One entry in `COMPONENT_TOKENS`, and one `var(--ds-x, …)`
 in the stylesheet that owns it — the same fallback the contract declares, which the
-lint checks. See [Component tokens](#component-tokens) for what a knob is allowed to
+lint checks. See [Component tokens](#component-tokens) for what a component token is allowed to
 be, and [Adding a component](adding-a-component.md) for the workflow.
 
-**Project colours of your own.** A site's decorative colours go in the palette files
+**Site colors of your own.** A site's decorative colors go in the palette files
 beside the roles, prefixed so they are obviously not part of the contract — and
-because they live in a palette, they can differ per palette. Replace `project` in
+because they live in a palette, they can differ per palette. Replace `brand` in
 this example with your site's prefix:
 
 ```css
 /* theme.css */
---project-paper: #f4ece3;
+--example-paper: #f4ece3;
 
 /* themes/dark.css — the same motif, dimmed for a dark page. */
---project-paper: #2a2622;
+--example-paper: #2a2622;
 ```
 
-Translucent pure black and pure white are shading, not colour, and can be written
+Translucent pure black and pure white are shading, not color, and can be written
 inline: `rgb(0 0 0 / 0.33)` for a shadow is fine anywhere.
 
 ## Component tokens
 
-Component tokens adjust specific settings, such as button corners or card padding.
+Component tokens adjust specific details, such as button corners or card padding.
 Set them in `theme.css` or an additional palette; omitted tokens use the library
 defaults shown below.
 
@@ -189,9 +189,9 @@ defaults shown below.
 | `--ds-button-weight` | Label weight on a button. | a `--ds-weight-*` token | `--ds-weight-medium` |
 | `--ds-card-radius` | Corner of a card. | zero or a `--ds-radius-*` token | `--ds-radius-md` |
 | `--ds-card-padding` | Inset of a card. | a `--ds-space-*` token | `--ds-space-lg` |
-| `--ds-card-surface` | Card fill, when it should not be the default surface. | `transparent` or a surface colour role | `--ds-surface` |
+| `--ds-card-surface` | Card fill, when it should not be the default surface. | `transparent` or a surface color role | `--ds-surface` |
 | `--ds-figure-radius` | Corner of a screenshot frame. | zero or a `--ds-radius-*` token | `--ds-radius-md` |
-| `--ds-hero-visual-height` | How much room the hero reserves for the project’s own visual. Set it from the block that fills it. | a `--ds-measure-*` token or CSS length | `--ds-measure-md` |
+| `--ds-hero-visual-height` | How much room the hero reserves for the site’s own visual. Set it from the block that fills it. | a `--ds-measure-*` token or CSS length | `--ds-measure-md` |
 | `--ds-grid-min` | Narrowest a grid column gets before the grid drops a column. | a `--ds-measure-*` token | `--ds-measure-xs` |
 | `--ds-split-columns` | Column ratio of a two-up split. | two `fr` tracks, for example `2fr 1fr` | `1fr 1fr` |
 ```
@@ -210,7 +210,7 @@ backgrounds must be opaque; translucent foregrounds are composited onto them.
 
 Lint checks every palette after resolving inheritance against the base. It rejects
 missing roles, unknown library tokens, unsupported values and a `color-scheme`
-other than `dark` or `light`. See [Allowed pairs](foundations/colour.md#allowed-pairs)
+other than `dark` or `light`. See [Allowed pairs](foundations/color.md#allowed-pairs)
 for the contrast thresholds and combinations that need a separate check.
 
 **Component tokens belong to the site.** Library stylesheets read them with a

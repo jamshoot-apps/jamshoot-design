@@ -1,6 +1,6 @@
 # FAQ
 
-<!-- docs-review: 89b5db1374e8; reason: Reviewed unchanged options and examples after moving token imports and declared runtime to src; guide links now work outside the checkout. -->
+<!-- docs-review: 0f7d34bda2b5; reason: Reviewed runtime comment spelling only; documented behavior unchanged -->
 
 Expandable questions and answers built on native `<details>`. Readers can open
 answers without JavaScript; add the `faq` runtime to open an answer when following

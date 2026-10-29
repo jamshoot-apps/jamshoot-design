@@ -6,7 +6,7 @@ The short line above a title that names the part of the page.
 
 For [Hero](../../organisms/hero/README.md) or
 [Section](../../organisms/section/README.md), set its `eyebrow` option. Use this atom
-when composing a custom block.
+when composing a site block.
 
 ## Usage
 

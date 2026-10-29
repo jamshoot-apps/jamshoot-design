@@ -7,7 +7,7 @@ before writing a renderer.
 
 Import helpers from `@jamshoot-apps/design/markup` inside the block. Pages and content
 files compose components; `src/cli/lint.mjs` rejects this entry point there. See
-[Authoring](../authoring.md#add-site-specific-blocks) for the block structure.
+[Authoring](../authoring.md#site-blocks) for the block structure.
 
 The examples on the foundations pages call `h()` to draw swatches and rulers. Their
 documentation-specific markup is not a page composition example.
@@ -43,7 +43,7 @@ const trusted = raw('<em>Checked at build time</em>');
 const composed = raw(`<span>${escape(content.label)}</span>`);
 ```
 
-When only a prop needs inline markup, prefer `h(tag, { html })` and keep the trusted
+When only one value needs inline markup, prefer `h(tag, { html })` and keep the trusted
 span as small as possible. Everything else belongs in `text`.
 
 ### Inline means inline

@@ -77,7 +77,7 @@ test('the copy is in the markup, not fetched by a script', () => {
   // A sentence from each part of the fixture home page.
   for (const phrase of [
     'Build the page from the library checkout.',
-    'Representative project block.',
+    'Representative site block.',
     'The bundled stylesheet includes component folders',
     'The fixture covers the complete workflow.',
   ]) {
@@ -108,7 +108,7 @@ test('a build-time block renderer is not shipped to the browser', () => {
 
   assert.ok(script.includes('data-nav-toggle'), 'the configured library runtime is missing');
   assert.ok(script.includes('clientReady'), 'the fixture client module is missing');
-  assert.doesNotMatch(script, /Representative project block/, 'the build-time block renderer leaked into the bundle');
+  assert.doesNotMatch(script, /Representative site block/, 'the build-time block renderer leaked into the bundle');
   assert.doesNotMatch(script, /\bimport\b/, 'a block renderer leaked into the browser bundle');
 });
 
@@ -128,7 +128,7 @@ test('the site’s palettes become the selectors that switch between them', () =
   assert.ok(!theme.includes('data-theme="default"'), 'the base palette was written twice');
 
   /*
-   * A palette whose name is not a colour scheme is offered and never automatic, and
+   * A palette whose name is not a color scheme is offered and never automatic, and
    * ships what it declares and no more — the eight roles it leaves alone are the
    * base's, which is the cascade doing the work no build step has to.
    */
@@ -170,7 +170,7 @@ test('all assets ship with nested dependencies; direct-reference diagnostics nev
     });
 
     assert.ok(existsSync(join(source, 'dist/assets/icons/icon-48.png')), 'a referenced asset was left behind');
-    assert.ok(existsSync(join(source, 'dist/assets/icons/LICENSE.txt')), 'the licence has to travel with the files');
+    assert.ok(existsSync(join(source, 'dist/assets/icons/LICENSE.txt')), 'the license has to travel with the files');
     assert.ok(existsSync(join(source, 'dist/assets/icons/icon-master.png')), 'a diagnostic must not omit an asset');
     assert.ok(existsSync(join(source, 'dist/assets/icons/art.svg')));
     assert.ok(existsSync(join(source, 'dist/assets/symbols.svg')), 'the nested SVG dependency was omitted');
@@ -244,7 +244,7 @@ test('browser scripts retain their source comments', () => {
   assert.ok(read(built.jsHref).includes('Mobile navigation and the optional scroll-away header'));
 });
 
-test('a project block uses the normal static page and asset pipeline', () => {
+test('a site block uses the normal static page and asset pipeline', () => {
   const markup = read('index.html');
   const stylesheet = read(`styles/${built.cssName}`);
 
@@ -441,7 +441,7 @@ test('shared URLs resolve from the site root on root, nested and fallback pages'
   const config = { ...site,
     brand: { ...site.brand, logo: 'assets/logo.svg', favicon: 'assets/icon.svg', appleTouchIcon: 'assets/touch.png' },
     nav: { ...site.nav, links: [...site.nav.links, { label: 'External', href: 'https://example.test/' }, { label: 'Anchor', href: '#main' }] },
-    footer: { ...site.footer, columns: [{ title: 'Help', links: [{ label: 'Support', href: 'support.html' }, { label: 'Help', href: 'support.html?from=footer&lang=en#help' }] }] },
+    footer: { ...site.footer, groups: [{ title: 'Help', links: [{ label: 'Support', href: 'support.html' }, { label: 'Help', href: 'support.html?from=footer&lang=en#help' }] }] },
   };
   for (const base of ['https://example.test/', 'https://example.test/app/']) {
     await buildSite({ root: SITE, site: { ...config, url: base }, out: output, pages: [

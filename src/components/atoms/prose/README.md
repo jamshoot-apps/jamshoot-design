@@ -17,7 +17,7 @@ import { h } from '@jamshoot-apps/design/markup';
 
 The expression below is the block's return value. See
 [example context](https://jamshoot-apps.github.io/jamshoot-design/authoring.html#component-example-context) and
-[site blocks](https://jamshoot-apps.github.io/jamshoot-design/authoring.html#add-site-specific-blocks) for the file structure.
+[site blocks](https://jamshoot-apps.github.io/jamshoot-design/authoring.html#site-blocks) for the file structure.
 
 ```example title="Long-form copy"
 prose({ content: [

@@ -25,7 +25,7 @@ Documentation is built separately from the source checkout using `scripts/`.
 3. Open the deployment URL shown by the `github-pages` environment.
 
 `npm run docs` produces `dist-docs/`, including HTML, CSS, runtime scripts, brand
-assets, licences and the Markdown catalog. The workflow uploads that directory
+assets, licenses and the Markdown catalog. The workflow uploads that directory
 using the official Pages artifact action. Assets and navigation are relative, so
 both `https://OWNER.github.io/REPOSITORY/` and a custom domain work without a base-path
 setting. The default project URL is

@@ -2,7 +2,7 @@
 
 JamShoot Design helps you build static websites with reusable JavaScript components, consistent styling and no extra dependencies.
 
-Components render HTML at build time, so there's no client-side framework to ship. You bring the content, colours and any custom blocks. JamShoot takes care of the layout, typography, styling and motion.
+Components render HTML at build time, so there's no client-side framework to ship. You bring the content, colors and any site blocks. JamShoot takes care of the layout, typography, styling and motion.
 
 [Documentation](https://jamshoot-apps.github.io/jamshoot-design/) ·
 [Authoring guide](https://jamshoot-apps.github.io/jamshoot-design/authoring.html)
@@ -11,12 +11,12 @@ Components render HTML at build time, so there's no client-side framework to shi
 
 - No npm dependencies. Everything runs on the Node.js standard library.
 - Components render static HTML during the build. The browser only gets
-  small scripts for the mobile menu, theme switching and FAQ links, plus
-  whatever client code a site adds itself.
+  small scripts for the mobile menu, theme control and FAQ links, plus
+  whatever client blocks a site adds itself.
 - Each component declares its options with `defineComponent`, so you'll
   know during the build if something isn't quite right.
-- Customise your site's colours using twelve predefined roles. 
-  Light and dark themes are included, along with a theme toggle.
+- Customize your site's colors using twelve color roles. 
+  Light and dark palettes are included, along with a theme control.
 - `jamshoot-lint` checks for accessibility and design issues like contrast,
   focus styles, tap target size, reduced motion and more. Each rule is
   explained in the docs.
@@ -42,10 +42,10 @@ A site is just a folder with a few files:
 ```text
 my-site/
 ├── site.config.js   # brand, URL, navigation, footer
-├── theme.css        # twelve colour roles and color-scheme
+├── theme.css        # twelve color roles and color-scheme
 ├── pages.js         # pages composed from components
 ├── content/         # user-facing strings
-├── blocks/          # optional site-specific markup
+├── blocks/          # optional site blocks
 └── themes/          # optional extra palettes
 ```
 
@@ -92,12 +92,12 @@ walks through a complete two-page site and a pre-launch checklist.
 | `jamshoot-dev` | Serves a site locally with live reload. |
 | `jamshoot-og-image` | Generates Open Graph share images. |
 
-## How it is organised
+## How it is organized
 
 | Layer | Owned by | Provides |
 | --- | --- | --- |
 | Design tokens | Library | Spacing, type scale, radii, motion and breakpoints. |
-| Site theme | Site | Twelve colour roles and allowed component tokens. |
+| Site theme | Site | Twelve color roles and allowed component tokens. |
 | Components | Library | Validated HTML and namespaced CSS built from tokens. |
 | Pages and blocks | Site | Components composed with the site's content and custom UI. |
 
@@ -124,7 +124,7 @@ Plain text options are escaped; options that accept HTML expect trusted content.
 Report vulnerabilities through the
 [security policy](https://github.com/jamshoot-apps/jamshoot-design/blob/main/SECURITY.md).
 
-## Licence
+## License
 
 [Apache License 2.0](LICENSE). Built-in icons are derived from Ionicons and keep
 their [MIT notice](src/assets/icons/LICENSE.txt). JamShoot brand artwork used by the

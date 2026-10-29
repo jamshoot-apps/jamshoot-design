@@ -252,7 +252,7 @@ async function copyAssets(root, out) {
     await mkdir(dirname(join(out, path)), { recursive: true });
     await cp(source, join(out, path));
 
-    if (!referenced.has(path) && !LICENCE_TEXT.test(basename(path))) {
+    if (!referenced.has(path) && !LICENSE_TEXT.test(basename(path))) {
       unreferencedAssets.push(path);
     }
   }
@@ -282,7 +282,7 @@ function prepareSite({ root, site, pages }) {
   const runtime = resolvedSite.runtime.map((name) => join(LIB, 'src/runtime', `${name}.js`));
 
   if (!themes.length) {
-    throw new Error(`${BASE_THEME.file} is missing — a site must declare its own colours`);
+    throw new Error(`${BASE_THEME.file} is missing — a site must declare its own colors`);
   }
 
   /*
@@ -318,8 +318,8 @@ async function buildGeneration(out, { root, resolvedSite, resolvedPages, themes,
   return { out, cssName, jsHref, pages: resolvedPages.length, unreferencedAssets };
 }
 
-/** A licence by its file name: LICENSE.txt, LICENCE.md, OFL.txt, Font-OFL.txt. */
-const LICENCE_TEXT = /^(licen[cs]e|.*ofl)(\.[a-z]+)?$/i;
+/** A license by its file name: LICENSE.txt, LICENCE.md, OFL.txt, Font-OFL.txt. */
+const LICENSE_TEXT = /^(licen[cs]e|.*ofl)(\.[a-z]+)?$/i;
 
 /**
  * Every `assets/…` path named anywhere in the built text files. A path is read up to

@@ -1,6 +1,6 @@
 # Plan
 
-<!-- docs-review: ea05c46b269f; reason: Clarified display price fields and separated the featured authoring convention from cross-plan validation; checked both pricing examples. -->
+<!-- docs-review: 408a79407932; reason: Reviewed subtitle to lead as inline markup, ds-plan__lead class and trusted-input note -->
 
 One pricing tier with a price, feature list and optional link. Arrange tiers with
 [Grid](../../layout/grid/README.md); use `featured` for the tier you recommend.
@@ -13,7 +13,7 @@ grid({ content: [
   plan({
     title: 'Pro',
     price: { amount: '$29', note: 'One-time purchase' },
-    subtitle: 'For larger projects.',
+    lead: 'For larger projects.',
     features: ['Unlimited tasks', 'Export project notes'],
     featured: true,
     badgeLabel: 'Best value',
@@ -48,7 +48,7 @@ or expiry date — what the store charges is what the store says.
 | `price.previous` | `string` | optional | The former price, smaller and struck through beside the current one. |
 | `price.previousLabel` | `string` | default `Previous price` | Screen-reader label for the former price, because a strikethrough alone may not be announced. |
 | `price.note` | `string (inline HTML allowed)` | optional | A small qualifier directly below the price. May carry an inline link. |
-| `subtitle` | `string` | optional | One line explaining what the tier is for. |
+| `lead` | `string (inline HTML allowed)` | optional | One line explaining what the tier is for. May carry an inline link. |
 | `features` | `non-empty array of strings` | required | What the tier includes, one line each. |
 | `featured` | `true or false` | default `false` | Visually marks a recommended tier. Use at most one per comparison; build and lint do not check this across plans. |
 | `badgeLabel` | `string` | optional | A word on the tier — "Popular", "Free". Drawn as a badge(). |
@@ -64,7 +64,10 @@ do not check this across separate `plan()` calls. Two or three tiers are a commo
 arrangement, not a limit enforced by Grid or Plan.
 
 The badge and icons sit in plan-owned wrappers. Omitting `badgeLabel`, `price.note`,
-`subtitle` or `link` leaves no empty row.
+`lead` or `link` leaves no empty row.
+
+`lead` is inline markup and is not escaped: pass trusted text only. Markup options are
+not sanitizers.
 
 For setup and the build/lint workflow, see [Authoring a site](https://jamshoot-apps.github.io/jamshoot-design/authoring.html).
 For alternatives, see [Choosing molecules](https://jamshoot-apps.github.io/jamshoot-design/molecules.html).

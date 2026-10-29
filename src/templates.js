@@ -83,7 +83,7 @@ export function page({ site, page: pageConfig, sections, cssHref, jsHref, themes
       h('body', { 'data-page': pageConfig.id }, [
         h('a', { class: 'ds-skip-link', href: '#main', text: site.skipLink ?? 'Skip to main content' }),
         shared(header({
-          brand: brand({ logo: site.brand.logo, text: site.brand.name, tagline: site.brand.tagline, href: site.nav.homeHref, compact: true }),
+          brand: brand({ logo: site.brand.logo, text: site.brand.name, tagline: site.brand.tagline, href: site.brand.href, compact: true }),
           links: site.nav.links,
           activeId: pageConfig.id,
           label: site.nav.label,
@@ -95,7 +95,7 @@ export function page({ site, page: pageConfig, sections, cssHref, jsHref, themes
         shared(footer({
           blurb: site.footer.blurb,
           showContact: site.footer.showContact,
-          groups: site.footer.columns,
+          groups: site.footer.groups,
           legalNote: site.footer.legalNote,
           email: site.contact?.email,
           copyright: typeof site.footer.copyright === 'function' ? site.footer.copyright(new Date().getFullYear()) : site.footer.copyright,

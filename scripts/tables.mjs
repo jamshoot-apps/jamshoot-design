@@ -71,14 +71,14 @@ export function optionsMarkdown(name) {
 
   // Site configuration spans several concerns; keep each group beside its explanation.
   const groups = [
-    ['Site identity', ['lang', 'url', 'brand'], 'Set the document language, public origin, product name and brand images. Only `brand.name` is required in this block.'],
+    ['Site identity', ['lang', 'url', 'brand'], 'Set the document language, public origin, product name, brand images and the brand link. Only `brand.name` is required in this block.'],
     ['Download and contact', ['appStore', 'contact'], 'Set the download button text and destination, support email and developer name. Both objects are optional; download buttons appear when `appStore.href` is supplied.'],
-    ['Header navigation', ['nav', 'skipLink'], 'Set the header links, home destination and accessible labels. `nav.links` is required; `skipLink` labels the first link keyboard users reach, which takes them to the main content. The menu and theme icons are built in; see the [icon guide](foundations/icons.md) for custom icons.'],
-    ['Footer', ['footer'], 'Set the link columns and copyright notice shown on every page. Both are required. The footer shows `contact.email` when supplied unless `footer.showContact` is false.'],
+    ['Header navigation', ['nav', 'skipLink'], 'Set the header links and accessible labels. `nav.links` is required; `skipLink` labels the first link keyboard users reach, which takes them to the main content. The menu and theme icons are built in; see the [icon guide](foundations/icons.md) for custom icons.'],
+    ['Footer', ['footer'], 'Set the link groups and copyright notice shown on every page. Both are required. The footer shows `contact.email` when supplied unless `footer.showContact` is false.'],
     ['Search and sharing', ['ogImage', 'jsonLd'], 'Set a default share image and structured data for all pages. Both are optional. Page titles, descriptions and additional structured data belong in [pages.js](authoring.md).'],
     ['Theme control', ['theme'], 'Enable the header theme control when the site has another palette in `themes/`. Set `theme.toggle` to true and include `theme` in `runtime`. See [Theming](theming.md) for palette files.'],
     ['Fonts', ['fonts'], 'Omit `fonts` to use the system stack with no font files emitted. To supply a typeface, set its family, fallback stack and files for each role you replace. Paths must be normalized local .woff2 paths under `assets/`, such as `assets/fonts/display.woff2`; parent segments, URL escapes, query strings and fragments are rejected.'],
-    ['Browser runtime', ['runtime'], 'List the library modules loaded in the browser. The default is `["nav"]`; keep `nav` for `nav.hideOnScroll` and add `theme` for `theme.toggle`. Site files matching `blocks/*.client.js` are included automatically.'],
+    ['Browser runtime', ['runtime'], 'List the runtime modules loaded in the browser. The default is `["nav"]`; keep `nav` for `nav.hideOnScroll` and add `theme` for `theme.toggle`. Site files matching `blocks/*.client.js` are included automatically.'],
   ];
   const lines = [
     ...(name === 'siteConfig'

@@ -85,10 +85,10 @@ section({
 ## Authoring boundaries
 
 - Pages call components; they do not write \`ds-*\` classes or import \`@jamshoot-apps/design/markup\`.
-- One-site markup belongs in \`blocks/*.js\`; only \`blocks/*.client.js\` reaches the browser.
+- Site block markup belongs in \`blocks/*.js\`; only \`blocks/*.client.js\` reaches the browser.
 - A component returns static markup. Missing or invalid options stop the build and link to its README.
 - User-facing strings stay in \`content/*.js\` or \`site.config.js\`.
-- A site sets the twelve colour roles and \`color-scheme\`; optional component tokens are closed by the contract.
+- A site sets the twelve color roles and \`color-scheme\`; optional component tokens are closed by the contract.
 - Spacing, type, radii, motion, measures and breakpoints stay library-owned.
 - Component CSS owns its namespace. Composition uses parent wrappers or a documented hook.
 - Option names are a closed vocabulary: \`title\` is a heading, \`label\` names a control, \`text\` is escaped words, \`body\`/\`lead\`/\`note\`/\`answer\`/\`value\` are prose carrying an inline link, \`content\` is renderable, \`items\` is a list of objects. A list of plain strings is named for the strings.
@@ -109,9 +109,9 @@ ${sections.map(({ title, names }) => `### ${title}\n\n${names.map(componentLine)
 - [Authoring a site](https://jamshoot-apps.github.io/jamshoot-design/authoring.html) — setup, composition, builds and pre-launch checks
 - [Architecture](https://jamshoot-apps.github.io/jamshoot-design/architecture.html) — ownership and build flow
 - [Token contract](src/tokens/contract.js) — roles, component tokens, defaults and cascade layers
-- [Theming](https://jamshoot-apps.github.io/jamshoot-design/theming.html) — how a site supplies colour
+- [Theming](https://jamshoot-apps.github.io/jamshoot-design/theming.html) — how a site supplies color
 - [Rules](https://jamshoot-apps.github.io/jamshoot-design/anti-patterns.html) — every lint rule and its reason
-- [Site configuration](https://jamshoot-apps.github.io/jamshoot-design/configuration.html) — validated settings supplied to page components
+- [Site configuration](https://jamshoot-apps.github.io/jamshoot-design/configuration.html) — validated options supplied to page components
 `;
 }
 

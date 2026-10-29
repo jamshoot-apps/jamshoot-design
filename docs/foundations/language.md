@@ -16,7 +16,7 @@ Each of those is an option with a default, and each default is English.
 Set `lang` in `site.config.js`, then translate the interface strings used by the
 site. Setting `lang: 'de'` alone leaves the skip link saying "Skip to main content".
 
-For the site header and theme control, use the `site.config.js` fields below. When
+For the site header and theme control, use the `site.config.js` options below. When
 rendering a component directly, pass its translated options at that call site. The
 table lists both paths; a site does not need to configure components it does not use.
 
@@ -36,7 +36,7 @@ The list is generated from the option declarations. When a component gains a str
 | `navToggle()` | `label` | `Toggle navigation` |
 | `themeToggle()` | `label` | `Theme` |
 | `themeToggle()` | `action` | `Switch to` |
-| `figure()` | `label` | `Screenshot pending` |
+| `figure()` | `placeholder` | `Screenshot pending` |
 | `plan()` | `price.previousLabel` | `Previous price` |
 | `header()` | `label` | `Primary` |
 | `header()` | `toggleLabel` | `Toggle navigation` |
@@ -49,7 +49,7 @@ The component fixes the order and punctuation; changing `action` does not move t
 next palette's name or provide a configurable sentence template.
 
 A palette's own name is not here, because it is not the library's: it comes from
-`--ds-theme-label` in the palette file, and falls back to the capitalised file name.
+`--ds-theme-label` in the palette file, and falls back to the capitalized file name.
 See [Theming](../theming.md).
 
 ## What is not translated

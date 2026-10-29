@@ -36,7 +36,7 @@ SVG, or a component's `icon` option when it provides the surrounding layout.
 The grid previews the documentation's configured set. Only the eight names listed
 above are built in; every other preview uses an SVG from `docs/assets/icons/`. Sites do not
 load that directory automatically. To use an extra icon such as `star`, provide
-`star.svg` in your own configured directory and retain its licence notice.
+`star.svg` in your own configured directory and retain its license notice.
 
 `iconNames()` returns the sorted names available in the current build environment.
 Use it for tooling and catalogs; choose explicit names for page content so adding an
@@ -52,7 +52,7 @@ use built-in names so they can be copied without an extra SVG directory.
 
 ## Your own icons
 
-Put trusted SVG files in a directory of your choice. Keep their required licence
+Put trusted SVG files in a directory of your choice. Keep their required license
 notices under the site's `assets/` so the build copies them. For example:
 
 ```text
@@ -118,7 +118,7 @@ When text already conveys the meaning, omit `label`; the icon is hidden from
 assistive technology. Give a standalone meaningful icon a `label`, as in the rating
 example above. See the [Icon API](../../src/components/atoms/icon/README.md#composition).
 
-## Licences
+## Licenses
 
 The built-in icons are from [Ionicons](https://ionic.io/ionicons), MIT-licensed;
 the notice is in `src/assets/icons/LICENSE.txt`. The three theme icons use Ionicons
@@ -141,4 +141,4 @@ not replace any notices required by your own SVGs.
 The docs build and `npm test` configure `docs/assets/icons/` as their extra SVG directory.
 When changing `src/assets/icons/` or `docs/assets/icons/`, update its `MANIFEST.sha256` and keep
 its notice. `npm test` checks the checksums, the 512 grid, the absence of fixed
-colours and the root sizing of every repository icon.
+colors and the root sizing of every repository icon.

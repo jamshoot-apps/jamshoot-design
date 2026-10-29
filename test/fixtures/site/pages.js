@@ -36,7 +36,7 @@ export const pages = [
       description: 'A document page used by the jamshoot-design integration fixture.',
     },
     render: () => [
-      pageHeader({ title: support.title, meta: support.meta }),
+      pageHeader({ title: support.title, byline: support.byline }),
       legalDocument({ sections: support.sections }),
     ],
   },

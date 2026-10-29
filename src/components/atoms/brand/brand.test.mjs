@@ -11,8 +11,8 @@ test('brand() composes an optional name and tagline beside or below any logo', (
   );
 
   assert.match(String(brand({ logo: 'example.svg', label: 'Example' })), /alt="Example"/);
-  assert.throws(() => brand({ logo: 'unlabelled.svg' }), /needs "text" or "label" — a logo with no name/);
-  assert.throws(() => brand({ logo: 'x.svg', text: 'x', position: 'left' }), /must be one of "right", "bottom"/);
+  assert.throws(() => brand({ logo: 'unlabeled.svg' }), /needs "text" or "label" — a logo with no name/);
+  assert.throws(() => brand({ logo: 'x.svg', text: 'x', position: 'left' }), /must be one of "end", "bottom"/);
 });
 
 /**

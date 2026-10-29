@@ -11,7 +11,7 @@ export const site = {
   },
   footer: {
     blurb: 'This small site exercises the package without importing another repository.',
-    columns: [{ title: 'Pages', links: [{ label: 'Support', href: 'support.html' }] }],
+    groups: [{ title: 'Pages', links: [{ label: 'Support', href: 'support.html' }] }],
     copyright: (year) => `© ${year} Example.`,
   },
   theme: { toggle: true },

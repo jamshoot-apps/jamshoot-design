@@ -20,13 +20,13 @@ test('llms.txt is a compact linked catalog of the whole API', () => {
     assert.ok(text.includes(`](${specOf(component).docs})`), `llms.txt does not link ${name}'s README`);
   }
 
-  assert.doesNotMatch(text, /^## (?:Colour|Shape|Component tokens|Icons)$/m, 'llms.txt duplicates detailed contracts');
+  assert.doesNotMatch(text, /^## (?:Color|Shape|Component tokens|Icons)$/m, 'llms.txt duplicates detailed contracts');
   assert.equal((text.match(/\| Option \| Accepts/g) ?? []).length, 0, 'llms.txt embeds detailed option tables');
 });
 
 test('the llms.txt in the package is the one the generator writes', () => {
   /*
-   * It ships in `files`, so a consumer reads the committed copy rather than running
+   * It ships in `files`, so a site reads the committed copy rather than running
    * the generator. Without this, one forgotten `npm run llms` puts a stale API in
    * front of every model that opens the package — the drift the file exists to end.
    */

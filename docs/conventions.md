@@ -21,6 +21,8 @@ The remaining naming guidance includes conventions the test cannot check.
 | `text` | Plain words. Escaped, never markup. | `text` |
 | `body`, `lead`, `note`, `answer`, `value` | Prose, named by its role. May contain an inline link or emphasis. | `markup` |
 | `content` | Anything renderable: component calls, strings, lists of them. | `content` |
+| `icon` | The icon a component draws, by name. | `icon` |
+| `variant` | The look a component takes, from its own fixed set. | `enum` |
 
 `text` is escaped: a `<` in it prints as `<`, so it cannot carry a link and cannot
 inject markup. The prose names are not escaped, so a sentence in a content file can
@@ -74,7 +76,8 @@ For a complete component example and the required checks, follow
 ## Lists
 
 A general list of objects uses `items`. Existing role-specific names include
-`themeToggle.choices`, `footer.groups` and `legalDocument.sections`. The fields of
+`themeToggle.choices`, `header.links`, `footer.groups`, `footer.groups[].links` and
+`legalDocument.sections`. The fields of
 one row depend on the markup the row becomes:
 
 | Markup | Fields | Components |
@@ -123,4 +126,4 @@ Take the name from this page. If none fits, check whether the idea already exist
 under another name — it usually does. If it is new and more than one component will
 use it, add a row to the Shared names table and to `VOCABULARY` in `naming.test.mjs`, and
 rename the option in every component that should use it. A name only one component
-uses, like `subtitle` or `caption`, does not need a row.
+uses, like `caption`, does not need a row.

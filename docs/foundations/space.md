@@ -1,7 +1,7 @@
 # Space, radius and motion
 
 The library defines the shared spacing, radius and motion scales. Sites use these
-values without redefining the primitives. Some components expose settings that
+values without redefining the primitives. Some components expose component tokens that
 select from those scales; see [Component tokens](../theming.md#component-tokens).
 
 ## Spacing
@@ -63,7 +63,7 @@ h('div', { class: 'swatches' }, ['sm', 'md', 'lg', 'pill'].map((step) =>
 
 These are the shared steps and their default uses. Supported component tokens can
 change button, card and figure corners. Focus outlines follow the element's shape;
-they do not have a separate radius setting.
+they do not have a separate radius token.
 
 ## Motion
 
@@ -73,7 +73,7 @@ is refused by lint. The documented exception is the optional Header hide/reveal 
 
 | Token | Value |
 | --- | --- |
-| `--ds-motion-quick` | `160ms` — colour and border feedback |
+| `--ds-motion-quick` | `160ms` — color and border feedback |
 | `--ds-motion-settle` | `320ms` — something arriving or leaving |
 | `--ds-ease-out` | `cubic-bezier(0.22, 0.61, 0.36, 1)` |
 

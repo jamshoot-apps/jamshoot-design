@@ -360,7 +360,7 @@ export class ComponentError extends Error {
 
 /**
  * Validates `given` against `options`, returning a new object with defaults filled in
- * and omitted values normalised to null. `path` prefixes the error message, so a bad
+ * and omitted values normalized to null. `path` prefixes the error message, so a bad
  * row reports as `sections[2].title` rather than `title`.
  */
 function validate(given, options, fail, path = '') {
@@ -392,7 +392,7 @@ function validate(given, options, fail, path = '') {
      * `false` reads as "omit this" everywhere in the system — `icon && icon(…)` — so
      * an optional value may be written that way. The one place it cannot mean that is
      * a `boolean` option, where `false` is the answer: taken as an omission it would
-     * be replaced by the default, and a knob declared `default: true` could never be
+     * be replaced by the default, and an option declared `default: true` could never be
      * turned off.
      */
     const omitted = value === undefined || value === null || (value === false && option.type !== 'boolean');
@@ -483,7 +483,7 @@ export const requiredWith = (option, other, why) =>
  * `constraints` are the rules that span two options. `styles: false` is the explicit
  * declaration for a component that needs no stylesheet; every other component owns
  * `<name>.css`. `render` receives the validated object with defaults filled in and
- * every omitted option normalised to null, and returns markup.
+ * every omitted option normalized to null, and returns markup.
  */
 export function defineComponent(name, { summary, docs, options, constraints = [], styles = true, runtime = [], render }) {
   const reference = docs?.startsWith('docs/')

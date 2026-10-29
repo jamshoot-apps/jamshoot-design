@@ -18,7 +18,7 @@ test('a wrong option is a build error that names the right one', () => {
 
 test('a missing required option, a bad enum and a bad row all fail', () => {
   assert.throws(() => ds.hero({ title: 'x' }), /"lead" is required \(string \(inline HTML allowed\)\)/);
-  assert.throws(() => ds.section({ content: 'x', surface: 'sunk' }), /must be one of "plain", "sunken"/);
+  assert.throws(() => ds.section({ content: 'x', surface: 'sunk' }), /must be one of "default", "sunken"/);
   assert.throws(() => ds.steps({ items: [{ title: 'a', body: 'b' }, { title: 'b', bdy: 'c' }] }), /items\[1\]\.bdy/);
   assert.throws(() => ds.steps({ items: [{ title: 'a' }] }), /"items\[0\]\.body" is required/);
   assert.throws(() => ds.faq({ items: [{ question: 'q', answer: 'a', id: 'Not An Id' }] }), /lowercase letters/);

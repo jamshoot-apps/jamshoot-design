@@ -1,14 +1,14 @@
 # Overview
 
 JamShoot Design is a design system for developers building static websites from reusable components.
-Use it when pages should share layout and styling while keeping content, colours
+Use it when pages should share layout and styling while keeping content, colors
 and custom interactions local to the site. Compose pages in JavaScript and extend
-them with site blocks: custom renderers, styles and client scripts.
+them with site blocks: custom renderers, styles and client blocks.
 It requires Node.js 22+ and has no npm dependencies.
 
 Components render HTML at build time; their renderers stay out of the browser.
 One stylesheet uses CSS cascade layers to separate theme, library and site styles.
-Browser behaviour comes from selected library runtime modules and explicit
+Browser behavior comes from selected library runtime modules and explicit
 `blocks/*.client.js` files.
 
 ## Start here
@@ -23,8 +23,8 @@ section({
 })
 ```
 
-Put copy in `content/*.js`, composition in `pages.js`, shared settings in
-`site.config.js` and colours in `theme.css`. From the library checkout, build the
+Put copy in `content/*.js`, composition in `pages.js`, shared options in
+`site.config.js` and colors in `theme.css`. From the library checkout, build the
 prepared site, then lint its source and output:
 
 ```sh
@@ -45,7 +45,7 @@ point to its README; [Authoring](authoring.md#correct-invalid-options) shows an 
 
 API tables come from the specifications used for validation. The documentation
 build executes authored examples against the library. These checks verify defined
-contracts; they do not guarantee that generated code meets a project's requirements.
+contracts; they do not guarantee that generated code meets a site's requirements.
 
 ## Explore the system
 
@@ -62,7 +62,7 @@ contracts; they do not guarantee that generated code meets a project's requireme
   and [Naming conventions](conventions.md).
 - **Check and extend:** [Rules](anti-patterns.md) and [Adding a component](adding-a-component.md).
 - **Foundations:** start with [Layout](foundations/layout.md) for composition,
-  [Colour](foundations/colour.md) for semantic roles, [Typography](foundations/type.md)
+  [Color](foundations/color.md) for color roles, [Typography](foundations/type.md)
   and [Space, radius and motion](foundations/space.md) for shared scales.
   [Brand assets](foundations/brand.md), [Icon set](foundations/icons.md) and
   [Language](foundations/language.md) cover site-supplied artwork and strings.

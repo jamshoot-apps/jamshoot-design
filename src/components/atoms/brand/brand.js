@@ -14,8 +14,8 @@ export const brand = defineComponent('brand', {
     label: { type: 'text', summary: 'The name for screen readers only, when the logo stands alone.' },
     position: {
       type: 'enum',
-      values: ['right', 'bottom'],
-      default: 'right',
+      values: ['end', 'bottom'],
+      default: 'end',
       summary: 'Where the text sits relative to the logo.',
     },
     compact: {

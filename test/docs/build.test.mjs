@@ -124,7 +124,7 @@ test('the built reference retains every page, navigation, examples and shared as
   for (const [heading, slugs] of [
     ['Start here', ['index', 'architecture', 'authoring']],
     ['Build a site', ['configuration', 'theming', 'conventions', 'anti-patterns']],
-    ['Foundations', ['foundations-colour', 'foundations-type', 'foundations-space', 'foundations-brand', 'foundations-icons', 'foundations-language', 'foundations-markup']],
+    ['Foundations', ['foundations-color', 'foundations-type', 'foundations-space', 'foundations-brand', 'foundations-icons', 'foundations-language', 'foundations-markup']],
     ['Layout', ['foundations-layout', 'layout-cluster', 'layout-container', 'layout-grid', 'layout-split', 'layout-stack']],
     ['Molecules', ['molecules', 'molecules-card', 'molecules-definitions', 'molecules-faq', 'molecules-figure', 'molecules-plan', 'molecules-proof', 'molecules-steps', 'molecules-table']],
     ['Organisms', ['organisms-hero', 'organisms-section', 'organisms-subsection', 'organisms-cta', 'organisms-pageHeader', 'organisms-legalDocument', 'organisms-header', 'organisms-footer']],

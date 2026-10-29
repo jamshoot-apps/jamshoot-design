@@ -10,7 +10,7 @@ test('plans keep the badge beside the name and omit an unused footer action', ()
       title: 'Pro',
       price: { amount: 'One-time', note: 'Paid once' },
       features: ['Export every project'],
-      subtitle: 'Everything in Free, without the limit.',
+      lead: 'Everything in Free, <em>without</em> the limit.',
       badgeLabel: 'Best value',
       link: { label: 'Unlock it inside the app', href: '#download' },
     }),
@@ -18,10 +18,10 @@ test('plans keep the badge beside the name and omit an unused footer action', ()
   const css = readFileSync(new URL('plan.css', import.meta.url), 'utf8');
 
   assert.match(plain, /^<div class="ds-plan"><header class="ds-plan__head"><h3 class="ds-plan__name">Free<\/h3><\/header>/);
-  assert.doesNotMatch(plain, /ds-plan__badge|ds-plan__price-note|ds-plan__subtitle|ds-plan__action|ds-plan__previous-price/);
+  assert.doesNotMatch(plain, /ds-plan__badge|ds-plan__price-note|ds-plan__lead|ds-plan__action|ds-plan__previous-price/);
   assert.match(featured, /ds-plan__name">Pro<\/h3><div class="ds-plan__badge"><span class="ds-badge/);
   assert.match(featured, /ds-plan__price-note">Paid once<\/p>/);
-  assert.match(featured, /ds-plan__subtitle">Everything in Free, without the limit\.<\/p>/);
+  assert.match(featured, /ds-plan__lead">Everything in Free, <em>without<\/em> the limit\.<\/p>/);
   assert.match(featured, /<a class="ds-plan__action" href="#download">Unlock it inside the app/);
   assert.match(css, /\.ds-plan__head\s*\{[^}]*grid-template-columns:\s*minmax\(0, 1fr\) auto;/s);
   assert.match(css, /\.ds-plan__head\s*\{[^}]*grid-template-rows:\s*var\(--ds-space-xl\);/s);

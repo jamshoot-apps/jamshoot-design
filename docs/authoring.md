@@ -1,6 +1,6 @@
 # Authoring a site
 
-<!-- docs-review: 7066a0d14fe7; reason: Documented case-canonical lock keys and source protection, released marker lifecycle and og-image name=value hints -->
+<!-- docs-review: ba6dde926804; reason: Reviewed colors.js move, brand.href and footer.groups in templates; authoring prose and site-blocks anchors still apply -->
 
 Create the site files, write the content, compose pages with components, then build
 and check the output. The build validates component options; lint checks layout
@@ -37,7 +37,7 @@ cp node_modules/@jamshoot-apps/design/src/tokens/themes/light.css theme.css
 Repack and reinstall when you need a newer source snapshot. Always import by
 package name, never by an internal source path.
 
-The copied `theme.css` supplies all twelve colour roles and `color-scheme`.
+The copied `theme.css` supplies all twelve color roles and `color-scheme`.
 Change those values for the site; only component tokens declared in
 `src/tokens/contract.js` and site-prefixed decorative tokens may be added. The starter
 palettes are also available as [light](../src/tokens/themes/light.css) and
@@ -59,7 +59,7 @@ export const site = {
     { id: 'support', label: 'Support', href: 'support.html' },
   ] },
   footer: {
-    columns: [{ title: 'Explore', links: [
+    groups: [{ title: 'Explore', links: [
       { label: 'Home', href: 'index.html' },
       { label: 'Support', href: 'support.html' },
     ] }],
@@ -69,9 +69,9 @@ export const site = {
 };
 ```
 
-`site.config.js` is validated before rendering. A misspelled field fails with its
+`site.config.js` is validated before rendering. A misspelled option fails with its
 path and accepted shape. Put page content in `content/`; use `site.config.js` for
-shared settings and strings. See [Site configuration](configuration.md).
+shared options and strings. See [Site configuration](configuration.md).
 
 ## Site files
 
@@ -79,15 +79,15 @@ A site has four core inputs and optional blocks.
 
 | File | What it holds |
 | --- | --- |
-| `site.config.js` | Shared brand, navigation, footer and contact settings. |
-| `theme.css` | Twelve colour roles, `color-scheme` and optional whitelisted component tokens. |
+| `site.config.js` | Shared brand, navigation, footer and contact options. |
+| `theme.css` | Twelve color roles, `color-scheme` and optional whitelisted component tokens. |
 | `content/*.js` | Page text and content data. |
 | `pages.js` | Component calls in page order. |
 
-Edit copy in `content/`, page structure in `pages.js`, and colours in `theme.css`.
+Edit copy in `content/`, page structure in `pages.js`, and colors in `theme.css`.
 
 Add a palette in `themes/<name>.css`, setting only what differs from `theme.css`.
-Use `light.css` or `dark.css` for a palette that follows the system colour preference.
+Use `light.css` or `dark.css` for a palette that follows the system color preference.
 Other names identify palettes readers can select. In `site.config.js`, set
 `theme: { toggle: true }` and include `theme` in `runtime` to show the header's theme
 control. See [Theming](theming.md).
@@ -274,10 +274,10 @@ destinations. The [starter](#compose-pages) shows the surrounding page structure
 Examples using `h()` belong in site-owned blocks: import components from
 `@jamshoot-apps/design` and helpers from `@jamshoot-apps/design/markup`. Export a renderer
 that returns the expression, then import that block into `pages.js`. See
-[site blocks](#add-site-specific-blocks) and [Markup helpers](foundations/markup.md).
+[site blocks](#site-blocks) and [Markup helpers](foundations/markup.md).
 Documentation examples have both sets of functions in scope automatically.
 
-Interactive examples labelled static previews show markup only. Their pages state
+Interactive examples labeled static previews show markup only. Their pages state
 the runtime, assets and composition required for a working integration.
 
 ### Choose atoms
@@ -290,15 +290,15 @@ use an atom directly when composing content or a site-owned block.
 | A navigation action | [Button](../src/components/atoms/button/README.md); custom actions belong in a block. |
 | A status beside another element | [Badge](../src/components/atoms/badge/README.md). |
 | A standalone fact | [Chip](../src/components/atoms/chip/README.md), or [Proof](../src/components/molecules/proof/README.md) for a list under a hero. |
-| A label above a title | The `eyebrow` option on Hero or Section; [Eyebrow](../src/components/atoms/eyebrow/README.md) in a custom block. |
+| A label above a title | The `eyebrow` option on Hero or Section; [Eyebrow](../src/components/atoms/eyebrow/README.md) in a site block. |
 | A caveat or footnote | [Note](../src/components/atoms/note/README.md). |
 | An inline SVG or a decorative marker on a square | [Icon](../src/components/atoms/icon/README.md) or [Icon tile](../src/components/atoms/iconTile/README.md). |
 | Template branding and navigation | [Site configuration](configuration.md) and [Header](../src/components/organisms/header/README.md); [Brand](../src/components/atoms/brand/README.md) and [Navigation toggle](../src/components/atoms/navToggle/README.md) describe the primitives. |
-| Palette switching | [Theming](theming.md) for template setup; [Theme toggle](../src/components/atoms/themeToggle/README.md) for the control contract. |
+| Theme control | [Theming](theming.md) for template setup; [Theme toggle](../src/components/atoms/themeToggle/README.md) for the control contract. |
 | Long-form content | [Legal document](../src/components/organisms/legalDocument/README.md), or [Prose](../src/components/atoms/prose/README.md) in a block. |
 | Additional text for assistive technology | [Visually hidden](../src/components/atoms/visuallyHidden/README.md) in a block. |
 
-If a component almost fits, use a [site block](#add-site-specific-blocks) for a local
+If a component almost fits, use a [site block](#site-blocks) for a local
 variation or follow [Adding a component](adding-a-component.md#decide-where-the-change-belongs)
 for a shared library change. Keep layout and typography within the library contract.
 
@@ -330,10 +330,10 @@ rule. A successful build or lint run does not replace the pre-launch checks belo
 
 - Compose pages with components; put custom markup in blocks
   ([page-markup](anti-patterns.md#page-markup-a-page-that-writes-markup-by-hand)).
-- Keep colours in palettes, with decorative tokens under a site prefix such as
-  `--project-paper`
-  ([theme-colour](anti-patterns.md#theme-colour-colour-outside-the-theme),
-  [theme-contract](anti-patterns.md#theme-contract-a-project-token-outside-the-contract)).
+- Keep colors in palettes, with decorative tokens under a site prefix such as
+  `--example-paper`
+  ([theme-color](anti-patterns.md#theme-color-color-outside-the-theme),
+  [theme-contract](anti-patterns.md#theme-contract-a-site-token-outside-the-contract)).
 - Use spacing and radius tokens
   ([scale](anti-patterns.md#scale-a-size-that-is-not-on-a-scale)).
 
@@ -358,13 +358,13 @@ cluster({
 The second button renders nothing. Keep `site.appStore.href` as `null` until the
 App Store listing is live, so the site can launch without a dead download link.
 
-## Add site-specific blocks
+## Site blocks
 
 Put UI used only by this site in `blocks/`.
 
 - `blocks/thing.js` — the build-time renderer, imported by `pages.js`. It stays out
   of browser output and may import `@jamshoot-apps/design/markup`.
-- `blocks/thing.client.js` — behaviour. The `.client.js` suffix is what decides
+- `blocks/thing.client.js` — behavior. The `.client.js` suffix is what decides
   whether code reaches the browser.
 - `blocks/thing.css` — styles. The build puts them in the `site.blocks` cascade layer,
   which takes precedence over library styles. Do not write `@layer` yourself. See
@@ -372,16 +372,16 @@ Put UI used only by this site in `blocks/`.
 
 A block may compose anything exported by `@jamshoot-apps/design`, use the markup helpers,
 and read the design system's primitive, role and component tokens. It follows the
-same spacing, colour, motion and accessibility rules as library components.
+same spacing, color, motion and accessibility rules as library components.
 
 Import the renderer into `pages.js`. The build puts its HTML in the page and adds
-its CSS and optional client file to the site's hashed stylesheet and script.
+its CSS and optional client block to the site's hashed stylesheet and script.
 
 Promote a block when a second site needs it; see
 [Adding a component](adding-a-component.md).
 
 Pointer parallax and other illustration effects belong to the site's client block.
-The library provides only component behavior (`nav`, `theme`, `faq`); it does not
+The library provides only its runtime modules (`nav`, `theme`, `faq`); it does not
 provide `window.dsParallax`. For an existing site using `runtime: ['parallax']`,
 move the effect into `blocks/illustration.client.js` and remove `parallax` from
 `runtime`. Keep initialization and scene configuration together in that file,
@@ -398,7 +398,7 @@ and [Footer](../src/components/organisms/footer/README.md) from
 ### Header on scroll
 
 The header stays visible by default. To hide it on downward scroll and reveal it
-on upward scroll, set these fields in `site.config.js`:
+on upward scroll, set these options in `site.config.js`:
 
 ```js
 nav: { hideOnScroll: true, links: [/* site navigation */] },
@@ -413,7 +413,7 @@ and [configuration contract](configuration.md).
 
 `footer.blurb` is optional. Set `footer.showContact: false` to hide the footer email
 while keeping `contact.email` available to other pages. Contact is shown by default.
-When both the description and email are hidden, link columns fill the footer width.
+When both the description and email are hidden, link groups fill the footer width.
 
 ## Structured data and page paths
 
@@ -466,7 +466,7 @@ that output. The build does not run lint automatically.
 
 To use a site name, pass `--sites /path/to/sites` or set `JAMSHOOT_SITES`. You can also
 run an installed runner from the site directory, as in the starter above. Runners
-do not search neighbouring repositories.
+do not search neighboring repositories.
 
 The local watcher runs one rebuild at a time. Changes arriving during a rebuild
 produce one subsequent build after the save burst settles. A failed rebuild does
@@ -592,7 +592,7 @@ through `JAMSHOOT_ICONS_DIR`, or select built-in icons with
 `--scatter-icons menu,close,checkmark`.
 
 `--icon`, `--title` and `--subtitle` override site defaults;
-`--bg` takes a surface role or colour, and `--ink` takes `light` or `dark`. Sizes
+`--bg` takes a surface role or color, and `--ink` takes `light` or `dark`. Sizes
 (`--icon-size`, `--title-size`, `--subtitle-size`) are positive integers. Unknown flags
 and missing values fail instead of being silently ignored.
 
@@ -610,7 +610,7 @@ flags, each written as `--name=value`. For `scatter`, `JAMSHOOT_ICONS_DIR` must 
 match; the printed command does not repeat it. If the browser exits without writing
 a valid PNG, the existing file is left unchanged and the command fails. Pixels are
 not compared, so the result is the same across browsers, operating systems and font
-rasterisers. `--html` and `--check` cannot be combined.
+rasterizers. `--html` and `--check` cannot be combined.
 
 ## Verify before launch
 

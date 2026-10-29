@@ -1,6 +1,6 @@
 # Theme toggle
 
-<!-- docs-review: a9f604fed388; reason: Reviewed unchanged options and examples after moving token imports and declared runtime to src; guide links now work outside the checkout. -->
+<!-- docs-review: cb53a05857ca; reason: Reviewed CSS comment spelling only; control contract unchanged -->
 
 A button that cycles through a site's palettes, one per click. One state can follow
 the operating system instead of selecting a palette.

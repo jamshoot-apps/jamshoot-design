@@ -17,7 +17,7 @@ its own wrapper; the Brand stylesheet owns the image and text styling.
 The examples use `docs/assets/brand/example.svg`, a neutral sample mark under Apache 2.0.
 The documentation header uses `docs/assets/brand/jamshoot/logo.svg`. That JamShoot artwork
 has separate brand-asset terms in `docs/assets/brand/jamshoot/LICENSE.txt` and is
-excluded from Apache 2.0; it is not a starter logo for consuming sites. Documentation
+excluded from Apache 2.0; it is not a starter logo for sites. Documentation
 builds copy the logo and its terms together into `brand/jamshoot/`.
 
 ## Examples
@@ -39,5 +39,5 @@ brand({ text: 'Example', tagline: 'Project workspace' })
 ```
 
 Choose files that remain legible against the site's palettes and follow the asset
-owner's usage and licensing terms. The library does not prescribe a consumer's logo,
+owner's usage and licensing terms. The library does not prescribe a site's logo,
 wordmark, clear-space rules or trademark policy.

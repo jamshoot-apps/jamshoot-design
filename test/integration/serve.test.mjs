@@ -285,7 +285,7 @@ test('watcher builds never overlap, coalesce pending saves and recover from fail
   await new Promise(setImmediate);
   assert.equal(calls, 3);
   assert.equal(maximum, 1);
-  event('change', 'cancelled.js');
+  event('change', 'canceled.js');
   stop();
   context.mock.timers.tick(60);
   await new Promise(setImmediate);
@@ -341,7 +341,7 @@ test('only loopback host names reach the dev server', async (context) => {
   assert.equal(await requestWithoutHost(port), 421, 'a request without Host is refused');
 });
 
-/** A request sent with its path exactly as written: fetch would normalise `/.//docs` first. */
+/** A request sent with its path exactly as written: fetch would normalize `/.//docs` first. */
 function rawRequest(port, path) {
   return new Promise((resolve, reject) => {
     get({ host: '127.0.0.1', port, path }, (response) => {
