@@ -211,6 +211,12 @@
     --ds-gutter: inherit;
   }
 }
+/* A header in an example stays in its frame when the page scrolls.
+   Relative, not static: the mobile menu is positioned against it. */
+.example__stage .ds-header {
+  position: relative;
+  transform: none;
+}
 .example__source {
   margin: 0;
   border: 0;
