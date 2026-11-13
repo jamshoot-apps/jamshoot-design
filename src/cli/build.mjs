@@ -19,7 +19,7 @@ import { FONT_ROLES, pageSections, siteConfig, sitePages } from '../config.js';
 import { siteThemes } from '../themes.js';
 import { stylesheet } from './styles.mjs';
 import { filesBelow } from './files.js';
-import { isMain, knownSites, locate, takeSitesFlag } from './sites.js';
+import { isMain, knownSites, locate, siteArguments } from './sites.js';
 import { rewriteUrlAttributes } from '../html-transform.js';
 import { page, publicPath } from '../templates.js';
 import { outputDestination, replaceOutput } from './output.js';
@@ -357,8 +357,19 @@ export async function buildFrom(siteDir, explicit = []) {
 }
 
 if (isMain(import.meta.url)) {
-  const { explicit, rest } = takeSitesFlag(process.argv.slice(2));
-  const result = await buildFrom(rest[0] ?? '.', explicit);
+  const { list, error, site } = siteArguments(process.argv.slice(2));
+
+  if (list !== undefined) {
+    console.log(list);
+    process.exit(0);
+  }
+
+  if (error) {
+    console.error(`\n${error}\n`);
+    process.exit(1);
+  }
+
+  const result = await buildFrom(site.path);
   console.log(`built ${result.pages} pages → ${relative(process.cwd(), result.out)}`);
 
   if (result.unreferencedAssets.length) {

@@ -1,6 +1,6 @@
 # Authoring a site
 
-<!-- docs-review: ba6dde926804; reason: Reviewed colors.js move, brand.href and footer.groups in templates; authoring prose and site-blocks anchors still apply -->
+<!-- docs-review: 92050ce253d0; reason: Build and lint validate their site argument, list sites and reject unknown options; the Build and lint section documents it -->
 
 Create the site files, write the content, compose pages with components, then build
 and check the output. The build validates component options; lint checks layout
@@ -466,7 +466,9 @@ that output. The build does not run lint automatically.
 
 To use a site name, pass `--sites /path/to/sites` or set `JAMSHOOT_SITES`. You can also
 run an installed runner from the site directory, as in the starter above. Runners
-do not search neighboring repositories.
+do not search neighboring repositories. `--list` prints the sites a runner can name.
+Build and lint take one site and exit with a message, not a stack trace, for an
+unknown option or a directory that is not a site.
 
 The local watcher runs one rebuild at a time. Changes arriving during a rebuild
 produce one subsequent build after the save burst settles. A failed rebuild does

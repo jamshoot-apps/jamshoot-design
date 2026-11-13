@@ -17,7 +17,7 @@ import { fileURLToPath } from 'node:url';
 
 import { BASE_THEME, THEME_DIRECTORY } from '../tokens/contract.js';
 import { builder, portArgument, runner } from './serve.js';
-import { knownSites, locate, suggest, takeSitesFlag } from './sites.js';
+import { knownSites, locate, notASite, suggest, takeSitesFlag } from './sites.js';
 
 const LIB = fileURLToPath(new URL('../../', import.meta.url));
 const BUILD = fileURLToPath(new URL('./build.mjs', import.meta.url));
@@ -38,11 +38,7 @@ if (args.includes('--list')) {
 const site = locate(target, sites);
 
 if (!site) {
-  console.error(
-    target
-      ? `\n  "${target}" is not a site — it needs a site.config.js and a pages.js.\n`
-      : '\n  Name a site.\n',
-  );
+  console.error(`\n${notASite(target)}\n`);
   console.error(suggest(sites, explicit));
   process.exit(1);
 }

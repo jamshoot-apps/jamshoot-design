@@ -37,8 +37,9 @@ export function isMain(url) {
   }
 }
 
-const isSite = (path) =>
-  existsSync(join(path, 'site.config.js')) && existsSync(join(path, 'pages.js'));
+const SITE_FILES = ['site.config.js', 'pages.js'];
+
+const isSite = (path, needs = SITE_FILES) => needs.every((file) => existsSync(join(path, file)));
 
 const fromEnvironment = (environment) =>
   (environment.JAMSHOOT_SITES ?? '')
@@ -87,9 +88,10 @@ export function knownSites(explicit = [], { cwd = process.cwd(), environment = p
 /**
  * A name, a path, or nothing. Resolved in that order: a name is what you type day to
  * day, a path is the escape hatch for a site that lives somewhere unusual, and with
- * neither there had better be exactly one site.
+ * neither there had better be exactly one site. `needs` names the files a path must
+ * hold; a name always refers to a full site.
  */
-export function locate(argument, sites) {
+export function locate(argument, sites, needs = SITE_FILES) {
   if (!argument) {
     return sites.length === 1 ? sites[0] : null;
   }
@@ -102,7 +104,7 @@ export function locate(argument, sites) {
 
   const path = resolve(argument);
 
-  return isSite(path) ? { name: basename(path), path } : null;
+  return isSite(path, needs) ? { name: basename(path), path } : null;
 }
 
 /**
@@ -125,6 +127,43 @@ export function takeSitesFlag(args) {
   }
 
   return { explicit: explicit.filter(Boolean), rest };
+}
+
+/** Why a target named on the command line could not be resolved. */
+export const notASite = (target, needs = SITE_FILES) =>
+  target ? `  "${target}" is not a site — it needs ${needs.map((file) => `a ${file}`).join(' and ')}.` : '  Name a site.';
+
+/**
+ * The argument handling `build` and `lint` share: `[site] [--sites <dir>] [--list]`.
+ * Returns `{ list }` text to print, an `{ error }` to report, or the resolved `{ site }`.
+ * A flag it does not know and a target that is not a site are errors, not paths, so a
+ * mistyped command fails with a sentence instead of a module-resolution stack trace.
+ *
+ * `needs` is passed to `locate`: lint reads only the config, so it can check a theme
+ * before any page exists.
+ */
+export function siteArguments(args, { needs = SITE_FILES, ...options } = {}) {
+  const { explicit, rest } = takeSitesFlag(args);
+  const sites = knownSites(explicit, options);
+
+  if (rest.includes('--list')) {
+    return { list: sites.length ? sites.map((site) => `  ${site.name}`).join('\n') : suggest(sites, explicit) };
+  }
+
+  const flag = rest.find((argument) => argument.startsWith('-'));
+
+  if (flag) {
+    return { error: `  Unknown option "${flag}". Options: [site] --sites <dir> --list` };
+  }
+
+  if (rest.length > 1) {
+    return { error: `  Expected one site, got ${rest.length}: ${rest.join(' ')}` };
+  }
+
+  const target = rest[0] ?? '.';
+  const site = locate(target, sites, needs);
+
+  return site ? { site } : { error: `${notASite(target, needs)}\n${suggest(sites, explicit)}` };
 }
 
 /** What to print when a site could not be resolved. */

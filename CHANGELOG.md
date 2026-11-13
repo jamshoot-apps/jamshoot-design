@@ -2,6 +2,19 @@
 
 ## [Unreleased]
 
+## [2.1.0] — 2026-11-13
+
+### Added
+
+- `jamshoot-build --list` and `jamshoot-lint --list` print the sites the runner can
+  name, as `jamshoot-dev --list` does.
+
+### Fixed
+
+- `jamshoot-build` and `jamshoot-lint` validate their arguments. An unknown option, a
+  name or path that is not a site, or more than one site now exits with a message
+  and the available sites instead of an `ERR_MODULE_NOT_FOUND` stack trace.
+
 ## [2.0.0] — 2026-10-29
 
 ### Changed

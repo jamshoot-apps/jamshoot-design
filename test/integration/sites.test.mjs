@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -66,5 +66,34 @@ test('sites are found from the current site, flag or environment only', () => {
     assert.match(list([], { JAMSHOOT_SITES: join(workspace, 'websites') }), /example/, 'JAMSHOOT_SITES was ignored');
   } finally {
     rmSync(workspace, { recursive: true, force: true });
+  }
+});
+
+/*
+ * build and lint take the same site argument as dev. A flag or a name that is not a
+ * site used to fall through to a path and crash with ERR_MODULE_NOT_FOUND; it must be
+ * a sentence and a non-zero exit instead, and `--list` must work as it does in dev.
+ */
+test('build and lint list sites and refuse anything that is not one', () => {
+  const roots = join(LIB, 'test/fixtures');
+
+  for (const runner of ['build', 'lint']) {
+    const script = join(LIB, `src/cli/${runner}.mjs`);
+    const run = (...args) => spawnSync(process.execPath, [script, ...args], { encoding: 'utf8', cwd: LIB });
+
+    const listed = run('--list', '--sites', roots);
+    assert.equal(listed.status, 0, `${runner} --list failed: ${listed.stderr}`);
+    assert.match(listed.stdout, /^ {2}site$/m, `${runner} --list did not name the fixture site`);
+
+    for (const [args, message] of [
+      [['--lsit'], /Unknown option "--lsit"/],
+      [['not-a-site', '--sites', roots], /"not-a-site" is not a site[\s\S]*Available:\s+site/],
+      [['site', 'site', '--sites', roots], /Expected one site, got 2/],
+    ]) {
+      const result = run(...args);
+      assert.equal(result.status, 1, `${runner} ${args.join(' ')} should exit 1`);
+      assert.match(result.stderr, message);
+      assert.doesNotMatch(result.stderr, /ERR_MODULE_NOT_FOUND|\n\s+at /, `${runner} ${args.join(' ')} printed a stack trace`);
+    }
   }
 });

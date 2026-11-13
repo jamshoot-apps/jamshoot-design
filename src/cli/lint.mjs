@@ -11,7 +11,7 @@
  */
 
 import { readFileSync, existsSync, statSync } from 'node:fs';
-import { join, relative, resolve } from 'node:path';
+import { join, relative } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import {
@@ -31,7 +31,7 @@ import {
 } from '../tokens/contract.js';
 import { iconNames } from '../icons.js';
 import { siteThemes } from '../themes.js';
-import { isMain, knownSites, locate, takeSitesFlag } from './sites.js';
+import { isMain, siteArguments } from './sites.js';
 import { librarySheets, stripCssComments } from './build.mjs';
 import { filesBelow } from './files.js';
 import { parseColor, over, contrast } from './colors.js';
@@ -794,9 +794,19 @@ function run(siteRoot, dist) {
 }
 
 if (isMain(import.meta.url)) {
-  const { explicit, rest } = takeSitesFlag(process.argv.slice(2));
-  const target = rest[0] ?? '.';
-  const root = locate(target, knownSites(explicit))?.path ?? resolve(target);
+  const { list, error, site: found } = siteArguments(process.argv.slice(2), { needs: ['site.config.js'] });
+
+  if (list !== undefined) {
+    console.log(list);
+    process.exit(0);
+  }
+
+  if (error) {
+    console.error(`\n${error}\n`);
+    process.exit(1);
+  }
+
+  const root = found.path;
   const { site } = await import(pathToFileURL(join(root, 'site.config.js')).href);
   const results = lint(root, { site });
 
